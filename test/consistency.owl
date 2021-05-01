@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns=""
+         >
+<!--- AH regarde il y juste les individuals-->
+
+ <owl:NamedIndividual rdf:about="a">
+    <rdf:type rdf:resource="EA"/>
+
+    	<P rdf:resource="n"/>
+   		<N rdf:resource="l"/>
+</owl:NamedIndividual>
+
+ <owl:NamedIndividual rdf:about="n">
+	<rdf:type rdf:resource="N"/>
+</owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="l">
+<rdf:type rdf:resource="L"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="z">
+    <rdf:type rdf:resource="BSB"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="b">
+    <rdf:type rdf:resource="Wr"/>
+        <rdf:type rdf:resource="F"/>
+    <L rdf:resource="l"/>
+    <F rdf:resource="n"/>
+    <W rdf:resource="z"/>
+</owl:NamedIndividual>
+
+<!-- Schema definition RDFS -->
+<owl:Class rdf:about="E"/>
+<owl:Class rdf:about="EA">
+<rdfs:subClassOf>
+<owl:Class rdf:about="AW"/>
+</rdfs:subClassOf>
+<rdfs:subClassOf>
+<owl:Class rdf:about="E"/>
+</rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="BSB" />
+
+
+<owl:Class rdf:about="N"/>
+<owl:Class rdf:about="L"/>
+<owl:Class rdf:about="W"/>
+
+
+
+<owl:Class rdf:about="Pr"/>
+<owl:Class rdf:about="F">
+   <owl:Restriction owl:cardinality="1">
+    <owl:onProperty>
+      <owl:ObjectProperty rdf:about="W" />
+    </owl:onProperty>
+    <owl:someValuesFrom>
+      <owl:Class rdf:about="BSB" />
+    </owl:someValuesFrom>
+    </owl:Restriction>
+
+<rdfs:subClassOf>
+<owl:Class rdf:about="Pr">
+<owl:disjointWith rdf:resource="EA"/>
+</owl:Class>
+
+</rdfs:subClassOf>
+</owl:Class>
+<owl:Class rdf:about="AW">
+<rdfs:subClassOf>
+<owl:Class rdf:about="EA"/>
+</rdfs:subClassOf>
+</owl:Class>
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="P"/>
+<owl:ObjectProperty rdf:ID="N"/>
+<owl:ObjectProperty rdf:ID="L"/>
+<owl:ObjectProperty rdf:ID="F"/>
+<owl:ObjectProperty rdf:ID="W"/>
+  
+</rdf:RDF>

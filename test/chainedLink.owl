@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns=""
+         >
+<!--- AH regarde il y juste les individuals-->
+ <owl:NamedIndividual rdf:about="a">
+    <rdf:type rdf:resource="C"/>
+    <P rdf:resource="c"/>
+     <owl:differentFrom rdf:resource="b"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="c">
+    <rdf:type rdf:resource="E"/>
+    <Q rdf:resource="v"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="b">
+    <rdf:type rdf:resource="D"/>
+    <R rdf:resource="d"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="d">
+    <rdf:type rdf:resource="F"/>
+    
+    <S rdf:resource="v"/>
+</owl:NamedIndividual>
+<owl:NamedIndividual rdf:about="v">
+ <rdf:type rdf:resource="V"/>
+</owl:NamedIndividual>
+<!-- Schema definition RDFS -->
+<owl:Class rdf:about="C"/>
+<owl:Class rdf:about="E"/>
+<owl:Class rdf:about="D"/>
+<owl:Class rdf:about="F"/>
+
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="P"/>
+<owl:ObjectProperty rdf:ID="Q"/>
+<owl:ObjectProperty rdf:ID="R"/>
+<owl:ObjectProperty rdf:ID="S"/>
+</rdf:RDF>

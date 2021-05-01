@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns=""
+         >
+<!--- AH regarde il y juste les individuals-->
+
+ <owl:NamedIndividual rdf:about="a">
+    <rdf:type rdf:resource="C"/>
+    <P rdf:resource="z"/>
+    <owl:differentFrom rdf:resource="b"/>
+</owl:NamedIndividual>
+
+
+
+<owl:NamedIndividual rdf:about="z">
+    <rdf:type rdf:resource="E"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="b">
+    <rdf:type rdf:resource="D"/>
+    <Q rdf:resource="z"/>
+</owl:NamedIndividual>
+<!-- Schema definition RDFS -->
+<owl:Class rdf:about="C"/>
+<owl:Class rdf:about="E"/>
+<owl:Class rdf:about="D"/>
+
+
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="P"/>
+<owl:ObjectProperty rdf:ID="Q"/>
+  
+</rdf:RDF>
