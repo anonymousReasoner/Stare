@@ -11,12 +11,12 @@ For example **{(prenom ,firstname)**, **(nom, lastname)}** for **(Auteur, Author
 # Clone the repository.
 # Compile
 
-javac -cp "lib/\*" src/fr/anonymous/reasoner/\*.java -d bin
+```javac -cp "lib/*" src/fr/anonymous/reasoner/*.java -d bin```
 
 # Run
 From the root folder type:
 
-java -cp bin:"$(printf %s: lib/*.jar)" fr.anonymous.reasoner.Main
+```java -cp bin:"$(printf %s: lib/*.jar)" fr.anonymous.reasoner.Main```
 
 
 

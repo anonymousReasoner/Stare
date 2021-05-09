@@ -4,9 +4,8 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import org.semanticweb.owlapi.model.*;
 import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
-
+import org.semanticweb.owlapi.model.OWLIndividual;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 
@@ -32,7 +31,8 @@ public class CompressedTableau {
         // creation of star-types and neighbourhood relation ship maintaining
         for (OWLIndividual ind : inds) {
 
-            Set<OWLIndividual> closure = ind.getSameIndividuals(ontology);
+            Set<OWLIndividual> closure = new HashSet<>();
+                    //ind.getSameIndividuals(ontology);
             closure.add(ind);
             Startype st = rd.createInitStartype(closure);
             
