@@ -27,7 +27,6 @@ import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -39,6 +38,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
 import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
+import uk.ac.manchester.cs.owl.owlapi.mansyntaxrenderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 
 /*
   Concepts are manipulated as OWLExpressions in this class

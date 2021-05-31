@@ -1,5 +1,7 @@
 package fr.anonymous.reasoner;
 import java.io.File;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -90,6 +92,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+
+		Instant start = Instant.now();
 int idS=1;
 int nextIdS=2;
 		 String directoryName;  // Directory name entered by the user.
@@ -133,6 +137,7 @@ int nextIdS=2;
 		
 	    
 	    ct.main(ct,mf, ontology, rd);
+		Instant end = Instant.now();
     //
 	    Iterator<Layer> layers_iterator=ct.getSlayer().iterator();
 	
@@ -178,9 +183,11 @@ System.out.println("---------------------------------------------------------");
 printMatchingSucc(mf, ct);
 	        }	
 	//	System.out.println("\nThe following are the equality assertion in the ABox: "+rd.getABox().getSameIndAssers());
-		
+
+
 		System.out.println("\nQuestion:Is the ontology consistent? \n"+ "Answer: "+ ""+ct.checkNew(ct, mf, rd) );
-		System.out.println("The time is " +System.currentTimeMillis()+ "ms");
+		System.out.println("The time is " + Duration.between(start, end).toMillis()  + "ms");
+		System.out.println("The time is " + Duration.between(start, end).toMillis()/1000  + "s");
 		Runtime runtime = Runtime.getRuntime();
         // Run the garbage collector
         runtime.gc();

@@ -26,7 +26,12 @@ public class Layer {
 		this.Sstar= new CopyOnWriteArraySet<Startype>();
 
 	}
-	public boolean isNominal() {
+
+    public Layer(boolean nominal) {
+		this.isNominal=nominal;
+    }
+
+    public boolean isNominal() {
 		return isNominal;
 	}
 	public void setNominal(boolean isNominal) {

@@ -40,8 +40,6 @@ public class ABox implements Serializable {
         diffIndAssers = HashMultimap.create();
         closureByInd = HashMultimap.create();
     }
-
-
     // Generate sat, unsat startypes from initial individuals and form an Abox model
     public void init(ReasoningData data) {
         this.setTransitiveClosure();
@@ -54,21 +52,11 @@ public class ABox implements Serializable {
      *   2) L(x,z) <- L(y,z)
      *   3) L(z,x) <- L(z,y)
      */
-    public void merge2Inds(OWLIndividual d1, OWLIndividual d2) {
-        // 1)
-        //conceptsByInd.get(d1).addAll(conceptsByInd.removeAll(d2));
-        // 2)
-        //sourceOPropsByInd.get(d1).addAll(sourceOPropsByInd.removeAll(d2));
-        //sourceDPropsByInd.get(d1).addAll(sourceDPropsByInd.removeAll(d2));
-        // 3)
-        //targetOPropsByInd.get(d1).addAll(targetOPropsByInd.removeAll(d2));
-        //targetDPropsByInd.get(d1).addAll(targetDPropsByInd.removeAll(d2));
-    }
-
     /*
      * Two possible clashes : A, -A
      * x <> y : for each transitive closure x+, if x1, x2 belong to x+ and x1 <> x2 then there is a clash
      */
+    // we don't deal with ABox clashes but with star-type clashes
     public boolean isClash(ReasoningData data) {
         // A, -A
         // check the classes of all individuals(
@@ -89,8 +77,7 @@ public class ABox implements Serializable {
      *  Updates the transitive closure of each individual occurring in sameIndAssers
      */
     public void setTransitiveClosure() {
-        //SetMultimap<OWLIndividual, OWLIndividual> closure = HashMultimap.create();
-    
+
         for (OWLIndividual entry : initInds) {
             closureByInd.put(entry, entry);
         }
