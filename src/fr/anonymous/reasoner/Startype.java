@@ -48,16 +48,6 @@ public class Startype implements Serializable {
     private static final long serialVersionUhashcode = 1L;
     //for display/propagation
     private int idS = 0;
-    //public static int nextIdS=1;
-	/*public  int getNextIdS() {
-		return this.nextIdS;
-	}
-
-	public  void setNextIdS(int nextIdS) {
-		nextIdS = this.nextIdS;
-	}*/
-
-    //private static final int hashcode = 1;
     //This hashCode is not immutable. Therefore, each object should not be changed if it is hashed in a structure
     private int hashcode = 0;
     private static OWLDataFactory factory = new OWLDataFactoryImpl();
@@ -66,21 +56,7 @@ public class Startype implements Serializable {
     private Set<OWLClassExpression> processed;
     private Set<OWLClassExpression> allmax;
 
- /* public boolean isFirst() {
-	return first;
-}
 
-public void setFirst(boolean first) {
-	this.first = first;
-}
-
-public boolean isSecond() {
-	return second;
-}
-
-public void setSecond(boolean second) {
-	this.second = second;
-}*/
 
     //The list of triples is not hashtable since each triple may be shared and modified arbitrarily
     //The number of triples is not large because the nb of existential concepts is not great
@@ -123,8 +99,8 @@ public void setSecond(boolean second) {
         this.isSaturated = false;
         this.core = new ConceptLabel();
         //CopyOnWriteArrayList : thread-safe
-        this.predTriples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
-        this.triples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.predTriples = new ArrayList<Triple>();
+        this.triples = new ArrayList<Triple>();
         this.fresh = new HashSet<OWLClassExpression>();
         this.processed = new HashSet<OWLClassExpression>();
         this.allmax = new HashSet<OWLClassExpression>();
@@ -140,9 +116,9 @@ public void setSecond(boolean second) {
         this.processed = new HashSet<OWLClassExpression>();
         this.allmax = new HashSet<OWLClassExpression>();
         this.addFreshCore(cl.getConcepts(), data);
-        this.triples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.triples = new ArrayList<Triple>();
 
-        this.predTriples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.predTriples = new ArrayList<Triple>();
         if (this.core.isNominal())
             this.isNominal = true;
         hashcode = this.sumCode();
@@ -157,8 +133,8 @@ public void setSecond(boolean second) {
         this.processed = new HashSet<OWLClassExpression>();
         this.allmax = new HashSet<OWLClassExpression>();
         this.addFreshCore(cl.getConcepts(), data);
-        this.triples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
-        this.predTriples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.triples = new ArrayList<Triple>();
+        this.predTriples = new ArrayList<Triple>();
         this.addTripleToList(new Triple(this.getCore(), tr.getRay()).setCore(this.getCore()),
                 this.isNominal() || !tr.getRay().getTip().isNominal());
         if (this.core.isNominal())
@@ -182,7 +158,6 @@ public void setSecond(boolean second) {
         this.triples.add(tr);
         if (this.core.isNominal())
             this.isNominal = true;
-        //if(!this.isNominal() || !tr.getRay().getTip().getIndividuals().isEmpty())//bugged
         this.getPredTriples().add(tr);
         hashcode = this.sumCode();
     }
@@ -192,11 +167,11 @@ public void setSecond(boolean second) {
     public Startype(Startype st) {
 
         this.core = new ConceptLabel(st.getCore());
-        this.predTriples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.predTriples = new ArrayList<Triple>();
         this.fresh = new HashSet<OWLClassExpression>(st.getFreshCore());
         this.processed = new HashSet<OWLClassExpression>(st.getProcessedCore());
         this.allmax = new HashSet<OWLClassExpression>(st.getAllMaxCore());
-        this.triples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.triples = new ArrayList<Triple>();
         for (Triple i : st.getTriples()) {
             this.addTripleToList(new Triple(i).setCore(this.getCore()), st.isPredTriple(i));
         }
@@ -245,11 +220,11 @@ public void setSecond(boolean second) {
 
 
         this.core = new ConceptLabel(st.getCore());
-        this.predTriples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.predTriples = new ArrayList<Triple>();
         this.fresh = new HashSet<OWLClassExpression>(st.getFreshCore());
         this.processed = new HashSet<OWLClassExpression>(st.getProcessedCore());
         this.allmax = new HashSet<OWLClassExpression>(st.getAllMaxCore());
-        this.triples = new ArrayList<Triple>();//new CopyOnWriteArrayList<Triple>();
+        this.triples = new ArrayList<Triple>();
         for (Triple i : st.getTriples()) {
             this.addTripleWithHis(new Triple(i).setCore(this.getCore()), i, st.isPredTriple(i), his);
         }
@@ -679,25 +654,7 @@ public void setSecond(boolean second) {
     public Startype intersectionRule(Startype st_input, OWLClassExpression concept, SetMultimap<Triple, Triple> his, ReasoningData data) {
         Startype st = new Startype();
 
-        ConceptLabel cl = new ConceptLabel();
-//LinkedHashSet<OWLClassExpression> c2=new LinkedHashSet<OWLClassExpression>();
-
-        //  Set<OWLClassExpression> concepts = data.getConceptsFromPrimitiveAxioms(st_input.getCore().getConcepts(), new HashSet<OWLClassExpression>());
-			/*cl.setConcepts(c2);
-			ConceptLabel cl1=new ConceptLabel(concepts);
-			cl1.setIndividual(star.getCore().getIndividual());*/
-
-        cl.setConcepts(st_input.getCore().getConcepts());
-
-        cl.setIndividual(st_input.getCore().getIndividual());
-        st.setCore(cl, data);
-
-        List<Triple> trs = st_input.getTriples();
-        for (Triple tr : trs) {
-
-            tr.setCore(cl);
-        }
-        st_input.setTriples(trs);
+        duplicate(st,st_input,data);
 
         //returns the conjuncted concepts
         Set<OWLClassExpression> freshes = new HashSet<OWLClassExpression>(concept.asConjunctSet());
@@ -808,7 +765,6 @@ public void setSecond(boolean second) {
             return;
         }
 
-        //Set<OWLClassExpression> freshesFirst = new HashSet<OWLClassExpression>();
         OWLClassExpression first = operands.iterator().next();
         operands.remove(first);
 
@@ -872,10 +828,8 @@ public void setSecond(boolean second) {
 
         Set<Startype> choices = new HashSet<Startype>();
 
-        //ManchesterOWLSyntaxOWLObjectRendererImpl render = new ManchesterOWLSyntaxOWLObjectRendererImpl();
-
         Set<OWLClassExpression> operands = concept.asDisjunctSet();
-        //System.out.println(operands);
+
 
         LinkedHashSet<OWLClassExpression> c1 = star.getCore().getConcepts();
 
@@ -884,12 +838,13 @@ public void setSecond(boolean second) {
             Startype star_d = new Startype();
             ConceptLabel cl = new ConceptLabel();
 
-            LinkedHashSet<OWLClassExpression> c2 = new LinkedHashSet<OWLClassExpression>();
+            LinkedHashSet<OWLClassExpression> c2 = new LinkedHashSet<>();
             c2.addAll(c1);
             c2.add(c);
             Set<OWLClassExpression> concepts = data.getConceptsFromPrimitiveAxioms(c2, new HashSet<OWLClassExpression>());
             cl.setConcepts(c2);
             ConceptLabel cl1 = new ConceptLabel(concepts);
+
             cl1.setIndividual(star.getCore().getIndividual());
             star_d.setCore(cl1, data);
             List<Triple> trs = star.getTriples();
@@ -976,65 +931,50 @@ public void setSecond(boolean second) {
         //  this.addTriple(tAug,((OWLObjectSomeValuesFrom)concept).getProperty(), his, data);
         this.addTriple(tAug, ((OWLObjectSomeValuesFrom) concept).getProperty(), data);
     }
-
-    public Startype stsomeRule(Startype st, OWLClassExpression concept, SetMultimap<Triple, Triple> his, ReasoningData data, MatchingFn mf, CompressedTableau ct, OWLOntology ontology) {
-
-        Startype copy_st = new Startype();
-        copy_st.setCore(st.getCore());
-        //copy_st.setTriples(st.get());
-        ConceptLabel cl1 = new ConceptLabel();
+    public void duplicate(Startype copy_st,Startype st, ReasoningData data){
+        Startype star_d = new Startype();
 
 
-        cl1.setConcepts(st.getCore().getConcepts());
 
-        cl1.setIndividual(st.getCore().getIndividual());
-        copy_st.setCore(cl1, data);
+
+        copy_st.setNominal(st.isNominal());
+        ConceptLabel cl = new ConceptLabel();
+    //    cl.setConcepts(st.getCore().getConcepts());
+        cl.setIndividual(st.getCore().getIndividual());
+        copy_st.setCore(cl, data);
         List<Triple> trs = st.getTriples();
         for (Triple tr : trs) {
-
-            tr.setCore(cl1);
+            tr.setCore(cl);
         }
         copy_st.setTriples(trs);
+    }
 
+    public Startype stsomeRule(Startype st, OWLClassExpression concept,  ReasoningData data, MatchingFn mf, CompressedTableau ct, OWLOntology ontology) {
+
+        Startype copy_st = new Startype();
+        duplicate(copy_st,st,data);
 
         for (Triple t : copy_st.getTriples()) {
             Omega o = new Omega();
-            //	System.out.println(t.getRay().getTip().getIndividual());
             o.setS(copy_st);
             o.setT(t);
             mf.getMatch().add(o);
         }
-
-
         if (concept instanceof OWLObjectSomeValuesFrom) {
-            OWLObjectSomeValuesFrom res = (OWLObjectSomeValuesFrom) concept;
             Triple t = new Triple();
+            t.setCore( new ConceptLabel(st.getCore().getConcepts()));
             RoleLabel rl = new RoleLabel();
             rl.add(((OWLObjectSomeValuesFrom) concept).getProperty());
             t.getRay().setRidge(rl);
-
-            ConceptLabel cl = new ConceptLabel();
-            t.setCore(cl);
-
-            cl.setConcepts(st.getCore().getConcepts());
-
-
-            LinkedHashSet<OWLClassExpression> cFiller = new LinkedHashSet<OWLClassExpression>();
+            LinkedHashSet<OWLClassExpression> cFiller = new LinkedHashSet<>();
             cFiller.add(((OWLObjectSomeValuesFrom) concept).getFiller());
-
             t.getRay().getTip().setConcepts(cFiller);
-
             copy_st.getTriples().add(t);
             if (copy_st.isCoreValid(copy_st.getCore().getConcepts(), data) && copy_st.isCoreValidInd(copy_st, ontology)) {
-
                 mf.matchTriple(copy_st, t, this, null, this.getAddress(), ct, mf, data);
             }
-
-
         }
-
-        copy_st.setNominal(this.isNominal());
-
+        System.out.println(copy_st.getTriples().size());
         return copy_st;
     }
 
@@ -1254,8 +1194,7 @@ public void setSecond(boolean second) {
 
     // checks the applicability of the all rule
     public boolean isAllRule(OWLClassExpression concept, ReasoningData data) {
-        //OWLPropertyExpression role = ((OWLObjectAllValuesFrom)concept).getProperty();
-        //OWLClassExpression filler = ((OWLObjectAllValuesFrom)concept).getFiller();
+
         if (concept instanceof OWLObjectAllValuesFrom) {
 
             OWLObjectAllValuesFrom res = (OWLObjectAllValuesFrom) concept;
@@ -1797,10 +1736,6 @@ public void setSecond(boolean second) {
         if (st.getCore().getIndividual() != null) {
             for (OWLIndividual ind : st.getCore().getIndividual()) {
                 Set<OWLIndividual> diffinds;
-
-                System.out.println("11111");
-                System.out.println(ind.getClass());
-                System.out.println("22222");
                 diffinds = ind.getDifferentIndividuals(ontology);
 
                 for (OWLIndividual diffind : diffinds)
@@ -2150,20 +2085,13 @@ public void setSecond(boolean second) {
         writer.print("</startype>\n");
     }
 
-    /*	public Startype subsetRule(OWLClassExpression cl) {
-            Startype copy_st=this;
-            if( cl= null ) {
 
-            }
-            return copy_st;
-        }*/
     public boolean isSaturated(Layer layer, ReasoningData rd, CompressedTableau ct) {
 
         boolean saturated = true;
 
         for (OWLClassExpression cl : this.getCore().getConcepts()) {
-            //System.out.println("forall: "+this.isAllRule(cl, rd)+" is some "+this.isSomeRule(cl, rd, layer,ct)+" is union "+this.isUnionRule(cl, rd)+" is intersection "+this.isIntersectionRule(cl, rd));
-            // System.out.println(" is union "+this.isUnionRule(cl, rd)+" is intersection "+this.isIntersectionRule(cl, rd));
+
             if (this.isAllRule(cl, rd) || this.isSomeRule(cl, rd, layer, ct) || this.isUnionRule(cl, rd) || this.isIntersectionRule(cl, rd)) {
                 //+
                 saturated = false;
@@ -2177,7 +2105,6 @@ public void setSecond(boolean second) {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        //sb.append("SharedStartype, valid = " + this.isValid() + ", level= "+ evolLevel +", saturated =" + this.isSaturated()+ ", nominal =" + this.isNominal()+ System.getProperty("line.separator"));
         sb.append("\nStartype, hashcode=" + hashcode + ", valid = " + this.isValid() + ", saturated =" + this.isSaturated() + ", nominal =" + this.isNominal() + System.getProperty("line.separator"));
         sb.append("Core =" + System.getProperty("line.separator")); //", distance =" +this.getDistance()+
         sb.append(this.getCore().toString());

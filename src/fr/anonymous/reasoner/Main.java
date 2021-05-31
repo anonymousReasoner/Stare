@@ -94,8 +94,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		Instant start = Instant.now();
-int idS=1;
-int nextIdS=2;
+		int idS=1, nextIdS=2;
 		 String directoryName;  // Directory name entered by the user.
 	        File file;        // File object referring to the directory.
 	        String[] files;        // Array of file names in the directory.
@@ -130,38 +129,28 @@ int nextIdS=2;
 		CompressedTableau ct=new CompressedTableau();
 		CopyOnWriteArraySet<Layer> slayer= new CopyOnWriteArraySet<Layer>();
 		ct.setSlayer(slayer);
-		
 		// here is the initialization function 
 		ct.init(ontology, rd,pmanager,ct, mf);
 		//calling the rules
-		
-	    
 	    ct.main(ct,mf, ontology, rd);
 		Instant end = Instant.now();
     //
 	    Iterator<Layer> layers_iterator=ct.getSlayer().iterator();
-	
 		 System.out.println("The number of layers in the compressed tableau are:" +ct.getSlayer().size());
 		 int i=0;
 		 Layer l_0 = null;
-		
 		 while(layers_iterator.hasNext())
 		 {
 			 Layer l=layers_iterator.next();
-			
 			 i++;
 			System.out.println("Is Layer "+i+ " nominal?\n" + l.isNominal()+ ", and it contains "  + l.getSstar().size()+ " star-types ." );
 			 Iterator<Startype> layers_stars=l.getSstar().iterator();
 			
 			while(layers_stars.hasNext()) {
 				Startype st=layers_stars.next();
-			
 				st.setIdS(idS);
 				idS = nextIdS;
 				nextIdS++;
-					//System.out.println(st.getIdS()+" "+st.getCore().toString());
-
-				//	System.out.println("nbr of triples: "+st.getTriples().size());
 				 Iterator<Triple> star_triples=st.getTriples().iterator();
 				 int idT=1;
 				 int nextIdT=2;
@@ -171,23 +160,19 @@ int nextIdS=2;
 					 idT = nextIdT;
 						nextIdT++;
 				 }
-			
-				
 			}
 		 }
 		  System.out.print("Do you want to display the matching function: (y/n) ");
 	        String decision = scanner.nextLine().trim();
 	        if(decision.equalsIgnoreCase("y")) {
-printMatchingPred(mf, ct);
-System.out.println("---------------------------------------------------------");
-printMatchingSucc(mf, ct);
+				printMatchingPred(mf, ct);
+				System.out.println("---------------------------------------------------------");
+				printMatchingSucc(mf, ct);
 	        }	
 	//	System.out.println("\nThe following are the equality assertion in the ABox: "+rd.getABox().getSameIndAssers());
-
-
 		System.out.println("\nQuestion:Is the ontology consistent? \n"+ "Answer: "+ ""+ct.checkNew(ct, mf, rd) );
-		System.out.println("The time is " + Duration.between(start, end).toMillis()  + "ms");
-		System.out.println("The time is " + Duration.between(start, end).toMillis()/1000  + "s");
+		System.out.println("The execution time is " + Duration.between(start, end).toMillis()  + "ms");
+		System.out.println("The execution time is " + Duration.between(start, end).toMillis()/1000  + "s");
 		Runtime runtime = Runtime.getRuntime();
         // Run the garbage collector
         runtime.gc();
@@ -195,7 +180,5 @@ printMatchingSucc(mf, ct);
         long memory = runtime.totalMemory() - runtime.freeMemory();
         System.out.println("Used memory is bytes: " + memory);
 	}// TODO Auto-generated method stub
-
-	
 
 }

@@ -17,13 +17,8 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 //After that you can implement the reasoning core by using all ALC rules  from Startype.java, and all  LK rules from "LinkkeyRules.java".  I suggest that you test carefully each method when you finish it.
 
 public class LinkkeyRules implements StartypeOperators{
-	//the pair of startypes on which a link key rule might apply
-	Startype s_1, s_2;
-	ABox A;
-	private static OWLDataFactory factory = new OWLDataFactoryImpl();
-	// CHLK1, CHLK2
-	//LK
-	//the matching function can be added, but currently
+
+
 	public boolean weakSatisfaction(Startype s_1,  Startype s_2,   Linkey lk, MatchingFn mf)
 	{
 
@@ -55,12 +50,8 @@ public class LinkkeyRules implements StartypeOperators{
 								
 							}
 						}
-					//	}
 
 						}
-						
-						
-
 					}
 					}}
 		return false;
@@ -68,32 +59,19 @@ public class LinkkeyRules implements StartypeOperators{
 	//done
 	public boolean strongSatisfaction(Startype s_1,  Startype s_2,  Linkey lk, MatchingFn mf)
 	{
+		if (weakSatisfaction( s_1,   s_2,  lk, mf))
 
-
-		if (weakSatisfaction( s_1,   s_2,  lk, mf)) {
-
-			if((s_1.getCore().getConcepts().contains((lk.getPairsOfConcepts().getFirstConcept()))||s_1.getCore().getConcepts().equals(lk.getPairsOfConcepts().getFirstConcept())) && (s_2.getCore().getConcepts().contains(lk.getPairsOfConcepts().getSecondConcept()) ||  s_2.getCore().getConcepts().equals(lk.getPairsOfConcepts().getSecondConcept()))) {
+			if((s_1.getCore().getConcepts().contains((lk.getPairsOfConcepts().getFirstConcept()))||s_1.getCore().getConcepts().equals(lk.getPairsOfConcepts().getFirstConcept())) && (s_2.getCore().getConcepts().contains(lk.getPairsOfConcepts().getSecondConcept()) ||  s_2.getCore().getConcepts().equals(lk.getPairsOfConcepts().getSecondConcept())))
 			//	System.out.println("These two star-types strongly satisfy"+s_1.getCore().toString()+" and "+s_2.getCore().toString());
 				return true;
-			}
-		}
-
 		return false;
 	}
 
 
-	public boolean lkRule(Startype s_1,  Startype s_2,  ReasoningData data, Linkey lk, MatchingFn mf)
+	public boolean lkRule(Startype s_1,  Startype s_2,   Linkey lk, MatchingFn mf)
 	{
-
-		if(strongSatisfaction( s_1,   s_2,   lk, mf)){
-	
-		
-			return true;
-		
-		}
+		if(strongSatisfaction( s_1,   s_2,   lk, mf)) return true;
 		return false;
-
-
 	}
 
 	public Startype chlk_1Rule(Startype s_1,  Startype s_2,  ReasoningData data, Linkey lk,  MatchingFn mf)
@@ -101,7 +79,6 @@ public class LinkkeyRules implements StartypeOperators{
 		Startype copyS_1=new Startype();
 		copyS_1.setCore(s_1.getCore(),data);
 		copyS_1.setTriples(s_1.getTriples());
-
 
 		OWLDataFactory df= new OWLDataFactoryImpl();
 
@@ -185,66 +162,45 @@ public class LinkkeyRules implements StartypeOperators{
 	}
 	public boolean isMergeContained(Startype s_1,  Startype s_2) {
 		for(Startype s:s_1.getAddress().getSstar()) {
+			//R-neighbourhood relation
 			if(s.getCore().getIndividual().containsAll(s_1.getCore().getIndividual())&&s.getCore().getIndividual().containsAll(s_2.getCore().getIndividual())&&s.getCore().getConcepts().containsAll(s_1.getCore().getConcepts())&&s.getCore().getConcepts().containsAll(s_2.getCore().getConcepts())) {
-	
-		return true;
+		//System.out.println("merge contained");
+				return true;
 			}
 		}
-		//System.out.println("not contained");
 		return false;
 		
 	}
 
 
-	public Startype merge(Startype s_1,  Startype s_2,  ReasoningData data) {
-		boolean exists;
-		Startype merge=new Startype();
+	public Set<Startype> merge(Startype s_1,  Startype s_2,  ReasoningData data) {
+		Set<Startype> merges=new HashSet<>();
+		Startype merge1=new Startype();
+		Startype merge2=new Startype();
 		List<Triple> triples_1=s_1.getTriples(), triples_2=s_2.getTriples();
 
-		LinkedHashSet<OWLClassExpression> merge_concepts=new LinkedHashSet<OWLClassExpression>();
+		LinkedHashSet<OWLClassExpression> merge_concepts=new LinkedHashSet<>();
 		merge_concepts.addAll(s_1.getCore().getConcepts());
 		merge_concepts.addAll(s_2.getCore().getConcepts());
 		Set<OWLIndividual> merge_inds=new HashSet<>();
-		LinkedHashSet<OWLIndividual> merged_inds=new LinkedHashSet<OWLIndividual>();
 		merge_inds.addAll(s_1.getCore().getIndividual());
 		merge_inds.addAll(s_2.getCore().getIndividual());
-		ConceptLabel cl=new ConceptLabel(merge_concepts,merge_inds );
-		merge.setCore(cl, data);
+		ConceptLabel cl=new ConceptLabel(merge_concepts,merge_inds);
+		merge1.setCore(cl, data);
+		merge2.setCore(cl, data);
 		for(Triple tr_1 :triples_1) {
-			
-				
-				//Triple tr= new Triple();
-				tr_1.addConceptsToCore(merge.getCore().getConcepts());
-				//tr.addConceptsToCore(tr_2.getCore().getConcepts());
-				//tr.addRolesToRay(tr_1.getRay().getRidge().getRoles());
-				//tr.addRolesToRay(tr_2.getRay().getRidge().getRoles());
-				//tr.addConceptsToRay(tr_1.getRay().getTip().getConcepts());
-				//tr.addConceptsToRay(tr_2.getRay().getTip().getConcepts());
-				//tr.getRay().getTip().setIndividual(tr_1.getRay().getTip().getIndividual());
-				merge.addTriple(tr_1);
-		
-			
-
+				tr_1.addConceptsToCore(merge1.getCore().getConcepts());
+				merge1.addTriple(tr_1);
 		}
-	for( Triple tr_2 :triples_2) {
-	//	Triple tr= new Triple();
-		tr_2.addConceptsToCore(merge.getCore().getConcepts());
-	
-		//tr.addRolesToRay(tr_2.getRay().getRidge().getRoles());
-		//tr.addConceptsToRay(tr_2.getRay().getTip().getConcepts());
-		//tr.getRay().getTip().setIndividual(tr_2.getRay().getTip().getIndividual());
-		merge.addTriple(tr_2);
-		
+		for( Triple tr_2 :triples_2) {
+				tr_2.addConceptsToCore(merge2.getCore().getConcepts());
+				merge2.addTriple(tr_2);
 	}
-
-		
-
-
-		return merge;
-
-
+		merges.add(merge1);
+		merges.add(merge2);
+		return merges;
 	}
-	public void LkSaturation(Layer l, ReasoningData rd,  MatchingFn mf) {
+	/*public void LkSaturation(Layer l, ReasoningData rd,  MatchingFn mf) {
 		LinkkeyRules lkr=new LinkkeyRules();
 		for(Linkey lk:rd.getLKBox().getLks()) {
 			for(PropertyPair pp:lk.getPropertySet())
@@ -261,7 +217,7 @@ public class LinkkeyRules implements StartypeOperators{
 				}
 		}
 
-	}
+	}*/
 
 	/*
 	 *  Apply the union (\sqcup) rule to "concept" (that must be a \sqcup-concept) in the core of the startype.

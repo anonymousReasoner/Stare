@@ -8,10 +8,13 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class CompressedTableau {
-    public int id = 0;
+    final static Logger logger = Logger.getLogger(String.valueOf(CompressedTableau.class));
+    public static final int id = 0;
     private CopyOnWriteArraySet<Layer> Slayer;
     private static OWLDataFactory factory = new OWLDataFactoryImpl();
 
@@ -60,7 +63,10 @@ public class CompressedTableau {
                     }
             }
         }
-        System.out.println("\nIn the initialization step we have created " + l.getSstar().size() + " star-types:\n");
+       // Level level = 1;
+        logger.log(Level.FINE,"\nIn the initialization step we have created " + l.getSstar().size() + " star-types:\n");
+
+
         System.out.println("\n\n----------------------------------------------------------------");
         System.out.println("----------------------------Initialization----------------------");
         System.out.println("----------------------------------------------------------------");
@@ -109,17 +115,22 @@ public class CompressedTableau {
             System.out.println("Is existential rule applicable:" + exists);
 
             if (exists) {
-                System.out.println(cl);
-                Startype star_derived = star.stsomeRule(star, cl, his, rd, mf, ct, ontology);
+              //  System.out.println(cl);
+                Startype star_derived = star.stsomeRule(star, cl,rd, mf, ct, ontology);
                 star_derived.setParent(star);
                 star_derived.setAddress(star.getAddress());
-                if (star_derived.isCoreValid(star_derived.getCore().getConcepts(), rd) && star_derived.isCoreValidInd(star_derived, ontology)) {
+             //   if (star_derived.isCoreValid(star_derived.getCore().getConcepts(), rd) && star_derived.isCoreValidInd(star_derived, ontology)) {
+
                     star_derived.setParent(star);
                     star_derived.setAddress(star.getAddress());
+                    System.out.println(star_derived.getAddress().getSstar().size());
                     star_derived.getAddress().getSstar().add(star_derived);
+                    System.out.println(star_derived.getAddress().getSstar().size());
+                  //  System.out.println("derived valid");
                     if (star_derived.getAddress().isNominal())
                         star_derived.setNominal(true);
-                }
+               // }
+
             }
 
             boolean all = star.isAllRule(cl, rd);
@@ -179,26 +190,31 @@ public class CompressedTableau {
                             mf.matchingPred(starPair_2, s_2, s_1.getAddress(), ct, mf, rd);
                         }
 
-                        if (lkr.lkRule(s_1, s_2, rd, lk, mf)) {
-                            Startype merge = lkr.merge(s_1, s_2, rd);
+                        if (lkr.lkRule(s_1, s_2, lk, mf)) {
+                            Set<Startype> merges = lkr.merge(s_1, s_2, rd);
                             //check the validity for equality
-                            if ( merge.isValid(merge.getCore(), rd) && merge.isNominalValid(merge.getCore().getIndividual(), rd) && !lkr.isMergeContained(s_1, s_2)) {
-                                //  System.out.println("we have applied LK rule on: "+s_1.getCore().toString()+" and "+s_2.getCore().toString());
-                                merge.setParents(p);
-                                merge.setAddress(s_1.getAddress());
-                                s_1.getAddress().getSstar().add(merge);
-                                mf.matchingMerge(s_1, s_2, merge, ct, mf, rd);
+                            for (Startype merge:merges) {
+                                if (merge.isValid(merge.getCore(), rd) && merge.isNominalValid(merge.getCore().getIndividual(), rd) && !lkr.isMergeContained(s_1, s_2)) {
+                                    //  System.out.println("we have applied LK rule on: "+s_1.getCore().toString()+" and "+s_2.getCore().toString());
+                                    merge.setParents(p);
+                                    merge.setAddress(s_1.getAddress());
+                                    s_1.getAddress().getSstar().add(merge);
+                                    mf.matchingMerge(s_1, s_2, merge, ct, mf, rd);
+                                }
                             }
                         }
                         if (lkr.shouldMerge(s_1, s_2, rd, mf)) {
-                            Startype merge = lkr.merge(s_1, s_2, rd);
+                            Set<Startype> merges = lkr.merge(s_1, s_2, rd);
                             //check the validity for equality
-                            if (merge.isValid(merge.getCore(), rd) && merge.isNominalValid(merge.getCore().getIndividual(), rd) && lkr.isMergeContained(s_1, s_2)) {
-                                //	System.out.println("We have applied equality rule: "+s_1.getCore().toString()+" and "+s_2.getCore().toString());
-                                merge.setParents(p);
-                                merge.setAddress(s_1.getAddress());
-                                s_1.getAddress().getSstar().add(merge);
-                                mf.matchingMerge(s_1, s_2, merge, ct, mf, rd);
+                            for (Startype merge : merges) {
+                                //check the validity for equality
+                                if (merge.isValid(merge.getCore(), rd) && merge.isNominalValid(merge.getCore().getIndividual(), rd) && lkr.isMergeContained(s_1, s_2)) {
+                                    //	System.out.println("We have applied equality rule: "+s_1.getCore().toString()+" and "+s_2.getCore().toString());
+                                    merge.setParents(p);
+                                    merge.setAddress(s_1.getAddress());
+                                    s_1.getAddress().getSstar().add(merge);
+                                    mf.matchingMerge(s_1, s_2, merge, ct, mf, rd);
+                                }
                             }
                         }
                     }
@@ -256,25 +272,15 @@ public class CompressedTableau {
                     for (Layer ll : generateSubsets(layer, set, rd, ct)) {
                         ll.getSstar().add(s);
                         choices.add(ll);
-
                     }
-
                 }
-
             }
-
-
         }
-
-
         return choices;
     }
 
     public static boolean singleCheck(Startype st, Layer l, MatchingFn mf, ReasoningData rd, CompressedTableau ct) {
-
         boolean validchoice = true;
-
-
         for (Triple t : st.getTriples()) {
 
             if (t.getRay().getTip().getConcepts() != null) {
@@ -287,8 +293,6 @@ public class CompressedTableau {
                             if (!o.getSset().isEmpty()) {
                                 if (o.getSset() != null)
                                     for (Startype w : o.getSset()) {
-
-
                                         if (w.isSaturated(w.getAddress(), rd, ct)) {
 
                                             validchoice = true;
@@ -343,29 +347,22 @@ public class CompressedTableau {
 
                         for (OWLIndividual ind : rd.getABox().getInds()) {
 
-
                             for (Startype st : nominal.getSstar()) {
 
                                 if (st.getCore().getIndividual().contains(ind)) {
 
-
                                     if (singleCheck(st, nominal.next(ct, nominal), mf, rd, ct)) {
-
                                         matched = true;
                                     }
 
                                 }
-
                             }
-
 
                         }
                     }
-            	/*else {
+            	else {
             		System.out.println("I don't satisfy LKs");
-            	}*/
-
-
+            	}
                 }
             }
         }
@@ -373,12 +370,10 @@ public class CompressedTableau {
 
         return matched;
 
-
     }
 
-    //chooseLK not correctly implemented
     public static boolean main(CompressedTableau ct, MatchingFn mf, OWLOntology ontology, ReasoningData rd) {
-        // CopyOnWriteArraySet<Layer> layers = ct.getSlayer();
+
         boolean changed = true;
         LinkkeyRules lkr = new LinkkeyRules();
         //This is a simple solution for the underlying problem of your first code:
@@ -398,52 +393,45 @@ public class CompressedTableau {
         //if we implement the rule directly like there would be a current modification exception as well
         Set<Startype> processed = new HashSet<Startype>();
         Set<Startype> addedSet = new HashSet<Startype>();
-        Set<Startype> addedSetLk = new HashSet<Startype>();
-        Set<StartypePair> processed_LK = new HashSet<StartypePair>();
 
-
+        Set<StartypePair> processed_LK = new HashSet<>();
         System.out.println("The reasoner checking if your ontology is consistent.....\n\n");
-
         System.out.println("\n\n So we first saturate each star-type built in the initialization step: \n\n");
-
         while (changed) {
             changed = false;
-
             ListIterator<Layer> layers_iterator = new ArrayList<Layer>(ct.getSlayer()).listIterator();
+         /*   if(checkNew(ct,mf,rd)){
+                return true;
+            }*/
             while (layers_iterator.hasNext()) {
-
                 Layer l = layers_iterator.next();
                 ListIterator<Startype> star_iterator = new ArrayList<Startype>(l.getSstar()).listIterator();
 
                 while (star_iterator.hasNext()) {
                     Startype st = star_iterator.next();
-
-
-                    // System.out.println( st.getCore().toString());
                     if (!processed.contains(st) && !st.isSaturated(l, rd, ct) && !l.isBlocked(st, ct, l)) {
                         System.out.println("*******************************************");
                         System.out.println("*******************************************\n\n");
                         changed = true;
                         System.out.println("\nThis star-type is not processed and not saturated.\n");
-
                         processed.add(st);
                         saturateALC(st, l, ct, rd, mf, ontology);
-
-
-                    } else if (processed.contains(st)) {
+                    }
+                    else if (processed.contains(st)) {
                         System.out.println("\nI'm already processed.\n");
-                    } else if (st.isSaturated(l, rd, ct)) {
+                    }
+                    else if (st.isSaturated(l, rd, ct)) {
                         System.out.println("\nI'm saturated so there is no ALC rule applicable on me.\n");
-                    } else if (l.isBlocked(st, ct, l)) {
+                    }
+                    else if (l.isBlocked(st, ct, l)) {
                         System.out.println("I'm blocked");
                     }
                 }
                 System.out.println("\nLet us now check LK rules by first traversing each pair of star-type in the first layer \n");
-                if (l.isNominal()) {
 
+                if (l.isNominal()) {
                     for (Startype s_1 : l.getSstar()) {
                         for (Startype s_2 : l.getSstar()) {
-
                             StartypePair p = new StartypePair(s_1, s_2);
                             boolean contained = false;
                             for (StartypePair pp : processed_LK) {
@@ -452,12 +440,8 @@ public class CompressedTableau {
                                 }
                             }
                             if (!contained && lkr.isLkRuleApp(s_1, s_2, rd.getLKBox(), mf, rd)) {
-
                                 saturateLK(s_1, s_2, l, ct, rd, mf, ontology);
-
                                 changed = true;
-
-
                             }
                             processed_LK.add(p);
                         }
