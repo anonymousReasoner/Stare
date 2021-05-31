@@ -280,7 +280,7 @@ public class CompressedTableau {
     }
 
     public static boolean singleCheck(Startype st, Layer l, MatchingFn mf, ReasoningData rd, CompressedTableau ct) {
-        boolean validchoice = true;
+        boolean validchoice = false;
         for (Triple t : st.getTriples()) {
 
             if (t.getRay().getTip().getConcepts() != null) {
@@ -314,7 +314,6 @@ public class CompressedTableau {
 
                                 validchoice = false;
                             }
-
 
                         }// checking the index
                     }//accessing the matching function
@@ -400,9 +399,9 @@ public class CompressedTableau {
         while (changed) {
             changed = false;
             ListIterator<Layer> layers_iterator = new ArrayList<Layer>(ct.getSlayer()).listIterator();
-         /*   if(checkNew(ct,mf,rd)){
+            if(checkNew(ct,mf,rd)){
                 return true;
-            }*/
+            }
             while (layers_iterator.hasNext()) {
                 Layer l = layers_iterator.next();
                 ListIterator<Startype> star_iterator = new ArrayList<Startype>(l.getSstar()).listIterator();
