@@ -1,30 +1,23 @@
 package fr.anonymous.reasoner;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-public class Omega {
-    Startype s;
+public class Succ {
+    //Startype s;
     Triple t;
     Set<Startype> Sset;
-    public Omega(Startype s, Triple t) {
-        this.s=s;
+    public Succ( Triple t, Set<Startype> Sset) {
         this.t=t;
-        this.Sset=new HashSet<Startype>();
+        this.Sset=Sset;
     }
-    public Omega() {
+    public Succ() {
         // TODO Auto-generated constructor stub
-        this.Sset=new HashSet<Startype>();
+        this.t=new Triple();
+        this.Sset=new HashSet<>();
     }
-    public Startype getS() {
-        return s;
-    }
-    public void setS(Startype s) {
-        this.s = s;
-    }
+
     public Triple getT() {
         return t;
     }

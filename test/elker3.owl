@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns="">
+<!-- Box -->
+ <owl:NamedIndividual rdf:about="a1">
+    <rdf:type rdf:resource="Newspaper"/>
+ </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="a2">
+     <rdf:type rdf:resource="Newspaper"/>
+  </owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="a3">
+    <rdf:type rdf:resource="Newspaper"/>
+ </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="a4">
+     <rdf:type rdf:resource="Newspaper"/>
+  </owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="a5">
+      <rdf:type rdf:resource="Newspaper"/>
+   </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="a6">
+       <rdf:type rdf:resource="Newspaper"/>
+    </owl:NamedIndividual>
+      <owl:NamedIndividual rdf:about="a7">
+          <rdf:type rdf:resource="Person"/>
+     </owl:NamedIndividual>
+     <owl:NamedIndividual rdf:about="a8">
+       <rdf:type rdf:resource="Person"/>
+        </owl:NamedIndividual>
+      <owl:NamedIndividual rdf:about="a9">
+     <rdf:type rdf:resource="Person"/>
+              </owl:NamedIndividual>
+                  <owl:NamedIndividual rdf:about="a11">
+                      <rdf:type rdf:resource="Person"/>
+                   </owl:NamedIndividual>
+
+
+
+ <owl:NamedIndividual rdf:about="b1">
+    <rdf:type rdf:resource="Journal"/>
+ </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="b2">
+     <rdf:type rdf:resource="Journal"/>
+  </owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="b3">
+      <rdf:type rdf:resource="Journal"/>
+   </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="b4">
+       <rdf:type rdf:resource="Journal"/>
+    </owl:NamedIndividual>
+     <owl:NamedIndividual rdf:about="b5">
+        <rdf:type rdf:resource="Journal"/>
+     </owl:NamedIndividual>
+          <owl:NamedIndividual rdf:about="b7">
+             <rdf:type rdf:resource="Personne"/>
+          </owl:NamedIndividual>
+            <owl:NamedIndividual rdf:about="b8">
+                       <rdf:type rdf:resource="Personne"/>
+                    </owl:NamedIndividual>
+                      <owl:NamedIndividual rdf:about="b9">
+                                 <rdf:type rdf:resource="Personne"/>
+                              </owl:NamedIndividual>
+                                <owl:NamedIndividual rdf:about="b10">
+                                           <rdf:type rdf:resource="Personne"/>
+                                        </owl:NamedIndividual>
+                                          <owl:NamedIndividual rdf:about="b11">
+                                                     <rdf:type rdf:resource="Personne"/>
+                                                  </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="a1">
+ <c>Paris</c>
+ </owl:NamedIndividual>
+<owl:NamedIndividual rdf:about="b10">
+ <p>Paris</p>
+ </owl:NamedIndividual>
+<!-- Schema definition RDFS -->
+<!-- Concepts -->
+<owl:Class rdf:about="Newspaper"/>
+<owl:Class rdf:about="City"/>
+<owl:Class rdf:about="Person"/>
+<owl:Class rdf:about="Journal"/>
+<owl:Class rdf:about="Personne">
+ <owl:disjointWith rdf:resource="Newspaper"/>
+</owl:Class>
+
+
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="pubCity"/>
+<owl:ObjectProperty rdf:ID="prenom"/>
+
+  
+</rdf:RDF>

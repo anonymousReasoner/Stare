@@ -51,24 +51,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import org.semanticweb.owlapi.model.ClassExpressionType;
-import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLDataMinCardinality;
-import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
-import org.semanticweb.owlapi.model.OWLIndividual;
-import org.semanticweb.owlapi.model.OWLObjectComplementOf;
-import org.semanticweb.owlapi.model.OWLObjectInverseOf;
-import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
-import org.semanticweb.owlapi.model.OWLObjectOneOf;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLPropertyExpression;
-import org.semanticweb.owlapi.model.OWLQuantifiedRestriction;
-import org.semanticweb.owlapi.model.PrefixManager;
+import org.semanticweb.owlapi.model.*;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.HashMultimap;
@@ -76,6 +59,7 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 
 import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
+import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
 
 /*
  * This class stores all data for reasoning including an initial ABox, derived named individuals, named concepts
@@ -94,7 +78,6 @@ public class ReasoningData implements Serializable
 	private boolean containsTransitive = false;
 	private boolean containsInverse = false;
 	private boolean containsDatatype = false;
-	private boolean containsLk=false;
 	private static OWLDataFactory factory = new OWLDataFactoryImpl();
 	private SetMultimap<OWLPropertyExpression,  OWLPropertyExpression> superClosureByRole;
 	private SetMultimap<OWLPropertyExpression, OWLPropertyExpression> subClosureByRole;
@@ -123,24 +106,25 @@ public class ReasoningData implements Serializable
 	private Set<OWLClassExpression> rightConjunctsOfTop = null;
 	//0 : breadth; 1 : depth; 2 : both
 	private int strategy = 0;
+	private boolean containsLk;
+
 	public ReasoningData()
 	{
 		initABox = new ABox();
-		initialAtomicConcepts = new HashSet<OWLClass>();
-		derivedAtomicConcepts = new HashSet<OWLClass>();
+		initialAtomicConcepts = new HashSet<>();
+		derivedAtomicConcepts = new HashSet<>();
 		superClosureByRole = HashMultimap.create();
 		subClosureByRole = HashMultimap.create();
 		absorbedSupersBySub = HashMultimap.create();
-		absorbedAtomic = new HashSet<OWLClassExpression> ();
-		absorbedNegated = new HashSet<OWLClassExpression> ();
-	//	setIRIBase( Optional.fromNullable((IRI.create("http://iut.univ-paris8.fr/linc/myOnto") ))) ;
+		absorbedAtomic = new HashSet<> ();
+		absorbedNegated = new HashSet<> ();
 		setTop(factory.getOWLThing());
 		setBottom(factory.getOWLNothing());
-		minNames = new HashMap<OWLClassExpression,List<OWLClass>>();
-		rightConjunctsOfTop = new HashSet<OWLClassExpression>();
+		minNames = new HashMap<>();
+		rightConjunctsOfTop = new HashSet<>();
 		//the keys of the two following maps contain all role names
-		objectPropWithAttr = new HashMap<OWLObjectPropertyExpression, RoleAttributes>();
-		dataPropWithAttr = new HashMap<OWLDataPropertyExpression, RoleAttributes>();
+		objectPropWithAttr = new HashMap<>();
+		dataPropWithAttr = new HashMap<>();
 	}
 
 	public LKBox getLKBox()
@@ -185,16 +169,14 @@ public class ReasoningData implements Serializable
 	public Triple getDummyTriple(ConceptLabel core, ConceptLabel tip)
 	{
 		Ray ray = new Ray( new RoleLabel(), tip);
-		Triple triple =  new Triple(core, ray) ;
-		return triple;
+
+		return new Triple(core, ray) ;
 	}
 
 	public boolean isDummyTriple(Triple triple)
 	{
-		if(triple.getRay().getRidge().getRoles().isEmpty())
-			return true;
-		else
-			return false;
+		return triple.getRay().getRidge().getRoles().isEmpty();
+
 	}
 
 	public int getStrategy()
@@ -277,101 +259,115 @@ public class ReasoningData implements Serializable
 	 */
 	// This is  like the function init, it returns  one single star-type
 	// It takes a set because, is it because of equal individuals?
-	public Startype createInitStartype(Set<OWLIndividual> inds)
+	public Startype createInitStartype(OWLOntology ontology, Set<OWLIndividual> inds)
 	{
-		Startype st = null;
-		Set<OWLClassExpression> concepts = new HashSet<OWLClassExpression>();
+		Startype st;
+		Set<OWLClassExpression> concepts=new HashSet<>();
 
 		if(inds!=null)
 		{
-			for(OWLIndividual i : inds)
-			{
+			for(OWLIndividual i : inds) {
 				concepts.addAll(initABox.getConceptsByInd().get(i)); //get concept assertions
-				//	initABox.getConceptsByInd().get(i);
-
-				//conjunction of individuals
-				//	for(OWLIndividual j : initABox.getClosureByInd().get(i))
-				//  concepts.add(factory.getOWLObjectOneOf(j));
 			}
-			//System.out.println(concepts);
 		}
-		concepts = this.getConceptsFromPrimitiveAxioms(concepts, new HashSet<OWLClassExpression>());
-	//	System.out.println(concepts);
-		//  Set<OWLClassExpression>  i=this.getInitCore().getConcepts();
-
+		concepts = this.getConceptsFromPrimitiveAxioms(concepts, new HashSet<>());
 
 		if(this.getInitCore().getConcepts().isEmpty())
 		{
-
-			ConceptLabel cl = new ConceptLabel(concepts);
+			ConceptLabel cl = new ConceptLabel(new LinkedHashSet<>(concepts), inds);
 			st = new Startype(cl, this );
 		}
 		else
 		{
-			Set<OWLClassExpression> ids = new HashSet<OWLClassExpression> (this.getInitCore().getConcepts());
+			Set<OWLClassExpression> ids = new HashSet<> (this.getInitCore().getConcepts());
 			ids.addAll(concepts);
-			ConceptLabel cl = new ConceptLabel(ids);
+			ConceptLabel cl = new ConceptLabel(new LinkedHashSet<>(concepts), inds);
 			st = new Startype(cl, this);
-
-
 		}
-		st.addFreshCore(st.getCore().getConcepts(), this );
+		for(OWLClass c: ontology.getClassesInSignature()) {
+			// If $E\sqsubseteq F\in \mathcal{T}$ then  $\mathsf{nnf}(\neg E \sqcup F) \in \mathsf{core_C}(\sigma)$
+			if(!c.getSuperClasses(ontology).isEmpty()) {
+
+				st.getCore().getConcepts().addAll(c.getSuperClasses(ontology));
+				// st.getCore().getConcepts().containsAll(c.getSuperClasses(ontology).getComplementNNF()))
+				//System.out.println(c);
+				//System.out.println(c.getSuperClasses(ontology));
+			}
+		}
+
+		//st.addFreshCore(st.getCore().getConcepts());
+
 
 		return st;
 	}
 
-	public void neighbourhood (Startype st, OWLOntology ontology, ABox a,PrefixManager pmanager ) {
-		Set<OWLIndividual> inds=st.getCore().getIndividual();
+	public void neighbourhood (Startype st,  ABox a,PrefixManager pmanager ) {
+			SetMultimap<OWLIndividual, Map<OWLObjectPropertyExpression, OWLIndividual>> assertions=
+					a.getConceptObjAssertsBySource();
+		SetMultimap<OWLIndividual, Map<OWLDataPropertyExpression, OWLLiteral>> assertions2=
+				a.getConceptDataAssertBySource();
+		for( Entry<OWLIndividual, Map<OWLDataPropertyExpression, OWLLiteral>> ass:assertions2.entries()) {
+			if(st.getCore().getIndividual().contains(ass.getKey())) {
+				Triple tr = new Triple();
+				Set<OWLIndividual> set_ind = new HashSet();
+				tr.setCoreI(st.getCore().getIndividual());
+				Set<OWLPropertyExpression> trp = new HashSet<>();
+				Set<OWLDataPropertyExpression> p = ass.getValue().keySet();
+				//bug here to correct
+				// must change here
+				for (OWLDataPropertyExpression pp:p) {
 
-		for (OWLIndividual ind: inds) {
-
-
-			SetMultimap<OWLIndividual, Map<OWLObjectPropertyExpression, OWLIndividual>> assertions=a.getConceptObjAssertsBySource();
-
+					OWLObjectProperty ps =factory.getOWLObjectProperty( pp.toString(),pmanager );
+					tr.getRay().getRidge().getRoles().add(ps);
+				//trp.add(ps);
+			}
+				//System.out.println("trp: "+trp);
+			//	tr.addRolesToRay(trp);
+				Set<OWLIndividual> o = new HashSet();
+				for (OWLDataPropertyExpression pp : p) {
+					OWLIndividual ind= factory.getOWLNamedIndividual(IRI.create( ass.getValue().get(pp).toString()) );
+					o.add(ind);
+				}
+				tr.getRay().getTip().setIndividual(o);
+				LinkedHashSet<OWLClassExpression> f = new LinkedHashSet<>();
+				for (OWLIndividual i : o) {
+					set_ind.add(i);
+					f.addAll(a.getConceptsByInd().get(i));
+				}
+				tr.getRay().getTip().setConcepts(f);
+				tr.getRay().getTip().setIndividual(set_ind);
+				st.addTriple(tr);
+			}
+		}
 
 			for( Entry<OWLIndividual, Map<OWLObjectPropertyExpression, OWLIndividual>> ass:assertions.entries()) {
-				if(ass.getKey()==ind) {
-
-					for(Map<OWLObjectPropertyExpression, OWLIndividual> m: assertions.get(ind))
-					{
-
-
-						Triple tr=new Triple();
-						Set<OWLIndividual> set_ind=new HashSet();
-						// the individuals of the head of the triple are the same as the core of the star-type
+				if(st.getCore().getIndividual().contains(ass.getKey())) {
+						Triple tr = new Triple();
+						Set<OWLIndividual> set_ind = new HashSet();
 						tr.setCoreI(st.getCore().getIndividual());
-
-						//New set for the properties
-						Set<OWLPropertyExpression> trp=new HashSet<OWLPropertyExpression>();
-						Set<OWLObjectPropertyExpression> p=m.keySet();
-						OWLObjectProperty ps = factory.getOWLObjectProperty(p.toString().substring(2,3),pmanager);
-						//System.out.println("Here "+ps);
-						trp.add(ps);
+						Set<OWLPropertyExpression> trp = new HashSet<>();
+						Set<OWLObjectPropertyExpression> p = ass.getValue().keySet();
+					for (OWLObjectPropertyExpression pp:p) {
+						OWLObjectProperty ps =factory.getOWLObjectProperty( pp.toString(),pmanager );
+						tr.getRay().getRidge().getRoles().add(ps);
+					}
 						tr.addRolesToRay(trp);
-
-						Set<OWLIndividual> o =new HashSet();
-						for(OWLObjectPropertyExpression pp:p)
-						{o.add( m.get(pp));
-
+						Set<OWLIndividual> o = new HashSet();
+						for (OWLObjectPropertyExpression pp : p) {
+							o.add(ass.getValue().get(pp));
 						}
-						//tr.getRay().setTip(o);
 						tr.getRay().getTip().setIndividual(o);
-						LinkedHashSet<OWLClassExpression> f =new LinkedHashSet<OWLClassExpression>();
-						for(OWLIndividual i:o) {
-
+						LinkedHashSet<OWLClassExpression> f = new LinkedHashSet<>();
+						for (OWLIndividual i : o) {
 							set_ind.add(i);
 							f.addAll(a.getConceptsByInd().get(i));
-
 						}
 						tr.getRay().getTip().setConcepts(f);
 						tr.getRay().getTip().setIndividual(set_ind);
 						st.addTriple(tr);
-
 					}
 				}
 			}
-		}
-	}
 	/*
 	 * Used when adding an individual to the  tip  of a ray
 	 * Uses the initABox
@@ -387,11 +383,11 @@ public class ReasoningData implements Serializable
 			}
 		} else
 		{
-			concepts =  new HashSet<OWLClassExpression>();
+			concepts =  new HashSet<>();
 		}
-		concepts = this.getConceptsFromPrimitiveAxioms(concepts, new HashSet<OWLClassExpression>());
+		concepts = this.getConceptsFromPrimitiveAxioms(concepts, new HashSet<>());
 		
-		if(this.getInitCore().getConcepts().size()==0)
+		if(this.getInitCore().getConcepts().isEmpty())
 		{
 			if(inds!=null)
 			{
@@ -400,7 +396,7 @@ public class ReasoningData implements Serializable
 		}
 		else
 		{
-			Set<OWLClassExpression> ids = new HashSet<OWLClassExpression> (this.getInitCore().getConcepts());
+			Set<OWLClassExpression> ids = new HashSet<> (this.getInitCore().getConcepts());
 			ids.addAll(concepts );
 			if(inds!=null)
 			{
@@ -414,16 +410,13 @@ public class ReasoningData implements Serializable
 
 	public Set<OWLClassExpression> computeOntoDisjunction(Set<OWLClassExpression> cs)
 	{
-		//System.out.println("cs="+ (new ConceptLabel(cs)).toString());
-		//Scanner scan = new Scanner(System.in);
-		//String text= scan.nextLine();
-		Set<OWLClassExpression> sOs = new HashSet<OWLClassExpression>();
+		Set<OWLClassExpression> sOs = new HashSet<>();
 		for(OWLClassExpression conj : cs)
 		{
 			if(conj.getClassExpressionType()== ClassExpressionType.OBJECT_UNION_OF){
 				Set<OWLClassExpression> disjuncts = conj.asDisjunctSet();
 				for(OWLClassExpression co : disjuncts){
-					Set<OWLClassExpression> newConj = new HashSet<OWLClassExpression>(cs);
+					Set<OWLClassExpression> newConj = new HashSet<>(cs);
 					newConj.remove(conj);
 					Set<OWLClassExpression> ss = computeOntoDisjunction(newConj);
 					ss.add(co);
@@ -445,19 +438,16 @@ public class ReasoningData implements Serializable
 	 */
 	public Set<OWLClassExpression> getConceptsFromPrimitiveAxioms(Set<OWLClassExpression> concepts, Set<OWLClassExpression> existings )
 	{
-		Set<OWLClassExpression> toAdd = new HashSet<OWLClassExpression>(concepts);
+		Set<OWLClassExpression> toAdd = new HashSet<>(concepts);
 
 		toAdd.addAll( existings );
 		toAdd.addAll(this.getRightConjunctsOfTop());//\top < C
-//System.out.println(this.getRightConjunctsOfTop());
 		boolean changed = true;
 		while(changed)
 		{
 			changed = false;
 			for(BinaryLabel cs : this.getAbsorbedSupersBySub().keySet() )
 			{
-				
-
 				if( toAdd.containsAll( cs.getBoth() )  && !toAdd.containsAll( this.getAbsorbedSupersBySub().get(cs) ) )
 				{
 					toAdd.addAll(  this.getAbsorbedSupersBySub().get( cs ) );
@@ -465,9 +455,7 @@ public class ReasoningData implements Serializable
 				}
 			}
 		}
-
 		toAdd.remove(getTop());
-		
 		return toAdd;
 	}
 
@@ -483,10 +471,8 @@ public class ReasoningData implements Serializable
 					concept.getClassExpressionType() == ClassExpressionType.OBJECT_MIN_CARDINALITY )
 			{
 				OWLClassExpression filler = (OWLClassExpression)((OWLQuantifiedRestriction)concept).getFiller();
-				if(filler.isClassExpressionLiteral())
-					return true;
-				else
-					return false;
+				return filler.isClassExpressionLiteral();
+
 			} else
 				return false;
 		} else
@@ -501,10 +487,8 @@ public class ReasoningData implements Serializable
 			if( concept.getClassExpressionType() == ClassExpressionType.OBJECT_ALL_VALUES_FROM )
 			{
 				OWLClassExpression filler = (OWLClassExpression)((OWLQuantifiedRestriction)concept).getFiller();
-				if(filler.isClassExpressionLiteral())
-					return true;
-				else
-					return false;
+				return filler.isClassExpressionLiteral();
+
 			} else
 				return false;
 		} else
@@ -520,32 +504,23 @@ public class ReasoningData implements Serializable
 					concept.getClassExpressionType() == ClassExpressionType.OBJECT_MIN_CARDINALITY )
 			{
 				OWLClassExpression filler = (OWLClassExpression)((OWLQuantifiedRestriction)concept).getFiller();
-				if(filler.isClassExpressionLiteral())
-					return true;
-				else
-					return false;
+				return filler.isClassExpressionLiteral();
+
 			} else
 				return false;
 		} else
 			return false;
 	}
 
-	public boolean isSomeL1LiteralExpression(OWLClassExpression concept)
-	{
-		if(concept.isAnonymous())
-		{
-			if( concept.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM )
-			{
-				OWLClassExpression filler = (OWLClassExpression)((OWLQuantifiedRestriction)concept).getFiller();
-				if(filler.isClassExpressionLiteral())
-					return true;
-				else
-					return false;
-			} else
-				return false;
-		} else
-			return false;
-	}
+	public boolean isSomeL1LiteralExpression(OWLClassExpression concept) {
+		if (concept.isAnonymous() &&concept.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM) {
+				OWLClassExpression filler = (OWLClassExpression) ((OWLQuantifiedRestriction) concept).getFiller();
+				return filler.isClassExpressionLiteral();
+
+		}
+return false;
+		}
+
 
 	public boolean isL1Clash(OWLClassExpression c1, OWLClassExpression c2 ) {
 		if( !this.isL1LiteralExpression(c1) || !this.isL1LiteralExpression(c2))
@@ -641,7 +616,6 @@ public class ReasoningData implements Serializable
 	{
 		String inverse ="";
 		String transitive ="";
-		String closure ="";
 		String roleName = null ;
 		int card = 0;
 		OWLPropertyExpression owlRole = null;
@@ -662,8 +636,7 @@ public class ReasoningData implements Serializable
 			return;
 
 
-		List<OWLClass> sMin = new ArrayList<OWLClass>(card);
-		//OWLDataFactory factory = new OWLDataFactoryImpl();
+		List<OWLClass> sMin = new ArrayList<>(card);
 		for(int i=0 ; i< card ;i++){
 			String name = "http://linc/owl#MIN_" + card + inverse +  transitive + roleName+  "_" +i; //??? baseIRI ?
 			// It is always a new OWLClass
@@ -675,12 +648,12 @@ public class ReasoningData implements Serializable
 
 	public List<OWLClass> getMinNames(OWLClassExpression concept)
 	{
-		if (minNames.containsKey(concept))
-			return minNames.get(concept);
-		else {
+		if (!minNames.containsKey(concept))
+
 			this.setNameForMIN(concept);
-			return minNames.get(concept);
-		}
+
+
+		return minNames.get(concept);
 	}
 
 
@@ -697,9 +670,9 @@ public class ReasoningData implements Serializable
 	//Not needed for ALC
 	// Finds all sub transitive roles of "role"
 	public Set<OWLPropertyExpression> getRolesForTransRule(OWLPropertyExpression role){
-		Set<OWLPropertyExpression> roles = new HashSet<OWLPropertyExpression>( this.getSubClosureByRole().get(role) );
+		Set<OWLPropertyExpression> roles = new HashSet<>( this.getSubClosureByRole().get(role) );
 		//It was a bug here : role was always is transitive  (roles1 was not added : 31/11/2015
-		Set<OWLPropertyExpression> roles1 = new HashSet<OWLPropertyExpression>();
+		Set<OWLPropertyExpression> roles1 = new HashSet<>();
 		for(OWLPropertyExpression r : roles){
 			if ( (r instanceof OWLObjectPropertyExpression) && this.getObjectPropWithAttr().get(r).isTransitive() )
 				roles1.add( r );
@@ -708,7 +681,6 @@ public class ReasoningData implements Serializable
 	}
 
 	public OWLClassExpression getTransObjectAllValuesFrom(OWLPropertyExpression trans, OWLClassExpression filler){
-		//OWLDataFactory factory = new OWLDataFactoryImpl();
 		return factory.getOWLObjectAllValuesFrom( (OWLObjectPropertyExpression)trans, filler);
 	}
 
@@ -796,7 +768,7 @@ public class ReasoningData implements Serializable
 	}
 
 	public void setLK(LKBox lk) {
-		// TODO Auto-generated method stub
+
 		LK=lk;
 
 	}

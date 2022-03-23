@@ -4,6 +4,7 @@
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns=""
          >
+ <!-- { <P,F><N,L>}   LK   <E,Wr>-->
 <align:Cell rdf:about="#cell-with-linkkey">
   <align:entity1><Class rdf:about="E" /></align:entity1>
   <align:entity2><Class rdf:about="Wr" /></align:entity2>

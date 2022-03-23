@@ -4,9 +4,6 @@ import java.util.Set;
 
 public class LKBox {
 	private Set<Linkey> lks;
-	public LKBox() {
-		
-	}
 
 	public Set<Linkey> getLks() {
 		return lks;

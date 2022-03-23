@@ -1,12 +1,10 @@
 package fr.anonymous.reasoner;
 
-//import net.sourceforge.sizeof.SizeOf;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import org.semanticweb.owlapi.model.*;
-
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
@@ -25,12 +23,9 @@ public class ABox implements Serializable {
     private SetMultimap<OWLIndividual, Map<OWLObjectPropertyExpression, OWLIndividual>> conceptObjAssertsByTarget;
     private SetMultimap<OWLIndividual, Map<OWLDataPropertyExpression, OWLLiteral>> conceptDataAssertsBySource;
     private SetMultimap<OWLLiteral, Map<OWLDataPropertyExpression, OWLIndividual>> conceptDataAssertsByTarget;
-
-    //private SetMultimap<Triple, SharedStartype> startypesByPredTriple; //get startypes from a pred triple
-    //private SetMultimap<Startype, Triple> startypesBySuccTriple; //get startypes from a succ triple
     public ABox() {
-        initInds = new ArrayList<OWLIndividual>();
-        newInds = new HashSet<OWLIndividual>();
+        initInds = new ArrayList<>();
+        newInds = new HashSet<>();
         conceptsByInd = HashMultimap.create();
         conceptObjAssertsBySource = HashMultimap.create();
         conceptObjAssertsByTarget = HashMultimap.create();
@@ -114,6 +109,7 @@ public class ABox implements Serializable {
     }
 
     public void addDataPropertyAssertions() {
+        // This will be used later in the presence of Data Properties
     }
 
     public SetMultimap<OWLIndividual, OWLClassExpression> getConceptsByInd() {
@@ -181,31 +177,15 @@ public class ABox implements Serializable {
         this.conceptObjAssertsBySource = conceptObjAssertsBySource;
     }
 
-
-    public SetMultimap<OWLIndividual, Map<OWLObjectPropertyExpression, OWLIndividual>> getConceptObjAssertsByTarget() {
-        return conceptObjAssertsByTarget;
-    }
-
-
     public void setConceptObjAssertsByTarget(
             SetMultimap<OWLIndividual, Map<OWLObjectPropertyExpression, OWLIndividual>> conceptObjAssertsByTarget) {
         this.conceptObjAssertsByTarget = conceptObjAssertsByTarget;
     }
 
 
-    public SetMultimap<OWLIndividual, Map<OWLDataPropertyExpression, OWLLiteral>> getConceptDataAssertsBySource() {
-        return conceptDataAssertsBySource;
-    }
-
-
     public void setConceptDataAssertsBySource(
             SetMultimap<OWLIndividual, Map<OWLDataPropertyExpression, OWLLiteral>> conceptDataAssertsBySource) {
         this.conceptDataAssertsBySource = conceptDataAssertsBySource;
-    }
-
-
-    public SetMultimap<OWLLiteral, Map<OWLDataPropertyExpression, OWLIndividual>> getConceptDataAssertsByTarget() {
-        return conceptDataAssertsByTarget;
     }
 
 

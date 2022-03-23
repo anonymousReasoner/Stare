@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns=""
+         >
+<!--- AH regarde il y juste les individuals-->
+<!-- C(a), D(b), B(g), M(b,g), P(a,v), Q(b,v), (\exists W. (\exists P. \top\sqcap\exists S. \exists P.\top))(v)\}-->
+
+<!-- B\sqsubseteq (\exists P.\top  \sqcap \exists S.\exists P.\top) \sqcup \exists R.(E\sqcap D), D \sqsubseteq \neg E -->
+
+
+
+<owl:NamedIndividual rdf:about="a">
+    <rdf:type rdf:resource="C"/>
+    <P rdf:resource="v"/>
+</owl:NamedIndividual>
+
+
+<owl:NamedIndividual rdf:about="b">
+    <rdf:type rdf:resource="D"/>
+    <M rdf:resource="g"/>
+    <Q rdf:resource="v"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="v">
+    <rdf:type rdf:resource="V"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="d">
+    <rdf:type rdf:resource="D"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="e">
+    <rdf:type rdf:resource="E"/>
+</owl:NamedIndividual>
+<owl:NamedIndividual rdf:about="g">
+    <rdf:type rdf:resource="B"/>
+</owl:NamedIndividual>
+<!-- Schema definition RDFS -->
+
+
+
+<owl:Class rdf:about="B"/>
+<owl:Class rdf:about="C"/>
+<owl:Class rdf:about="D"/>
+<owl:Class rdf:about="E"/>
+
+<!-- C(a), D(b), B(g), M(b,g), P(a,v), Q(b,v), (\exists W. (\exists P. \top\sqcap\exists S. \exists P.\top))(v)\}-->
+
+<!-- B\sqsubseteq (\exists P.\top  \sqcap \exists S.\exists P.\top) \sqcup \exists R.(E\sqcap D), D \sqsubseteq \neg E -->
+<owl:Class rdf:about="B">
+  <owl:unionOf rdf:parseType="Collection">
+            <owl:Class rdf:about="X1"/>
+            <owl:Class rdf:about="X2"/>
+  </owl:unionOf>
+</owl:Class>
+<owl:Class rdf:about="X1">
+    <owl:intersectionOf rdf:parseType="Collection">
+ <owl:Class rdf:about="Y1"/>
+
+<owl:Class rdf:about="Y2"/>
+ </owl:intersectionOf>
+</owl:Class>
+<owl:Class rdf:about="Y1">
+<rdfs:subClassOf>
+ <owl:Restriction owl:cardinality="1">
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="P"/>
+                </owl:onProperty>
+                    <owl:someValuesFrom>
+                        <owl:Class rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:someValuesFrom>
+                </owl:Restriction>
+        </rdfs:subClassOf>
+            </owl:Class>
+
+<owl:Class rdf:about="Y2">
+<rdfs:subClassOf>
+ <owl:Restriction owl:cardinality="1">
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="S" />
+                </owl:onProperty>
+                    <owl:someValuesFrom>
+                        <owl:Class rdf:about="Y1"/>
+                    </owl:someValuesFrom>
+                </owl:Restriction>
+        </rdfs:subClassOf>
+            </owl:Class>
+
+     <owl:Class rdf:about="X2">
+     <rdfs:subClassOf>
+         <owl:Restriction owl:cardinality="1">
+                     <owl:onProperty>
+                       <owl:ObjectProperty rdf:about="R" />
+                    </owl:onProperty>
+                         <owl:someValuesFrom>
+                            <owl:intersectionOf rdf:parseType="Collection">
+                         <owl:Class rdf:about="E"/>
+                         <owl:Class rdf:about="D"/>
+                         </owl:intersectionOf>
+                         </owl:someValuesFrom>
+                     </owl:Restriction>
+                            </rdfs:subClassOf>
+                                 </owl:Class>
+<!-- V= (\exists W. (\exists P. \top\sqcap\exists S. \exists P.\top)) -->
+
+<owl:Class rdf:about="V">
+ <rdfs:subClassOf>
+         <owl:Restriction owl:cardinality="1">
+                     <owl:onProperty>
+                       <owl:ObjectProperty rdf:about="W" />
+                    </owl:onProperty>
+                         <owl:someValuesFrom>
+                          <owl:Class rdf:about="V1"/>
+</owl:someValuesFrom>
+                     </owl:Restriction>
+                            </rdfs:subClassOf>
+                                 </owl:Class>
+
+<owl:Class rdf:about="V1">
+<owl:intersectionOf rdf:parseType="Collection">
+ <owl:Class rdf:about="Y1"/>
+
+<owl:Class rdf:about="Y2"/>
+ </owl:intersectionOf>
+</owl:Class>
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="R"/>
+<owl:ObjectProperty rdf:ID="S"/>
+<owl:ObjectProperty rdf:ID="P"/>
+<owl:ObjectProperty rdf:ID="Q"/>
+<owl:ObjectProperty rdf:ID="U"/>
+<owl:ObjectProperty rdf:ID="V"/>
+  
+</rdf:RDF>

@@ -445,7 +445,7 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-7.owl">
 </ObjectIntersectionOf>
 </SubClassOf>
 
-<SubClassOf>
+<!--<SubClassOf>
 <ObjectIntersectionOf>
 <Class IRI="#B_0"/>
 <Class IRI="#B_1"/>
@@ -3103,7 +3103,7 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-7.owl">
 </ObjectSomeValuesFrom>
 </ObjectIntersectionOf>
 <Class abbreviatedIRI="owl:Nothing"/>
-</SubClassOf>
+</SubClassOf>-->
 
 <SubClassOf>
 <ObjectIntersectionOf>

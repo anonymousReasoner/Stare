@@ -1,5 +1,4 @@
 package fr.anonymous.reasoner;
-
 /*
  * $Id$
  *
@@ -19,15 +18,12 @@ package fr.anonymous.reasoner;
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
-
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -54,9 +50,7 @@ import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.util.DLExpressivityChecker;
-
 import com.google.common.collect.SetMultimap;
-
 import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 
 public class LoadOntology {
@@ -64,11 +58,7 @@ public class LoadOntology {
     private static OWLDataFactory factory = new OWLDataFactoryImpl();
     private ReasoningData data;
     private BinaryAbsorption absor;
-    //new for link keys first we need the file containing link keys
-    //private String pathlk;
-    // then we need to load this file
     private LoadingLinkeys loadlk;
-    // finally we need to add the set of loaded link keys to the LKBox
     private LKBox LK;
 
     public LoadOntology(OWLOntology onto, int strategy) {
@@ -76,9 +66,7 @@ public class LoadOntology {
         absor = new BinaryAbsorption();
         loadlk = new LoadingLinkeys();
         LK = new LKBox();
-        //f=new File();
-
-        Set<OWLOntology> sOnto = new HashSet<OWLOntology>();
+        Set<OWLOntology> sOnto = new HashSet<>();
         sOnto.add(onto);
         DLExpressivityChecker expr = new DLExpressivityChecker(sOnto);
         List<DLExpressivityChecker.Construct> constructs = null;
@@ -106,7 +94,6 @@ public class LoadOntology {
                 data.setDatatype(true);
         }
         this.ontology = onto;
-        //  data.setIRIBase( ontology.getOntologyID().getOntologyIRI() );
         data.setTop(factory.getOWLThing());
         data.setBottom(factory.getOWLNothing());
         data.setStrategy(strategy);
@@ -120,8 +107,6 @@ public class LoadOntology {
         this.getAssertions(data);
         this.createEmptyInitCores(data);
         data.getABox().init(data);// computes transitive individual equalities
-
-
     }
 
     public LoadOntology(OWLOntology onto, int strategy, File f) {
@@ -129,15 +114,14 @@ public class LoadOntology {
         absor = new BinaryAbsorption();
         loadlk = new LoadingLinkeys();
         LK = new LKBox();
-        //f=new File();
-
-        Set<OWLOntology> sOnto = new HashSet<OWLOntology>();
+        Set<OWLOntology> sOnto = new HashSet<>();
         sOnto.add(onto);
         DLExpressivityChecker expr = new DLExpressivityChecker(sOnto);
         List<DLExpressivityChecker.Construct> constructs = null;
         try {
             constructs = expr.getConstructs();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
         for (DLExpressivityChecker.Construct c : constructs) {
@@ -159,8 +143,6 @@ public class LoadOntology {
                 data.setDatatype(true);
         }
         this.ontology = onto;
-
-        //  data.setIRIBase( ontology.getOntologyID().getOntologyIRI() );
         data.setTop(factory.getOWLThing());
         data.setBottom(factory.getOWLNothing());
         data.setStrategy(strategy);
@@ -172,21 +154,13 @@ public class LoadOntology {
         absor.absorbBinaryAxioms(data);
         this.makeClosureByRole(data);
         this.getAssertions(data);
-        //System.out.print(loadlk.EDOALtoLKs(f).size());
-        //this.createEmptyInitCores(data);
         data.getABox().init(data);// computes transitive individual equalities
-        //this.pathlk=path;
         loadlk.EDOALtoLKs(f);
-        //	LK.setLks(loadlk.EDOALtoLKs(f));
-        //THERE IS A PB HERE WHY NOT ENTERING THE LOOP
         if (!loadlk.EDOALtoLKs(f).isEmpty()) {
-
             data.containsLk(true);
             LK.setLks(loadlk.EDOALtoLKs(f));
             data.setLK(LK);
         }
-
-
     }
 
 
@@ -202,7 +176,7 @@ public class LoadOntology {
     //    since the left side of each primitive axiom is atomic (not a UNION)
     // If data.getGenConceptAxioms() is empty, there is an individual "o" included in "TOP". It is done in "getIndividuals"
     public void createEmptyInitCores(ReasoningData data) {
-        Set<OWLClassExpression> label = new HashSet<OWLClassExpression>();
+        Set<OWLClassExpression> label = new HashSet<>();
         for (ConceptAxiom ax : absor.getGenConceptAxioms()) {
             label.addAll(ax.getNNF().asConjunctSet());
         }
@@ -218,7 +192,7 @@ public class LoadOntology {
      */
     public int getNbIndet(Set<OWLClassExpression> cs) {
         int max = 0;
-        Set<OWLClassExpression> addedC = new HashSet<OWLClassExpression>(cs);
+        Set<OWLClassExpression> addedC = new HashSet<>(cs);
 
         for (OWLClassExpression c : cs) {
             addedC.addAll(data.getConceptsFromPrimitiveAxioms(c.asConjunctSet(), data.getInitCore().getConcepts()));
@@ -245,7 +219,9 @@ public class LoadOntology {
      *  in turn, transforms and stores them in ReasoningData
      */
     private void getConceptAxioms(ReasoningData data) {
-        OWLClassExpression superClass = null, subClass = null;
+
+        OWLClassExpression superClass = null;
+        OWLClassExpression subClass = null;
         // for each class axiom in the ontology
         for (OWLAxiom classAxiom : ontology.getAxioms()) {
             //HERE for Tbox
@@ -263,14 +239,17 @@ public class LoadOntology {
                         continue;
                     else
                         absor.getAtomicAxioms().add(new ConceptAxiom(subClass, superClass));
-                } else if (absor.containsOnlyInterSomeLiteral(subClass)) // including negated subClass
+                }
+                else if (absor.containsOnlyInterSomeLiteral(subClass)) // including negated subClass
                 {
                     Set<ConceptAxiom> atomicAxs = absor.absorbAxiom(new ConceptAxiom(subClass, superClass), data);
                     absor.getAtomicAxioms().addAll(atomicAxs);
-                } else if (absor.isAbsorbableInterLiteral(subClass)) {
+                }
+                else if (absor.isAbsorbableInterLiteral(subClass)) {
                     Set<ConceptAxiom> s = absor.absorbPart(new ConceptAxiom(subClass, superClass), data);
                     absor.getAtomicAxioms().addAll(s);
-                } else {
+                }
+                else {
                     absor.getGenConceptAxioms().add(new ConceptAxiom(subClass, superClass));
                 }
             }
@@ -399,12 +378,10 @@ public class LoadOntology {
     private void getIndividuals(ReasoningData data) {
         //The individuals stored in ABox, not ReasoningData
         data.getABox().getInitInds().addAll(ontology.getIndividualsInSignature());
-
         if (data.getABox().getInitInds().isEmpty()) {
             data.setDummyInd();
             data.getABox().getInitInds().add(data.getDummyInd());
             data.getABox().getConceptsByInd().put(data.getDummyInd(), data.getTop());
-
         }
     }
 
@@ -418,11 +395,6 @@ public class LoadOntology {
     private void getAtomicRoles(ReasoningData data) {
         for (OWLProperty prop : ontology.getObjectPropertiesInSignature()) {
             boolean tr = false;
-//            if (prop instanceof OWLObjectPropertyExpression) {
-//                OWLObjectPropertyExpression p = (OWLObjectPropertyExpression) prop;
-//		    	if(EntitySearcher.isTransitive(p, ontology))
-//		              tr = true;
-//            }
             RoleAttributes attr = new RoleAttributes(false, false, false, tr, false);
             data.getObjectPropWithAttr().put((OWLObjectPropertyExpression) prop, attr);
         }
@@ -442,31 +414,23 @@ public class LoadOntology {
                 data.getABox().getConceptsByInd().put(individual, as.getClassExpression());
 
             for (OWLObjectPropertyAssertionAxiom asser : ontology.getObjectPropertyAssertionAxioms(individual)) {
-                //if(asser.getSubject().equals(individual) )
-                //{
-                Map<OWLObjectPropertyExpression, OWLIndividual> m = new HashMap<OWLObjectPropertyExpression, OWLIndividual>();
+                Map<OWLObjectPropertyExpression, OWLIndividual> m = new HashMap<>();
                 m.put(asser.getProperty(), asser.getObject());
                 data.getABox().getConceptObjeAssertBySource().put(individual, m);
-                //}
-                //if(asser.getObject().equals(individual))
-                //{
-                Map<OWLObjectPropertyExpression, OWLIndividual> m1 = new HashMap<OWLObjectPropertyExpression, OWLIndividual>();
+                Map<OWLObjectPropertyExpression, OWLIndividual> m1 = new HashMap<>();
                 m1.put(asser.getProperty(), asser.getSubject());
                 data.getABox().getConceptObjeAssertByTarget().put(asser.getObject(), m1);
-                //}
             }
             for (OWLDataPropertyAssertionAxiom asser : ontology.getDataPropertyAssertionAxioms(individual)) {
                 if (asser.getSubject().equals(individual)) {
-                    Map<OWLDataPropertyExpression, OWLLiteral> m = new HashMap<OWLDataPropertyExpression, OWLLiteral>();
+                    Map<OWLDataPropertyExpression, OWLLiteral> m = new HashMap<>();
                     m.put(asser.getProperty(), asser.getObject());
                     data.getABox().getConceptDataAssertBySource().put(individual, m);
 
-                    Map<OWLDataPropertyExpression, OWLIndividual> m2 = new HashMap<OWLDataPropertyExpression, OWLIndividual>();
+                    Map<OWLDataPropertyExpression, OWLIndividual> m2 = new HashMap<>();
                     m2.put(asser.getProperty(), individual);
                     data.getABox().getConceptDataAssertByTarget().put(asser.getObject(), m2);
                 }
-                //if( asser.getObject().equals(individual))
-                //    data.getABox().getTargetDPropsByInd().put(individual, asser.getProperty());
             }
             for (OWLSameIndividualAxiom asser : ontology.getSameIndividualAxioms(individual)) {
                 List<OWLIndividual> is = asser.getIndividualsAsList();
@@ -485,9 +449,8 @@ public class LoadOntology {
      *  If R- <= S- then S is in the closure of R
      */
     private void makeClosureByRole(ReasoningData data) {
-        Set<OWLPropertyExpression> rolesInHierarchy = new HashSet<OWLPropertyExpression>();
+        Set<OWLPropertyExpression> rolesInHierarchy = new HashSet<>();
         for (OWLObjectProperty property : ontology.getObjectPropertiesInSignature()) {
-            //rolesInHierarchy.add(property);//self subsumption which are all properties
             for (OWLSubObjectPropertyOfAxiom axiom : ontology.getObjectSubPropertyAxiomsForSubProperty(property)) {
                 rolesInHierarchy.add(axiom.getSubProperty());
                 rolesInHierarchy.add(axiom.getSuperProperty());
@@ -501,8 +464,8 @@ public class LoadOntology {
             }
         }
         for (OWLPropertyExpression role : rolesInHierarchy) {
-            Set<OWLPropertyExpression> supers = new HashSet<OWLPropertyExpression>();
-            Set<OWLPropertyExpression> subs = new HashSet<OWLPropertyExpression>();
+            Set<OWLPropertyExpression> supers = new HashSet<>();
+            Set<OWLPropertyExpression> subs = new HashSet<>();
             supers.add(role);
             subs.add(role);
             if (!role.isDataPropertyExpression()) {
@@ -540,9 +503,9 @@ public class LoadOntology {
         }
 
         // compute closure
-        Set<OWLPropertyExpression> rolesPinv = new HashSet<OWLPropertyExpression>(data.getObjectPropWithAttr().keySet());
+        Set<OWLPropertyExpression> rolesPinv = new HashSet<>(data.getObjectPropWithAttr().keySet());
         rolesPinv.addAll(data.getDataPropWithAttr().keySet());
-        Set<OWLPropertyExpression> tmp = new HashSet<OWLPropertyExpression>(rolesPinv);
+        Set<OWLPropertyExpression> tmp = new HashSet<>(rolesPinv);
         //tmp contains the initial roles in the hierarchy
         //This loop adds the inverse roles
         for (OWLPropertyExpression role : tmp) {
@@ -561,10 +524,10 @@ public class LoadOntology {
         //build closure of P- where P is an object property
         for (OWLPropertyExpression role : rolesPinv) {
             if (!rolesInHierarchy.contains(role)) {
-                Set<OWLPropertyExpression> rs = new HashSet<OWLPropertyExpression>();
+                Set<OWLPropertyExpression> rs = new HashSet<>();
                 rs.add(role);
                 data.getSubClosureByRole().putAll(role, rs);
-                rs = new HashSet<OWLPropertyExpression>();
+                rs = new HashSet<>();
                 rs.add(role);
                 data.getSuperClosureByRole().putAll(role, rs);
             }
@@ -583,18 +546,18 @@ public class LoadOntology {
             nstop = false;
             //each r and r- is considered
             for (OWLPropertyExpression r : init.keySet()) {
-                Set<OWLPropertyExpression> rs = new HashSet<OWLPropertyExpression>(init.get(r));
+                Set<OWLPropertyExpression> rs = new HashSet<>(init.get(r));
                 for (OWLPropertyExpression r1 : rs) {
                     if (init.get(r).addAll(init.get(r1)))
                         nstop = true;
-                    if (r instanceof OWLObjectPropertyExpression)
-                        if (init.get(((OWLObjectPropertyExpression) r).getInverseProperty()).addAll(init.get(((OWLObjectPropertyExpression) r1).getInverseProperty())))
-                            nstop = true;
+                    if (r instanceof OWLObjectPropertyExpression &&
+                            init.get(((OWLObjectPropertyExpression) r).getInverseProperty())
+                                    .addAll(init.get(((OWLObjectPropertyExpression) r1).getInverseProperty())))
+                        nstop = true;
                 }
             }
         }
     }
-
 
     public ReasoningData getData() {
         return data;

@@ -1,0 +1,36 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns=""
+         >
+<align:Cell rdf:about="#cell-with-linkkey">
+  <align:entity1><Class rdf:about="http://data.doremus.org/ontology/Self_Contained_Expression" /></align:entity1>
+  <align:entity2><Class rdf:about="http://data.doremus.org/ontology/Self_Contained" /></align:entity2>
+  <align:relation>=</align:relation>
+  <linkkey>
+    <Linkkey>
+      <lk:type>plain</lk:type>
+      <binding>
+      <Intersects>
+    <property1><Relation rdf:about="http://www.cidoc-crm.org/cidoc-crm/P3_has_note"/></property1>
+    <property2><Relation rdf:about="http://www.cidoc-crm.org/cidoc-crm/P3_has_note"/></property2>
+  </Intersects>
+      </binding>
+    </Linkkey>
+  </linkkey>
+<align:Cell rdf:about="#cell-with-linkkey">
+  <align:entity1><Class rdf:about="http://data.doremus.org/ontology/Self_Contained_Expression"/></entity1>
+  <align:entity2><Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E4_Period"/></entity2>
+  <relation>=</relation>
+  <linkkey>
+    <Linkkey>
+       <lk:type>plain</lk:type>
+       <binding>
+       <Intersects>
+     <property1><Relation rdf:about="http://data.doremus.org/ontology/U13_has_casting"/></property1>
+     <property2><Relation rdf:about="http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by"/> </property2>
+     </Intersects>
+           </binding>
+         </Linkkey>
+       </linkkey>

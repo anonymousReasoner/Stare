@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns=""
+         >
+<align:Cell rdf:about="#cell-with-linkkey">
+  <align:entity1><Class rdf:about="W" /></align:entity1>
+  <align:entity2><Class rdf:about="W" /></align:entity2>
+  <align:relation>=</align:relation>
+  <linkkey>
+    <Linkkey>
+      <lk:type>plain</lk:type>
+      <binding>
+      <Intersects>
+    <property1><Relation rdf:about="C"/></property1>
+    <property2><Relation rdf:about="C"/></property2>
+  </Intersects>
+      <Intersects>
+      <property1><Relation rdf:about="T"/></property1>
+      <property2><Relation rdf:about="T1"/></property2>
+    </Intersects>
+      </binding>
+    </Linkkey>
+  </linkkey>

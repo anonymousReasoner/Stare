@@ -32,8 +32,6 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLObjectComplementOf;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
@@ -51,11 +49,11 @@ public class Absorption {
     Set<ConceptAxiom> atomicAxioms  ;
     Set<ConceptAxiom> interAtomicAxioms  ;
 	
-    public Absorption(ReasoningData data) {	
-	   genConceptAxioms = new HashSet<ConceptAxiom>();
-	   equivAtomicAxioms =new HashSet<ConceptAxiom>(); 
-	   atomicAxioms = new HashSet<ConceptAxiom>();
-	   interAtomicAxioms = new HashSet<ConceptAxiom>();  
+    public Absorption() {
+	   genConceptAxioms = new HashSet<>();
+	   equivAtomicAxioms =new HashSet<>();
+	   atomicAxioms = new HashSet<>();
+	   interAtomicAxioms = new HashSet<>();
     }
    
 	// A < C, A \equiv C, \exists R A < C , A \sqcap B < C 
@@ -63,11 +61,11 @@ public class Absorption {
 	// data.atomicAxioms, data.equivAtomicAxioms => data.atomicAxioms,  data.genConceptAxioms (equiv is privileged)
         // data.genConceptAxioms  => data.atomicAxioms,  data.someAtomicAxioms, data.genConceptAxioms
     public void absorbEquivAtomicInterAxioms(ReasoningData data) {
-      	  Set<OWLClassExpression> atomics  = new HashSet<OWLClassExpression>();
+      	  Set<OWLClassExpression> atomics  = new HashSet<>();
       	  
-	      Set<OWLClassExpression> equivAtomics  = new HashSet<OWLClassExpression>();
+	      Set<OWLClassExpression> equivAtomics  = new HashSet<>();
       	   
-      	  Set<OWLClassExpression> interAtomics  = new HashSet<OWLClassExpression>();
+      	  Set<OWLClassExpression> interAtomics  = new HashSet<>();
 	      OWLDataFactory factory = new OWLDataFactoryImpl();
 	       
 	      //"data.getAbsorbedSuperBySub is used for lazy applying rule  
@@ -86,7 +84,7 @@ public class Absorption {
 
 	      //group atomicAxioms : A < C by A and remove A < C from  A < C if there is A = C  
 	      // "atomic" has more priority than "neg atomic"
-	      Set<ConceptAxiom> copyAtomicAxioms = new HashSet<ConceptAxiom>( atomicAxioms );
+	      Set<ConceptAxiom> copyAtomicAxioms = new HashSet<>( atomicAxioms );
       	  for(ConceptAxiom ax : copyAtomicAxioms ){
 	      //ignore \bot < C
 	        if( !ax.getLeftMember().isOWLNothing() ) {
@@ -107,13 +105,13 @@ public class Absorption {
       	   
       	  //interAxioms : A \sqcap B < C
       	  //Absorption A \sqcap B < C is better than A < \neg B \sqcup C
-      	  Set<ConceptAxiom> copyInterAtomicAxioms = new HashSet<ConceptAxiom>( interAtomicAxioms );
+      	  Set<ConceptAxiom> copyInterAtomicAxioms = new HashSet<>( interAtomicAxioms );
       	  for(ConceptAxiom ax : copyInterAtomicAxioms ){
       	      
-      	      Set<OWLClassExpression> leftConjuncts =  new HashSet<OWLClassExpression>( ax.getLeftMember().asConjunctSet() );
+      	      Set<OWLClassExpression> leftConjuncts =  new HashSet<>( ax.getLeftMember().asConjunctSet() );
       	       
       	      //Can we reduce to one traverse of 
-      	      Set<OWLClassExpression> abs = this.extractAbsorbableInter(ax.getLeftMember(), equivAtomics, interAtomics );
+      	      Set<OWLClassExpression> abs = this.extractAbsorbableInter(ax.getLeftMember(), equivAtomics);
       	       
       	      if(abs.isEmpty()) {
       	         interAtomicAxioms.remove( ax );
@@ -121,7 +119,7 @@ public class Absorption {
       	      } else {
       	         //convert  A \sqcap B < C to A < C \sqcup \neg B
       	         leftConjuncts.removeAll(abs); 
-      	         Set<OWLClassExpression> terms =  new HashSet<OWLClassExpression>( ax.getRightMember().asDisjunctSet() );
+      	         Set<OWLClassExpression> terms =  new HashSet<>( ax.getRightMember().asDisjunctSet() );
       	        
       	         if( !leftConjuncts.isEmpty() ){
       	            OWLClassExpression tmp  = factory.getOWLObjectIntersectionOf( leftConjuncts );
@@ -134,22 +132,15 @@ public class Absorption {
       	         } 
       	         OWLClassExpression left  = null;
       	         if(abs.size() ==1) 
-	  	           left = (OWLClassExpression)abs.toArray()[0]; 
+				 {left = (OWLClassExpression)abs.toArray()[0]; }
 	  	         else
-	  	           left  = factory.getOWLObjectIntersectionOf(abs);
-	  	    
-      	          
-      	         //OWLClassExpression notLeft =  left.getComplementNNF();
-      	         //Set<OWLClassExpression> leftNNF = new HashSet<OWLClassExpression>( notLeft.asDisjunctSet() );
-      	                    
+				 {left  = factory.getOWLObjectIntersectionOf(abs);}
       	         OWLClassExpression right  = null;
       	         if(terms.size() ==1) 
-	  	            right = (OWLClassExpression)terms.toArray()[0]; 
+				 {right = (OWLClassExpression)terms.toArray()[0]; }
 	  	         else
 	  	            right  = factory.getOWLObjectUnionOf(terms);
-	  	 
-	  	 
-	  	         //OWLClassExpression nnf  = factory.getOWLObjectUnionOf(leftNNF);  
+
 	  	         interAtomicAxioms.remove( ax );
 	             Set<ConceptAxiom> binarizing = binarizingAbsorbableAxiom(new ConceptAxiom(left,  right), data);
 	             interAtomicAxioms.addAll(binarizing);
@@ -157,7 +148,7 @@ public class Absorption {
 	             interAtomics.add(left);
       	         for(ConceptAxiom  axiom : binarizing) 
       	         {
-      	           Set<OWLClassExpression> tr = new HashSet<OWLClassExpression>( axiom.getRightMember().asConjunctSet() );
+      	           Set<OWLClassExpression> tr = new HashSet<>( axiom.getRightMember().asConjunctSet() );
       	           Object[] arr = axiom.getLeftMember().asConjunctSet().toArray();
       	           
       	           BinaryLabel bl = null;
@@ -176,7 +167,7 @@ public class Absorption {
 	   
            
           //Reduction of general axioms : A < C , A < D => A <  C \sqcap D 
-      	  Set<ConceptAxiom> genAxioms = new HashSet<ConceptAxiom>( genConceptAxioms );
+      	  Set<ConceptAxiom> genAxioms = new HashSet<>( genConceptAxioms );
           SetMultimap<OWLClassExpression, OWLClassExpression> finalGenAxioms = HashMultimap.create(); 
           for(ConceptAxiom ax : genAxioms){
 	      finalGenAxioms.put(ax.getLeftMember(), ax.getRightMember()); 
@@ -189,7 +180,7 @@ public class Absorption {
 	        Set<OWLClassExpression>  rs =  finalGenAxioms.get(l);
 	        OWLClassExpression[] rsArray = rs.toArray( new OWLClassExpression[rs.size()] );
 	      
-	        Set<OWLClassExpression> clsSet = new HashSet<OWLClassExpression>();
+	        Set<OWLClassExpression> clsSet = new HashSet<>();
 	        for(int i=0; i< rsArray.length; i++) 
 	        {
 	          clsSet.add( rsArray[i]  );
@@ -276,12 +267,12 @@ public class Absorption {
                 //System.out.println( "LOAD : binarizing, subClass=" +   (new ManchesterOWLSyntaxOWLObjectRendererImpl()).render(subClass) +"\n\n");
           OWLClassExpression superClass = axiom.getRightMember();
           if( subClass.asConjunctSet().size() <= 2 ) {
-              Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();
+              Set<ConceptAxiom> res = new HashSet<>();
 		      res.add ( axiom );
 		     return res;
           }
                      
-          Set<OWLClassExpression> copyConjuncts =  new HashSet<OWLClassExpression>(subClass.asConjunctSet());
+          Set<OWLClassExpression> copyConjuncts =  new HashSet<>(subClass.asConjunctSet());
           OWLClassExpression conj1 = (OWLClassExpression)copyConjuncts.toArray()[0];
           copyConjuncts.remove(conj1);
           OWLClassExpression conj2 = (OWLClassExpression)copyConjuncts.toArray()[0]; 
@@ -291,9 +282,9 @@ public class Absorption {
           // TODO check if it is the initial atomic concepts here, and not the derived ones
           data.getInitialAtomicConcepts().add(F1);
                 //OWLClassExpression remaining = factory.getOWLObjectIntersectionOf( copyConjuncts );
-          Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();
+          Set<ConceptAxiom> res = new HashSet<>();
                      
-          Set<OWLClassExpression> clsSet1 = new HashSet<OWLClassExpression>();
+          Set<OWLClassExpression> clsSet1 = new HashSet<>();
           clsSet1.add( conj1 );
 		  clsSet1.add( conj2 );
 		  OWLClassExpression newLeft1 = factory.getOWLObjectIntersectionOf( clsSet1 );
@@ -311,8 +302,8 @@ public class Absorption {
 	      return res; 
     }
           
-	public Set<OWLClassExpression> extractAbsorbableInter(OWLClassExpression c, Set<OWLClassExpression> equivAtomics, Set<OWLClassExpression> inters  ) {
-	    Set<OWLClassExpression> abs = new HashSet<OWLClassExpression>();                             
+	public Set<OWLClassExpression> extractAbsorbableInter(OWLClassExpression c, Set<OWLClassExpression> equivAtomics ) {
+	    Set<OWLClassExpression> abs = new HashSet<>();
 	    if(c.getClassExpressionType()!=ClassExpressionType.OBJECT_INTERSECTION_OF) {
 	           return abs;
 	    }
@@ -329,9 +320,8 @@ public class Absorption {
             
 	public boolean isOperandOfComplements(OWLClassExpression c, Set<OWLClassExpression> negs ) {
 	       for(OWLClassExpression i :  negs) {
-	           OWLClassExpression opera = ((OWLObjectComplementOf)i).getOperand();
 	           if(c.equals(i))
-	              return true;
+	              return c.equals(i);
 	       }
 	       return false;
 	}
@@ -371,7 +361,7 @@ public class Absorption {
 	}
 	
 	public Set<ConceptAxiom> getAllAxioms() { 
-	    Set<ConceptAxiom> allAxioms = new HashSet<ConceptAxiom>( this.genConceptAxioms );
+	    Set<ConceptAxiom> allAxioms = new HashSet<>( this.genConceptAxioms );
 	    //allAxioms.addAll( this.equivConceptAxioms );
 	    allAxioms.addAll( this.equivAtomicAxioms );
 	    //allAxioms.addAll( this.equivNegAtomicAxioms );

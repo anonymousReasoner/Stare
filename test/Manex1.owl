@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns=""
+         >
+<!--- AH regarde il y juste les individuals-->
+
+
+<owl:NamedIndividual rdf:about="a">
+    <rdf:type rdf:resource="A"/>
+    <P rdf:resource="c"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="b">
+    <rdf:type rdf:resource="B"/>
+    <R rdf:resource="d"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="c">
+    <rdf:type rdf:resource="C"/>
+    <Q rdf:resource="e"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="d">
+    <rdf:type rdf:resource="D"/>
+    <R rdf:resource="e"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="e">
+    <rdf:type rdf:resource="E"/>
+</owl:NamedIndividual>
+<!-- Schema definition RDFS -->
+
+
+<owl:Class rdf:about="A"/>
+<owl:Class rdf:about="B"/>
+<owl:Class rdf:about="C"/>
+<owl:Class rdf:about="D"/>
+<owl:Class rdf:about="E"/>
+
+<!--\exists T.( \exists U.E\sqcup \exists V. (\exists U.E))(e)-->
+
+<owl:Class rdf:about="E">
+  <rdfs:subClassOf>
+    <owl:Restriction owl:cardinality="1">
+    <owl:onProperty>
+      <owl:ObjectProperty rdf:about="T" />
+    </owl:onProperty>
+    <owl:someValuesFrom>
+     <owl:Class rdf:about="X" />
+    </owl:someValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+<owl:Class rdf:about="X1">
+<rdfs:subClassOf>
+ <owl:Restriction owl:cardinality="1">
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="U" />
+                </owl:onProperty>
+                    <owl:someValuesFrom>
+                        <owl:Class rdf:about="E"/>
+                    </owl:someValuesFrom>
+                </owl:Restriction>
+        </rdfs:subClassOf>
+            </owl:Class>
+
+<owl:Class rdf:about="X">
+  <owl:unionOf rdf:parseType="Collection">
+            <owl:Class rdf:about="X1"/>
+
+            <owl:Class rdf:about="X2"/>
+
+
+            </owl:unionOf>
+     </owl:Class>
+     <owl:Class rdf:about="X2">
+     <rdfs:subClassOf>
+         <owl:Restriction owl:cardinality="1">
+                     <owl:onProperty>
+                       <owl:ObjectProperty rdf:about="V" />
+                    </owl:onProperty>
+                         <owl:someValuesFrom>
+                         <owl:Class rdf:about="X1"/>
+                         </owl:someValuesFrom>
+                     </owl:Restriction>
+                            </rdfs:subClassOf>
+                                 </owl:Class>
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="R"/>
+<owl:ObjectProperty rdf:ID="S"/>
+<owl:ObjectProperty rdf:ID="P"/>
+<owl:ObjectProperty rdf:ID="Q"/>
+<owl:ObjectProperty rdf:ID="U"/>
+<owl:ObjectProperty rdf:ID="V"/>
+  
+</rdf:RDF>

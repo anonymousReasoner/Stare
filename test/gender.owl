@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:PREFIX="http://www.okkam.org/oaie/person1-"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:ontology_base="http://www.okkam.org/ontology_person1.owl#"
+    xmlns:ontology_base1="http://www.okkam.org/ontology_person2.owl#"
+    xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" >
+
+
+        <owl:Class rdf:about="http://www.okkam.org/ontology_person2.owl#Person"/>
+
+  <owl:Class rdf:about="http://www.okkam.org/ontology_person1.owl#Person"/>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+       <owl:Class>
+    <owl:Restriction>
+     <owl:onProperty>
+     <owl:ObjectProperty rdf:about="sex" />
+     </owl:onProperty>
+     <owl:allValuesFrom>
+     <owl:Class rdf:about="Male" />
+     </owl:allValuesFrom>
+     </owl:Restriction>
+     </owl:Class>
+     <owl:Class>
+     <owl:Restriction>
+      <owl:onProperty>
+      <owl:ObjectProperty rdf:about="sex" />
+      </owl:onProperty>
+      <owl:allValuesFrom>
+      <owl:Class rdf:about="Female" />
+      </owl:allValuesFrom>
+      </owl:Restriction>
+      </owl:Class>
+      </owl:intersectionOf>
+      <rdfs:subClassOf rdf:resource="owl:Nothing"/>
+      </owl:Class>
+
+
+<owl:Class rdf:about="http://www.okkam.org/ontology_person1.owl#Person">
+ <owl:disjointWith rdf:resource="owl:Nothing"/>
+</owl:Class>
+<owl:Class rdf:about="http://www.okkam.org/ontology_person2.owl#Person">
+ <owl:disjointWith rdf:resource="owl:Nothing"/>
+</owl:Class>
+
+  <rdf:Description rdf:about="http://www.okkam.org/oaie/person1-Person730">
+      <has_address rdf:resource="http://www.okkam.org/oaie/person1-Address730"/>
+      <sex rdf:resource="Female"/>
+      <age>40</age>
+      <date_of_birth>19690505</date_of_birth>
+      <surname>bakes</surname>
+      <given_name>luke</given_name>
+      <rdf:type rdf:resource="http://www.okkam.org/ontology_person1.owl#Person"/>
+  </rdf:Description>
+    <rdf:Description rdf:about="http://www.okkam.org/oaie/person1-Person370">
+        <has_address rdf:resource="http://www.okkam.org/oaie/person1-Address730"/>
+        <sex rdf:resource="Male"/>
+        <age>40</age>
+        <date_of_birth>19690505</date_of_birth>
+        <surname>bakes</surname>
+        <given_name>luke</given_name>
+        <rdf:type rdf:resource="http://www.okkam.org/ontology_person2.owl#Person"/>
+    </rdf:Description>
+</rdf:RDF>
+
+

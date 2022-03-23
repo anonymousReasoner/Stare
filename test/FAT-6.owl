@@ -1,2085 +1,2155 @@
 <?xml version="1.0"?>
+
+<!DOCTYPE Ontology [
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="http://www.semanticweb.org/ontologies/2014/6/FAT-6.owl"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-6.owl">
-    <Prefix name="" IRI="http://www.semanticweb.org/ontologies/2014/6/FAT-6.owl"/>
-    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
-    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
-    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
-    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Import>http://www.semanticweb.org/ontologies/2014/6/FAT-7.owl</Import>
-    <Declaration>
-        <Class IRI="#B_0"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#B_1"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#B_2"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#B_3"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#B_4"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#B_5"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#C"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#D"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#L"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#R"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#ind1"/>
-    </Declaration>
-    <SubClassOf>
-        <Class IRI="#C"/>
-        <ObjectIntersectionOf>
-            <ObjectUnionOf>
-                <Class IRI="#B_0"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectUnionOf>
-            <ObjectUnionOf>
-                <Class IRI="#B_1"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectUnionOf>
-            <ObjectUnionOf>
-                <Class IRI="#B_2"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectUnionOf>
-            <ObjectUnionOf>
-                <Class IRI="#B_3"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectUnionOf>
-            <ObjectUnionOf>
-                <Class IRI="#B_4"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectUnionOf>
-            <ObjectUnionOf>
-                <Class IRI="#B_5"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectUnionOf>
-        </ObjectIntersectionOf>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_1"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_1"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_2"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_2"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_3"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_3"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_4"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_4"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_5"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_5"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#C"/>
-        </ObjectIntersectionOf>
-        <ObjectIntersectionOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#C"/>
-                    <Class IRI="#D"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_0"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#C"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_0"/>
-                    </ObjectComplementOf>
-                    <ObjectComplementOf>
-                        <Class IRI="#D"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_0"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <Class IRI="#C"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-        </ObjectIntersectionOf>
-        <ObjectIntersectionOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#C"/>
-                    <Class IRI="#D"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_1"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#C"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_1"/>
-                    </ObjectComplementOf>
-                    <ObjectComplementOf>
-                        <Class IRI="#D"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_1"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_1"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <Class IRI="#C"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-        </ObjectIntersectionOf>
-        <ObjectIntersectionOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#C"/>
-                    <Class IRI="#D"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_2"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#C"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_2"/>
-                    </ObjectComplementOf>
-                    <ObjectComplementOf>
-                        <Class IRI="#D"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_2"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_2"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <Class IRI="#C"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-        </ObjectIntersectionOf>
-        <ObjectIntersectionOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#B_2"/>
-                    <Class IRI="#C"/>
-                    <Class IRI="#D"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_3"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#B_2"/>
-                    <Class IRI="#C"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_3"/>
-                    </ObjectComplementOf>
-                    <ObjectComplementOf>
-                        <Class IRI="#D"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_4"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_3"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_3"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_4"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_4"/>
-            <Class IRI="#B_5"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_5"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_4"/>
-            <Class IRI="#C"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-        </ObjectIntersectionOf>
-        <ObjectIntersectionOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#B_2"/>
-                    <Class IRI="#B_3"/>
-                    <Class IRI="#C"/>
-                    <Class IRI="#D"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_4"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#B_2"/>
-                    <Class IRI="#B_3"/>
-                    <Class IRI="#C"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_4"/>
-                    </ObjectComplementOf>
-                    <ObjectComplementOf>
-                        <Class IRI="#D"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_4"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_5"/>
-            </ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_0"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_1"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_2"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_3"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <Class IRI="#B_5"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectComplementOf>
-                    <Class IRI="#B_4"/>
-                </ObjectComplementOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_5"/>
-            <Class IRI="#C"/>
-            <ObjectComplementOf>
-                <Class IRI="#B_0"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_1"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_2"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_3"/>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <Class IRI="#B_4"/>
-            </ObjectComplementOf>
-        </ObjectIntersectionOf>
-        <ObjectIntersectionOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#L"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#B_2"/>
-                    <Class IRI="#B_3"/>
-                    <Class IRI="#B_4"/>
-                    <Class IRI="#C"/>
-                    <Class IRI="#D"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_5"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="#R"/>
-                <ObjectIntersectionOf>
-                    <Class IRI="#B_0"/>
-                    <Class IRI="#B_1"/>
-                    <Class IRI="#B_2"/>
-                    <Class IRI="#B_3"/>
-                    <Class IRI="#B_4"/>
-                    <Class IRI="#C"/>
-                    <ObjectComplementOf>
-                        <Class IRI="#B_5"/>
-                    </ObjectComplementOf>
-                    <ObjectComplementOf>
-                        <Class IRI="#D"/>
-                    </ObjectComplementOf>
-                </ObjectIntersectionOf>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-    </SubClassOf>
-    <SubClassOf>
-        <ObjectIntersectionOf>
-            <ObjectSomeValuesFrom>
-                <ObjectInverseOf>
-                    <ObjectProperty IRI="#L"/>
-                </ObjectInverseOf>
-                <Class abbreviatedIRI="owl:Thing"/>
-            </ObjectSomeValuesFrom>
-            <ObjectSomeValuesFrom>
-                <ObjectInverseOf>
-                    <ObjectProperty IRI="#R"/>
-                </ObjectInverseOf>
-                <Class abbreviatedIRI="owl:Thing"/>
-            </ObjectSomeValuesFrom>
-        </ObjectIntersectionOf>
-        <Class abbreviatedIRI="owl:Nothing"/>
-    </SubClassOf>
-    <ClassAssertion>
-        <ObjectIntersectionOf>
-            <Class IRI="#B_0"/>
-            <Class IRI="#B_1"/>
-            <Class IRI="#B_2"/>
-            <Class IRI="#B_3"/>
-            <Class IRI="#B_4"/>
-            <Class IRI="#B_5"/>
-            <Class IRI="#C"/>
-        </ObjectIntersectionOf>
-        <NamedIndividual IRI="#ind1"/>
-    </ClassAssertion>
-    <InverseFunctionalObjectProperty>
-        <ObjectProperty IRI="#L"/>
-    </InverseFunctionalObjectProperty>
-    <InverseFunctionalObjectProperty>
-        <ObjectProperty IRI="#R"/>
-    </InverseFunctionalObjectProperty>
+xml:base="http://www.semanticweb.org/ontologies/2014/6/FAT-6.owl"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:xml="http://www.w3.org/XML/1998/namespace"
+ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-6.owl">
+<Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+<Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+<Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+<Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+<Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+<Declaration>
+
+<ObjectProperty IRI="#L"/>
+</Declaration>
+<InverseFunctionalObjectProperty>
+<ObjectProperty IRI="#L"/>
+</InverseFunctionalObjectProperty>
+<Declaration>
+<ObjectProperty IRI="#R"/>
+</Declaration>
+<InverseFunctionalObjectProperty>
+<ObjectProperty IRI="#R"/>
+</InverseFunctionalObjectProperty>
+<Declaration>
+<Class IRI="#C"/>
+</Declaration>
+<Declaration>
+<Class IRI="#D"/>
+</Declaration>
+<Declaration>
+<Class IRI="#B_0"/>
+</Declaration>
+<Declaration>
+<Class IRI="#B_1"/>
+</Declaration>
+<Declaration>
+<Class IRI="#B_2"/>
+</Declaration>
+<Declaration>
+<Class IRI="#B_3"/>
+</Declaration>
+<Declaration>
+<Class IRI="#B_4"/>
+</Declaration>
+<Declaration>
+<Class IRI="#B_5"/>
+</Declaration>
+<Declaration>
+<NamedIndividual IRI="#ind1"/>
+</Declaration>
+<SubClassOf>
+<Class IRI="#C"/>
+<ObjectIntersectionOf>
+<ObjectUnionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectUnionOf>
+<ObjectUnionOf>
+<Class IRI="#B_1"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectUnionOf>
+<ObjectUnionOf>
+<Class IRI="#B_2"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectUnionOf>
+<ObjectUnionOf>
+<Class IRI="#B_3"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectUnionOf>
+<ObjectUnionOf>
+<Class IRI="#B_4"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectUnionOf>
+<ObjectUnionOf>
+<Class IRI="#B_5"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectUnionOf>
+</ObjectIntersectionOf>
+</SubClassOf>
+<ClassAssertion>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<Class IRI="#B_2"/>
+<Class IRI="#B_3"/>
+<Class IRI="#B_4"/>
+<Class IRI="#B_5"/>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+<NamedIndividual IRI="#ind1"/>
+</ClassAssertion>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#C"/>
+<Class IRI="#B_0"/>
+</ObjectIntersectionOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectIntersectionOf>
+<Class IRI="#D"/>
+<Class IRI="#C"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<Class IRI="#B_1"/>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectIntersectionOf>
+<Class IRI="#D"/>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<Class IRI="#B_2"/>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectIntersectionOf>
+<Class IRI="#D"/>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<Class IRI="#B_3"/>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectIntersectionOf>
+<Class IRI="#D"/>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<Class IRI="#B_2"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<Class IRI="#B_2"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<Class IRI="#B_4"/>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectIntersectionOf>
+<Class IRI="#D"/>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<Class IRI="#B_2"/>
+<Class IRI="#B_3"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<Class IRI="#B_2"/>
+<Class IRI="#B_3"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<Class IRI="#B_5"/>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectIntersectionOf>
+<Class IRI="#D"/>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<Class IRI="#B_2"/>
+<Class IRI="#B_3"/>
+<Class IRI="#B_4"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<Class IRI="#B_2"/>
+<Class IRI="#B_3"/>
+<Class IRI="#B_4"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+</SubClassOf>
+
+<!--<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_5"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_2"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_4"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_3"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_0"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_2"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_2"/>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_3"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_3"/>
+</ObjectSomeValuesFrom>
+<Class IRI="#B_4"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_4"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectComplementOf>
+<Class IRI="#B_5"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_5"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectInverseOf>
+<ObjectProperty IRI="#L"/>
+</ObjectInverseOf>
+<Class abbreviatedIRI="owl:Thing"/>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectInverseOf>
+<ObjectProperty IRI="#R"/>
+</ObjectInverseOf>
+<Class abbreviatedIRI="owl:Thing"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>-->
+
 </Ontology>
-
-
-
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
-

@@ -5,7 +5,9 @@
          xmlns=""
          >
 <!--- AH regarde il y juste les individuals-->
-
+ <!-- { <P,F><N,L>}   LK   <E,Wr>-->
+<!-- EA(a), P(a,n), N(a,l), B(n), L(l), BSB(z), Wr(b), F(b), L(b,l), F(b,n), W(b,z),
+F <= \exists W.BSB, Pr \sqcap EA=\emptyset, EA <= AW , EA <= E-->
  <owl:NamedIndividual rdf:about="a">
     <rdf:type rdf:resource="EA"/>
 
@@ -14,7 +16,7 @@
 </owl:NamedIndividual>
 
  <owl:NamedIndividual rdf:about="n">
-	<rdf:type rdf:resource="N"/>
+	<rdf:type rdf:resource="B"/>
 </owl:NamedIndividual>
  <owl:NamedIndividual rdf:about="l">
 <rdf:type rdf:resource="L"/>
@@ -26,7 +28,7 @@
 
 <owl:NamedIndividual rdf:about="b">
     <rdf:type rdf:resource="Wr"/>
-        <rdf:type rdf:resource="F"/>
+    <rdf:type rdf:resource="F"/>
     <L rdf:resource="l"/>
     <F rdf:resource="n"/>
     <W rdf:resource="z"/>
@@ -49,10 +51,8 @@
 <owl:Class rdf:about="N"/>
 <owl:Class rdf:about="L"/>
 <owl:Class rdf:about="W"/>
-
-
-
 <owl:Class rdf:about="Pr"/>
+
 <owl:Class rdf:about="F">
    <owl:Restriction owl:cardinality="1">
     <owl:onProperty>

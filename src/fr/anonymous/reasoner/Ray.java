@@ -36,17 +36,11 @@ public class Ray implements Serializable
 	private int hashcode = 0;
 	private RoleLabel ridge; // ridge is the tie
 	private ConceptLabel tip; // tip is the tail
-//	private Set<OWLIndividual> tipI;
 
 	public Ray() {
 		this.ridge = new RoleLabel();
 		this.tip  =  new ConceptLabel();
-		//	this.tipI=new HashSet();
 	}
-	/*public void sumCode() 
-    {
-        hashcode = this.ridge.hashCode() + this.tip.hashCode();
-    }*/
 
 	//Creates a ray when we know ids
 	public Ray( RoleLabel rl, ConceptLabel tl) {
@@ -79,14 +73,14 @@ public class Ray implements Serializable
 		hashcode = sumCode();
 	}
 	//Returns a new ray if "r", "r" is a role and stores the new ridge in the set "ridge" 
-	public Ray getNewRayByRole(OWLPropertyExpression r, Set<RoleLabel> ridge , ReasoningData data) {
+	public Ray getNewRayByRole(OWLPropertyExpression r, ReasoningData data) {
 		RoleLabel rl =  this.ridge.getNewRoleLabel(r, data);
 		Ray rr = new Ray(rl, this.tip);
 		return rr;
 	}
 
 	//Stores the new ridge in the set "ridge"
-	public Ray getNewRayByRole(Set<OWLPropertyExpression> roleList, Set<RoleLabel> ridge, ReasoningData data) {
+	public Ray getNewRayByRole(Set<OWLPropertyExpression> roleList,  ReasoningData data) {
 		RoleLabel rl = this.ridge.getNewRoleLabel(roleList, data);
 		Ray ray = new Ray(rl, new ConceptLabel(this.tip));
 		return ray;
@@ -94,24 +88,14 @@ public class Ray implements Serializable
 
 
 	public boolean tipContains(OWLClassExpression concept){
-		if (this.tip.contains(concept))
-			return true;
-		else return false;
+		return this.tip.contains(concept);
 	}
 
 	public boolean containsAll(Ray ray){
-		if(this.tip.containsAll( ray.getTip() ) &&
-				this.ridge.containsAll(  ray.getRidge() ))
-			return true;
-		else
-			return false;
+		return this.tip.containsAll( ray.getTip() ) &&
+				this.ridge.containsAll(  ray.getRidge() );
 	}
 
-
-	/*public void addNNFToTip(ReasoningData data) {
-		this.tip.getConcepts().addAll( data.getAllAxiomNNFCore().getConcepts() );     
-		hashcode = this.ridge.hashCode() + this.tip.hashCode(); 
-	}*/
 
 	public boolean isInverseOf(ConceptLabel core1, ConceptLabel core2, Ray ray ) {
 		if ( ! core1.equals( ray.getTip()  ) )
@@ -187,11 +171,4 @@ public class Ray implements Serializable
 		return sb.toString();
 	}
 
-	/*public Set<OWLIndividual> getTipI() {
-		return tipI;
-	}
-
-	public void setTipI(Set<OWLIndividual> tipI) {
-		this.tipI = tipI;
-	}*/
 }

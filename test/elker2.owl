@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns="">
+<!-- Box -->
+ <owl:NamedIndividual rdf:about="d">
+    <rdf:type rdf:resource="N"/>
+    <C rdf:resource="v"/>
+    <T rdf:resource="w"/>
+    <A rdf:resource="v"/>
+    <T1 rdf:resource="w"/>
+ </owl:NamedIndividual>
+
+ <owl:NamedIndividual rdf:about="b">
+    <rdf:type rdf:resource="F"/>
+     <A rdf:resource="v"/>
+     <T1 rdf:resource="w"/>
+     <T rdf:resource="w"/>
+     <C rdf:resource="v"/>
+ </owl:NamedIndividual>
+
+
+<owl:NamedIndividual rdf:about="v">
+ <rdf:type rdf:resource="V"/>
+ </owl:NamedIndividual>
+<owl:NamedIndividual rdf:about="w">
+ <rdf:type rdf:resource="W"/>
+ </owl:NamedIndividual>
+<!-- Schema definition RDFS -->
+<!-- Concepts -->
+<owl:Class rdf:about="N"/>
+<owl:Class rdf:about="W"/>
+<owl:Class rdf:about="E"/>
+<owl:Class rdf:about="P"/>
+<owl:Class rdf:about="F">
+ <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="E"/>
+
+          <owl:Restriction owl:cardinality="1">
+              <owl:onProperty>
+                <owl:ObjectProperty rdf:about="L" />
+              </owl:onProperty>
+              <owl:someValuesFrom>
+                <owl:Class rdf:about="P" />
+              </owl:someValuesFrom>
+          </owl:Restriction>
+
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+</owl:Class>
+
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="C"/>
+<owl:ObjectProperty rdf:ID="T"/>
+<owl:ObjectProperty rdf:ID="A"/>
+<owl:ObjectProperty rdf:ID="T1"/>
+  
+</rdf:RDF>

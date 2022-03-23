@@ -19,8 +19,6 @@
  */
 
 package fr.anonymous.reasoner;
- 
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -91,12 +89,9 @@ public class BinaryLabel  implements Serializable {
 			return false;
 		BinaryLabel other = (BinaryLabel) obj;
 		
-		if( !this.getBoth().equals(other.getBoth() )  ) {
-		      
+		if( !this.getBoth().equals(other.getBoth() )  )
 		     return false;
-		}
-		 
-		
+
 		return true;
 	}
 

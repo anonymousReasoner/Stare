@@ -39,13 +39,9 @@ package fr.anonymous.reasoner;
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
-
-
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLPropertyExpression;
-import uk.ac.manchester.cs.owl.owlapi.mansyntaxrenderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
-
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Set;
@@ -74,7 +70,6 @@ public class Triple implements Serializable {
 	private ConceptLabel core;
     private Set<OWLIndividual> coreI;
     private Ray ray;
-    //private int counter = 0;
 
     public Triple() {
         this.core = new ConceptLabel();
@@ -123,7 +118,7 @@ public class Triple implements Serializable {
         return this;
     }
 
-    public boolean isInverseOf(ConceptLabel co, Ray ray, ReasoningData data) {
+    public boolean isInverseOf(Ray ray) {
         if (!this.core.equals(ray.getTip()))
             return false;
         if (!ray.getTip().equals(this.core))
@@ -150,11 +145,7 @@ public class Triple implements Serializable {
 
     //The core, ridge, tip of this contains the core, ridge, tip of "tr"
     public boolean containsAll(Triple tr) {
-        if (this.core.containsAll(tr.getCore()) &&
-                this.ray.containsAll(tr.getRay()))
-            return true;
-        else
-            return false;
+       return this.core.containsAll(tr.getCore()) && this.ray.containsAll(tr.getRay());
     }
 
     public Ray getRay() {
@@ -203,25 +194,23 @@ public class Triple implements Serializable {
             return false;
         Triple other = (Triple) obj;
         if (!this.getCore().equals(other.getCore())) {
-            //System.out.println("TR Core EQUAL FALSE = "+ this.getCore().toString()+ "<>"+ other.getCore().toString());
             return false;
         }
-        if (!this.getRay().equals(other.getRay())) {
-            //System.out.println("TR Core EQUAL FALSE = "+ this.getRay().toString()+ "<>"+ other.getRay().toString());
+        if (!this.getRay().getRidge().equals(other.getRay().getRidge())) {
             return false;
         }
-        //System.out.println("TRIPLE EQUAL TRUE");
+        if (!this.getRay().getTip().equals(other.getRay().getTip())) {
+            return false;
+        }
         return true;
     }
 
     public String toSimpleString() {
-        String s = this.getCore().toSimpleString() + "hashcode=" + hashcode + ", " + this.getRay().getRidge().toSimpleString() + "-" + this.getRay().getTip().toSimpleString();
-        return s;
+       return this.getCore().toSimpleString() + "hashcode=" + hashcode + ", " + this.getRay().getRidge().toSimpleString() + "-" + this.getRay().getTip().toSimpleString();
+
     }
 
     public void toXML(PrintWriter writer) {
-
-        ManchesterOWLSyntaxOWLObjectRendererImpl render = new ManchesterOWLSyntaxOWLObjectRendererImpl();
         writer.print("<triple> hashcode =" + hashcode);
         //writer.print("<core>\n");
         this.getCore().toXML(writer);

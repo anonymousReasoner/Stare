@@ -45,37 +45,33 @@ public class RoleLabel implements Serializable
 	private Set<OWLPropertyExpression> roles;
            
 	public RoleLabel() {
-		this.roles = new HashSet<OWLPropertyExpression>();
+		this.roles = new HashSet<>();
 	}
 	
 	public RoleLabel(RoleLabel rl) 
 	{
-	    this.roles = new HashSet<OWLPropertyExpression>( rl.getRoles() );
+	    this.roles = new HashSet<>( rl.getRoles() );
 	    hashcode = sumCode();
 	}
 	
 	public RoleLabel(Set<OWLPropertyExpression> rs) 
 	{
-		this.roles = new HashSet<OWLPropertyExpression>(rs);	 
+		this.roles = new HashSet<>(rs);
 		hashcode = sumCode();
 	}
 	
 	public RoleLabel(Set<OWLPropertyExpression> rs, ReasoningData data) 
 	{
-	  Set<OWLPropertyExpression> rss1 = new HashSet<OWLPropertyExpression>(rs);
+	  Set<OWLPropertyExpression> rss1 = new HashSet<>(rs);
 	  for(OWLPropertyExpression r : rs)
 	  {
 		rss1.addAll(data.getSuperClosureByRole().get(r));
 	  }
-	  this.roles = new HashSet<OWLPropertyExpression>(rss1);
+	  this.roles = new HashSet<>(rss1);
 	  for(OWLPropertyExpression r : rss1)
 	  {		
 		this.roles.addAll(data.getSuperClosureByRole().get(r));  
-		/*if(r instanceof OWLObjectPropertyExpression)
-		{
-		  for(OWLPropertyExpression i : data.getSuperClosureByRole().get(((OWLObjectPropertyExpression)r).getInverseProperty()))
-			this.roles.add(((OWLObjectPropertyExpression)i).getInverseProperty());
-		}*/  
+
 	  }
 	  hashcode = sumCode();
 	}
@@ -83,18 +79,13 @@ public class RoleLabel implements Serializable
 	//create a RoleLabel from a single role that must be identified 
 	public RoleLabel(OWLPropertyExpression r, ReasoningData data) 
 	{
-	  Set<OWLPropertyExpression> rs = new HashSet<OWLPropertyExpression>();
+	  Set<OWLPropertyExpression> rs = new HashSet<>();
 	  rs.add(r); 
 	  rs.addAll(data.getSuperClosureByRole().get(r));
-	  this.roles = new HashSet<OWLPropertyExpression>(rs);
+	  this.roles = new HashSet<>(rs);
 	  for(OWLPropertyExpression i : rs)
 	  {
 		this.roles.addAll(data.getSuperClosureByRole().get(r));
-	    /*if(i instanceof OWLObjectPropertyExpression)
-	    {
-		 for(OWLPropertyExpression j : data.getSuperClosureByRole().get(((OWLObjectPropertyExpression)i).getInverseProperty()))
-		   this.roles.add(((OWLObjectPropertyExpression)i).getInverseProperty());
-	    }*/
 	  }
 	  hashcode = sumCode();
 	}
@@ -118,13 +109,12 @@ public class RoleLabel implements Serializable
 	if(!this.contains(r) ) 
 	{
 	  return new RoleLabel(Sets.union(Collections.singleton(r), Sets.union(this.roles, data.getSuperClosureByRole().get(r))));  
-    } else
-	  return this;
+    } else {return this;}
   }
 
   public  RoleLabel getNewRoleLabel(Set<OWLPropertyExpression> lr, ReasoningData data) 
   {
-	Set<OWLPropertyExpression> rr = new HashSet<OWLPropertyExpression>(this.roles);
+	Set<OWLPropertyExpression> rr = new HashSet<>(this.roles);
 	for(OWLPropertyExpression i : lr) 
 	{
 	  rr.add(i);
@@ -167,7 +157,7 @@ public class RoleLabel implements Serializable
 	
   public RoleLabel getInverseOf() 
   {
-	Set<OWLPropertyExpression> rr = new HashSet<OWLPropertyExpression>();
+	Set<OWLPropertyExpression> rr = new HashSet<>();
 	for(OWLPropertyExpression r : this.roles) 
 	{
 	  //It is not possible to get inverse of a data role

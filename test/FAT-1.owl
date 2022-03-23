@@ -19,31 +19,39 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-1.owl">
 <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
 <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
 <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-<Declaration>
 
+<Declaration>
 <ObjectProperty IRI="#L"/>
 </Declaration>
+
 <InverseFunctionalObjectProperty>
 <ObjectProperty IRI="#L"/>
 </InverseFunctionalObjectProperty>
+
 <Declaration>
 <ObjectProperty IRI="#R"/>
 </Declaration>
+
 <InverseFunctionalObjectProperty>
 <ObjectProperty IRI="#R"/>
 </InverseFunctionalObjectProperty>
+
 <Declaration>
 <Class IRI="#C"/>
 </Declaration>
+
 <Declaration>
 <Class IRI="#D"/>
 </Declaration>
+
 <Declaration>
 <Class IRI="#B_0"/>
 </Declaration>
+
 <Declaration>
-<NamedIndividual IRI="#ind1"/>
+<NamedIndividual IRI="#a"/>
 </Declaration>
+
 <SubClassOf>
 <Class IRI="#C"/>
 <ObjectIntersectionOf>
@@ -55,12 +63,13 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-1.owl">
 </ObjectUnionOf>
 </ObjectIntersectionOf>
 </SubClassOf>
+
 <ClassAssertion>
 <ObjectIntersectionOf>
 <Class IRI="#B_0"/>
 <Class IRI="#C"/>
 </ObjectIntersectionOf>
-<NamedIndividual IRI="#ind1"/>
+<NamedIndividual IRI="#a"/>
 </ClassAssertion>
 
 <SubClassOf>
@@ -95,21 +104,21 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-1.owl">
 </SubClassOf>
 
 <SubClassOf>
-<ObjectIntersectionOf>
-<ObjectSomeValuesFrom>
-<ObjectInverseOf>
+ <ObjectIntersectionOf>
+ <ObjectSomeValuesFrom>
+ <ObjectInverseOf>
 <ObjectProperty IRI="#L"/>
-</ObjectInverseOf>
+ </ObjectInverseOf>
 <Class abbreviatedIRI="owl:Thing"/>
+ </ObjectSomeValuesFrom>
+ <ObjectSomeValuesFrom>
+ <ObjectInverseOf>
+ <ObjectProperty IRI="#R"/>
+ </ObjectInverseOf>
+ <Class abbreviatedIRI="owl:Thing"/>
 </ObjectSomeValuesFrom>
-<ObjectSomeValuesFrom>
-<ObjectInverseOf>
-<ObjectProperty IRI="#R"/>
-</ObjectInverseOf>
-<Class abbreviatedIRI="owl:Thing"/>
-</ObjectSomeValuesFrom>
-</ObjectIntersectionOf>
-<Class abbreviatedIRI="owl:Nothing"/>
-</SubClassOf>
+ </ObjectIntersectionOf>
+ <Class abbreviatedIRI="owl:Nothing"/>
+ </SubClassOf>
 
 </Ontology>

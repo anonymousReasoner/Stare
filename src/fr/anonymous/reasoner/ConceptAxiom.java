@@ -38,15 +38,16 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
  * 
  */
 public class ConceptAxiom {
-	private OWLClassExpression left, right;
-	private OWLClassExpression NNF;
-        private static OWLDataFactory factory = new OWLDataFactoryImpl();
+	private final OWLClassExpression left;
+	private final OWLClassExpression right;
+	private final OWLClassExpression NNF;
+        private static final OWLDataFactory factory = new OWLDataFactoryImpl();
         
 	public ConceptAxiom(OWLClassExpression l, OWLClassExpression r) {
 		this.left = l;
 		this.right = r;
 		OWLClassExpression notL = factory.getOWLObjectComplementOf(l).getNNF();
-		Set<OWLClassExpression> clsSet = new HashSet<OWLClassExpression>();
+		Set<OWLClassExpression> clsSet = new HashSet<>();
 		clsSet.add( r );
 		clsSet.add( notL );
 		NNF = factory.getOWLObjectUnionOf(clsSet);
@@ -78,8 +79,6 @@ public class ConceptAxiom {
 		ConceptAxiom other = (ConceptAxiom) obj;
 		if( !this.getLeftMember().equals(other.getLeftMember()) )
 		    return false;
-		if( !this.getRightMember().equals(other.getRightMember()) )
-		    return false;
-		return true;
-        }	
+			return this.getRightMember().equals(other.getRightMember());
+		}
 }

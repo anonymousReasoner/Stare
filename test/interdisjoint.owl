@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns="">
+<!-- Box -->
+ <owl:NamedIndividual rdf:about="a1">
+    <rdf:type rdf:resource="Male"/>
+ </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="a2">
+     <rdf:type rdf:resource="Male"/>
+  </owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="a3">
+    <rdf:type rdf:resource="Male"/>
+ </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="a4">
+     <rdf:type rdf:resource="Male"/>
+  </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="a5">
+       <rdf:type rdf:resource="Female"/>
+    </owl:NamedIndividual>
+
+      <owl:NamedIndividual rdf:about="a6">
+          <rdf:type rdf:resource="Female"/>
+     </owl:NamedIndividual>
+     <owl:NamedIndividual rdf:about="a7">
+       <rdf:type rdf:resource="Female"/>
+        </owl:NamedIndividual>
+      <owl:NamedIndividual rdf:about="a8">
+        <rdf:type rdf:resource="Female"/>
+         </owl:NamedIndividual>
+
+
+ <owl:NamedIndividual rdf:about="b1">
+    <rdf:type rdf:resource="Person"/>
+ </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="b2">
+     <rdf:type rdf:resource="Person"/>
+  </owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="b3">
+      <rdf:type rdf:resource="Person"/>
+   </owl:NamedIndividual>
+      <owl:NamedIndividual rdf:about="b4">
+         <rdf:type rdf:resource="Person"/>
+      </owl:NamedIndividual>
+
+
+
+<owl:NamedIndividual rdf:about="a1">
+ <firstName rdf:resource="Charlie"/>
+ <name rdf:resource="Smith"/>
+ <birthY rdf:resource="2010"/>
+ </owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="a2">
+  <firstName rdf:resource="Liam"/>
+  <name rdf:resource="Johnson"/>
+  <birthY rdf:resource="2009"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="a3">
+   <firstName rdf:resource="Benjamin"/>
+   <name rdf:resource="Williams"/>
+   <birthY rdf:resource="2011"/>
+   </owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="a4">
+    <firstName rdf:resource="Elijah"/>
+    <name rdf:resource="Brown"/>
+    <birthY rdf:resource="2011"/>
+    </owl:NamedIndividual>
+<owl:NamedIndividual rdf:about="a5">
+ <firstName rdf:resource="Charlie"/>
+ <name rdf:resource="Smith"/>
+ <birthY rdf:resource="2010"/>
+ </owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="a6">
+  <firstName rdf:resource="Amy"/>
+  <name rdf:resource="Davis"/>
+  <birthY rdf:resource="2008"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="a7">
+   <firstName rdf:resource="Annafise"/>
+   <name rdf:resource="Lopez"/>
+   <birthY rdf:resource="2011"/>
+   </owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="a8">
+    <firstName rdf:resource="Mitchell"/>
+    <name rdf:resource="Wilson"/>
+    <birthY rdf:resource="2010"/>
+    </owl:NamedIndividual>
+ <owl:NamedIndividual rdf:about="b1">
+  <prenom rdf:resource="Liam"/>
+  <nom rdf:resource="Johnson"/>
+  <anneeN rdf:resource="2007"/>
+  </owl:NamedIndividual>
+   <owl:NamedIndividual rdf:about="b2">
+    <prenom rdf:resource="Lucas"/>
+    <nom rdf:resource="White"/>
+    <anneeN rdf:resource="2011"/>
+    </owl:NamedIndividual>
+     <owl:NamedIndividual rdf:about="b3">
+      <prenom rdf:resource="Charlie"/>
+      <nom rdf:resource="Smith"/>
+      <anneeN rdf:resource="2010"/>
+      </owl:NamedIndividual>
+       <owl:NamedIndividual rdf:about="b4">
+        <prenom rdf:resource="Amy"/>
+        <nom rdf:resource="Davis"/>
+        <anneeN rdf:resource="2008"/>
+        </owl:NamedIndividual>
+<!-- Schema definition RDFS -->
+<!-- Concepts -->
+<owl:Class rdf:about="Male"/>
+<owl:Class rdf:about="Female"/>
+<owl:Class rdf:about="Person"/>
+<owl:Class rdf:about="Male">
+ <owl:disjointWith rdf:resource="Female"/>
+</owl:Class>
+
+
+<!-- Properties -->
+<owl:ObjectProperty rdf:ID="firstName"/>
+<owl:ObjectProperty rdf:ID="prenom"/>
+<owl:ObjectProperty rdf:ID="name"/>
+<owl:ObjectProperty rdf:ID="nom"/>
+<owl:ObjectProperty rdf:ID="birthY"/>
+<owl:ObjectProperty rdf:ID="aneeN"/>
+
+
+</rdf:RDF>

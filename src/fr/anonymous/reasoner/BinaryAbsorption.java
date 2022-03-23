@@ -26,11 +26,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
-
-//import uk.ac.manchester.cs.owl.owlapi.mansyntaxrenderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 /*
  *  Concepts are manipulated as OWLExpressions in this class
  *  It can absorb negated or no negated atomic concepts.
@@ -53,6 +50,8 @@ import com.google.common.collect.Sets;
 import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 import uk.ac.manchester.cs.owl.owlapi.mansyntaxrenderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 
+import static org.semanticweb.owlapi.vocab.OWLDataFactoryVocabulary.OWLThing;
+
 public class BinaryAbsorption 
 {
     int debug = 0;
@@ -62,8 +61,8 @@ public class BinaryAbsorption
    
     public BinaryAbsorption() 
     {	
-	   genConceptAxioms = new HashSet<ConceptAxiom>(); // filled by LoadingOntology
-	   atomicAxioms = new HashSet<ConceptAxiom>();   // filled by LoadingOntology (absorbable axioms : binary, negated concepts)  
+	   genConceptAxioms = new HashSet<>(); // filled by LoadingOntology
+	   atomicAxioms = new HashSet<>();   // filled by LoadingOntology (absorbable axioms : binary, negated concepts)
     }
     
     //This method absorbs binary axioms and stores in ReasoningData
@@ -71,68 +70,55 @@ public class BinaryAbsorption
     public void absorbBinaryAxioms(ReasoningData rData)
     {
 	   OWLDataFactory factory = new OWLDataFactoryImpl();
-       for(ConceptAxiom ax : atomicAxioms ) //the left member is binary
-       {
-	      Object[] left = ax.getLeftMember().asConjunctSet().toArray();
+       for(ConceptAxiom ax : atomicAxioms ) {  //the left member is binary
+       	  Object[] left = ax.getLeftMember().asConjunctSet().toArray();
 	      if(ax.getLeftMember().asConjunctSet().size()==1)
 	      {
 	         OWLClassExpression one = (OWLClassExpression)left[0]; 
 	         if( !one.isOWLNothing() ) //ignore \bot < C
 	         {
-	        	if( one.isClassExpressionLiteral() ) //atomic or negated
-	        	{
-	        	   if( !one.isAnonymous() )  
-	        			
+	        	if( one.isClassExpressionLiteral() ) {//atomic or negated
+	        	   if( !one.isAnonymous() )
 	        		 rData.getAbsorbedAtomic().add(one);
-	        	   else 
-	        	   {
+	        	   else {
 	        		 OWLClassExpression neg = ((OWLObjectComplementOf)one).getOperand(); 
 	        		 rData.getAbsorbedNegated().add(neg);
-	        	   }
+
+	        	   	}
 	        	   for(OWLClassExpression c : ax.getRightMember().asConjunctSet() )
 		  	       {
 		  	         rData.getAbsorbedSupersBySub().put(new BinaryLabel(one), c );
-		  	          
 		  	       }
-	            } else //some 
-	            { 
+	            } else { //some
 	  	           for(OWLClassExpression c : ax.getRightMember().asConjunctSet() )
 	  	           {
 	  	             rData.getAbsorbedSupersBySub().put(new BinaryLabel(one), c );
-	  	              
 	  	           }
 	            }
 	         }//
-	      } else 
-	      {
+	      } else {
 	         OWLClassExpression c1 = (OWLClassExpression)left[0];
 	         OWLClassExpression c2 = (OWLClassExpression)left[1];   
-	         if( !c1.isOWLNothing() && !c2.isOWLNothing() ) // tautology otherwise, 
-	         {
-	        	if( c1.isClassExpressionLiteral() ) //atomic or negated
-	        	{
+	         if( !c1.isOWLNothing() && !c2.isOWLNothing() ) {// tautology otherwise,
+	        	if( c1.isClassExpressionLiteral() ) {//atomic or negated
 	        	 if( !c1.isAnonymous() )
 	        		 rData.getAbsorbedAtomic().add(c1);
-	        	 else 
-	        	 {
+	        	 else {
 	        		 OWLClassExpression neg = ((OWLObjectComplementOf)c1).getOperand(); 
 	        		 rData.getAbsorbedNegated().add(neg);
 	        	 }
 	        	}
-	        	if( c2.isClassExpressionLiteral() ) //atomic or negated
-	        	{
+	        	if( c2.isClassExpressionLiteral() ) {//atomic or negated
 	        	 if( !c2.isAnonymous() )
 	        		 rData.getAbsorbedAtomic().add(c2);
-	        	 else 
-	        	 {
+	        	 else {
 	        		 OWLClassExpression neg = ((OWLObjectComplementOf)c2).getOperand(); 
 	        		 rData.getAbsorbedNegated().add(neg);
 	        	 }
 	        	}
 	        	
 	            BinaryLabel bl = new BinaryLabel(c1, c2);
-	  	        for(OWLClassExpression c : ax.getRightMember().asConjunctSet())
-	  	        {
+	  	        for(OWLClassExpression c : ax.getRightMember().asConjunctSet()) {
 	  	             rData.getAbsorbedSupersBySub().put(bl, c );
 	  	        }
 	         }
@@ -179,7 +165,7 @@ public class BinaryAbsorption
        }*/ 
        
        //Reduction of general axioms : A < C , A < D => A <  C \sqcap D 
-       Set<ConceptAxiom> genAxioms = new HashSet<ConceptAxiom>( genConceptAxioms );
+       Set<ConceptAxiom> genAxioms = new HashSet<>( genConceptAxioms );
        SetMultimap<OWLClassExpression, OWLClassExpression> finalGenAxioms = HashMultimap.create(); 
        for(ConceptAxiom ax : genAxioms)
        {
@@ -201,7 +187,9 @@ public class BinaryAbsorption
           PrintWriter writer = null;
 	      try{ 
 	    	  writer = new PrintWriter(new FileOutputStream(f));
-	      }  catch(IOException e){}
+	      }  catch(IOException e){
+
+		  }
 	      
 	      System.out.println("Ab: All axioms = " +  getAllAxioms().size() );
           writer.print( "Ab: All axioms = " +  getAllAxioms().size()+"\n\n");
@@ -220,8 +208,6 @@ public class BinaryAbsorption
        	  }
 	      
 	      System.out.println("Press enter!");
-       	  Scanner scan = new Scanner(System.in);
-          String text= scan.nextLine();
 	      }
 	      
 	      System.out.println("Ab: Atomic axioms = " +  atomicAxioms.size() );
@@ -257,21 +243,18 @@ public class BinaryAbsorption
        	  writer.close();
        	  
        	  System.out.println("Press enter!");
-       	  Scanner scan1 = new Scanner(System.in);
-          String text1= scan1.nextLine();
           
 	  }
 	}
     
     
-    public Set<ConceptAxiom> absorbPart(ConceptAxiom ax, ReasoningData data) 
+    public Set<ConceptAxiom> absorbPart(ConceptAxiom ax, ReasoningData data)
     {
-    	//ManchesterOWLSyntaxOWLObjectRendererImpl render = new ManchesterOWLSyntaxOWLObjectRendererImpl();
     	OWLDataFactory factory = new OWLDataFactoryImpl();  
-    	Set<OWLClassExpression> leftConjuncts =  new HashSet<OWLClassExpression>( ax.getLeftMember().asConjunctSet() );
+    	Set<OWLClassExpression> leftConjuncts =  new HashSet<>( ax.getLeftMember().asConjunctSet() );
 	      //Can we reduce to one traverse of 
 	    Set<OWLClassExpression> abs = this.extractAbsorbableInter( ax.getLeftMember() );
-	    Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();
+	    Set<ConceptAxiom> res = new HashSet<>();
 	    if(abs.isEmpty()) 
 	    {
 	    	 res.add(ax);
@@ -280,7 +263,7 @@ public class BinaryAbsorption
 	    {
 	         //convert  A_1 /\ ... /\ A_n /\ B < C to A_1 /\ ... /\ A_n < C \sqcup \neg B
 	         leftConjuncts.removeAll(abs); 
-	         Set<OWLClassExpression> terms =  new HashSet<OWLClassExpression>( ax.getRightMember().asDisjunctSet() );
+	         Set<OWLClassExpression> terms =  new HashSet<>( ax.getRightMember().asDisjunctSet() );
 	         if( !leftConjuncts.isEmpty() )
 	         {
 	            OWLClassExpression tmp  = factory.getOWLObjectIntersectionOf( leftConjuncts );
@@ -311,22 +294,22 @@ public class BinaryAbsorption
    
     //This method returns a new axiom whose subsume is the largest absorbable part of "c"
   	//It returns null if otherwise
-  	public boolean isAbsorbableInter( OWLClassExpression c ) 
-  	{
-  	    if( c.getClassExpressionType()!=ClassExpressionType.OBJECT_INTERSECTION_OF)
-  	           return false;
-  	    // return true if it contains at least one atomic or some    
-        for( OWLClassExpression i : c.asConjunctSet() ) {
-              if( !i.isAnonymous() || this.containsOnlyInterSome(i) ) 
-               	return true;   
-        }
-        return false;
-    } 
+//  	public boolean isAbsorbableInter( OWLClassExpression c )
+//  	{
+//  	    if( c.getClassExpressionType()!=ClassExpressionType.OBJECT_INTERSECTION_OF)
+//  	           return false;
+//  	    // return true if it contains at least one atomic or some
+//        for( OWLClassExpression i : c.asConjunctSet() ) {
+//              if( !i.isAnonymous() || this.containsOnlyInterSome(i) )
+//               	return true;
+//        }
+//        return false;
+//    }
   	
   	public boolean isAbsorbableInterLiteral( OWLClassExpression c ) 
   	{
-  	    if( c.getClassExpressionType() != ClassExpressionType.OBJECT_INTERSECTION_OF)
-  	        return false;
+//  	    if( c.getClassExpressionType() != ClassExpressionType.OBJECT_INTERSECTION_OF)
+//  	        return false;
   	    // return true if it contains at least one atomic or some    
         for( OWLClassExpression i : c.asConjunctSet() ) {
              if( i.isClassExpressionLiteral() || this.containsOnlyInterSomeLiteral(i) ) 
@@ -340,15 +323,16 @@ public class BinaryAbsorption
     {
   	       if( !c.isAnonymous() )
   	            return true;
-  	       if( c.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF ) 
-  	       {
-  	           for(OWLClassExpression conc : c.asConjunctSet()) 
-  	           {
-  	        	   if( !containsOnlyInterSome(conc) )
-  	        		   return false;
-  	           } 
-  	           return true;
-  	       } else if(c.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM ) 
+//  	       if( c.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF )
+//  	       {
+//  	           for(OWLClassExpression conc : c.asConjunctSet())
+//  	           {
+//  	        	   if( !containsOnlyInterSome(conc) )
+//  	        		   return false;
+//  	           }
+//  	           return true;
+//  	       }
+  	       else if(c.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM )
   	       {
   	                 OWLClassExpression filler = ((OWLObjectSomeValuesFrom)c).getFiller();
   	                 if( !filler.isAnonymous() )
@@ -363,77 +347,83 @@ public class BinaryAbsorption
     {
   	       if( c.isClassExpressionLiteral() )
   	            return true;
-  	       if( c.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF ) 
-  	       {
-  	           for(OWLClassExpression conc : c.asConjunctSet()) 
-  	           {
-  	        	   if( !containsOnlyInterSomeLiteral(conc) )
-  	        		   return false;
-  	                
-  	           } 
-  	           return true;
-  	       } else if(c.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM ) 
+//  	       if( c.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF )
+//  	       {
+//  	           for(OWLClassExpression conc : c.asConjunctSet())
+//  	           {
+//  	        	   if( !containsOnlyInterSomeLiteral(conc) )
+//  	        		   return false;
+//
+//  	           }
+//  	           return true;
+//  	       }
+//
+		   else if(c.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM )
   	       {
   	               OWLClassExpression filler = ((OWLObjectSomeValuesFrom)c).getFiller();
   	               if( filler.isClassExpressionLiteral() )
   			           return true;
   			       else
   			           return containsOnlyInterSomeLiteral(filler);     	 
-           } else
-              return false;
-    }
+           }
+  	       else
+           	return false;
+   		 }
           
           // It is supposed that "exp" is "containsOnlyInterSome"
           // adds fresh concepts names 
-    public Set<ConceptAxiom> absorbAxiom(ConceptAxiom axiom, ReasoningData data) 
+    public Set<ConceptAxiom> absorbAxiom(ConceptAxiom axiom, ReasoningData data)
     {
         OWLClassExpression subClass   = axiom.getLeftMember();
         OWLClassExpression superClass = axiom.getRightMember();
-        if( !subClass.isAnonymous() ) 
+        if( !subClass.isAnonymous() )
         {
-        	Set<ConceptAxiom> res = new HashSet<ConceptAxiom>(); 
+        	Set<ConceptAxiom> res = new HashSet<>();
             res.add( axiom );
             return res;
         } 
-        else if(subClass.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM) 
+        else if(subClass.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM)
         {
-              Vector<OWLClassExpression> newF = new Vector<OWLClassExpression>();
-              Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();   
-              res.addAll( absorbLeftSome(subClass, superClass, newF, data) ); 
+              Vector<OWLClassExpression> newF = new Vector<>();
+              Set<ConceptAxiom> res = new HashSet<>();
+              res.addAll( absorbLeftSome(subClass, superClass, newF, data) );
               return res;
-        } 
-        else if(subClass.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF) 
-        {   
+        }
+        else if(subClass.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF)
+        {
               Set<ConceptAxiom> binaryAxioms = binarizingAbsorbableAxiom(axiom, data);
-              Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();
-                     // binaryAxioms = {X^1_1 and X^1_2 < Y_1, ... , X^2_1 and X^2_2 < Y_2, ...}  
-              for(ConceptAxiom ax : binaryAxioms) 
+              Set<ConceptAxiom> res = new HashSet<>();
+
+              for(ConceptAxiom ax : binaryAxioms)
               {
                   res.addAll ( absorbBinaryAxiom( ax, data ) );
               }
               return res;
-          } else {
-              Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();
+          }
+        else {
+              Set<ConceptAxiom> res = new HashSet<>();
               res.add(axiom);
               return res;
           }
     }
     
     //This methods convert \exists R A => (A <= \forall R^- F)
-    public ConceptAxiom absorbSome( OWLClassExpression someClass, 
-    		                 Vector<OWLClassExpression> newF, ReasoningData data ) 
+    public ConceptAxiom absorbSome( OWLClassExpression someClass,
+    		                 Vector<OWLClassExpression> newF, ReasoningData data )
     {
-  	    OWLDataFactory factory = new OWLDataFactoryImpl();     
-  	    OWLClassExpression filler = ((OWLObjectSomeValuesFrom)someClass).getFiller(); //it may be negated
-  	    OWLObjectPropertyExpression prop = ((OWLObjectSomeValuesFrom)someClass).getProperty();
-  	    OWLClass F1 = factory.getOWLClass(IRI.create("http://linc/owl#conceptNameByAbsorption_Some_"+ data.getNewConceptID()) );
-  	    data.getDerivedAtomicConcepts().add(F1);
-  	    newF.add(F1);
-  	    OWLObjectPropertyExpression inv = prop.getInverseProperty().getSimplified();     
-  	    OWLClassExpression right = factory.getOWLObjectAllValuesFrom( inv, F1 ); 
-        ConceptAxiom result = new ConceptAxiom( filler, right); 
-  	    return result;
-    }
+  	   // OWLDataFactory factory = new OWLDataFactoryImpl();
+  	  //  OWLClassExpression filler = ((OWLObjectSomeValuesFrom)someClass).getFiller(); //it may be negated
+  	   // OWLObjectPropertyExpression prop = ((OWLObjectSomeValuesFrom)someClass).getProperty();
+  	    //OWLClass F1 = factory.getOWLClass(IRI.create("http://linc/owl#conceptNameByAbsorption_Some_"+ data.getNewConceptID()) );
+  	   // data.getDerivedAtomicConcepts().add( someClass);
+  	   newF.add(someClass);
+  	   // OWLObjectPropertyExpression inv = prop.getInverseProperty().getSimplified();
+  	   // OWLClassExpression right = factory.getOWLObjectAllValuesFrom( inv, F1 );
+		//data.getDerivedAtomicConcepts().add((OWLClass) someClass);
+
+		//data.getDerivedAtomicConcepts().add( someClass);
+  	    return new ConceptAxiom( someClass, OWLThing);
+	}
                           
     // "someClass" is \exists R X with X absorbable (atomic or negated)
     // Return X < \forall R-.F where F is fresh
@@ -443,51 +433,53 @@ public class BinaryAbsorption
     public Set<ConceptAxiom> absorbLeftSome(OWLClassExpression someClass, OWLClassExpression superClass, 
     		Vector<OWLClassExpression> newF, ReasoningData data )
     {
-    	  OWLDataFactory factory = new OWLDataFactoryImpl();     
+    	  OWLDataFactory factory = new OWLDataFactoryImpl();
     	  OWLClassExpression filler = ((OWLObjectSomeValuesFrom)someClass).getFiller();//it may be negated
     	  OWLObjectPropertyExpression prop = ((OWLObjectSomeValuesFrom)someClass).getProperty();
-    	  OWLClass F1 = factory.getOWLClass(IRI.create("http://linc/owl#conceptNameByAbsorption_Some_"+ data.getNewConceptID()) );
-    	  data.getDerivedAtomicConcepts().add(F1);
-    	  newF.add(F1);
-    	  OWLObjectPropertyExpression inv = prop.getInverseProperty().getSimplified();     
-    	  OWLClassExpression right = factory.getOWLObjectAllValuesFrom( inv, F1 ); 
-          Set<ConceptAxiom> result = new HashSet<ConceptAxiom>();   	  
-    	  if( filler.isOWLThing() )
-    		  data.getRightConjunctsOfTop().add(right);
-    	  
-    	  result.add(new ConceptAxiom( filler, right));
-    	  result.add(new ConceptAxiom( F1, superClass));
+//    	  OWLClass F1 = factory.getOWLClass(IRI.create("http://linc/owl#conceptNameByAbsorption_Some_"+ data.getNewConceptID()) );
+//    	  data.getDerivedAtomicConcepts().add(F1);
+//    	  newF.add(F1);
+//    	  OWLObjectPropertyExpression inv = prop.getInverseProperty().getSimplified();
+//    	  OWLClassExpression right = factory.getOWLObjectAllValuesFrom( inv, F1 );
+          Set<ConceptAxiom> result = new HashSet<>();
+//    	  if( filler.isOWLThing() )
+//
+    		  data.getRightConjunctsOfTop().add(someClass);
+    	  result.add(new ConceptAxiom( someClass, superClass));
+    	//  result.add(new ConceptAxiom( filler, right));
+    	 // result.add(new ConceptAxiom( F1, superClass));
     	  return result;
     }
           
     //It is supposed that  "someClass" has 1 level
-    public Set<ConceptAxiom> absorbAtomicAndSome(OWLClassExpression ato, OWLClassExpression someClass, OWLClassExpression superClass,
-    	                    	Vector<OWLClassExpression> newF, ReasoningData data) 
+    public Set<ConceptAxiom> absorbAtomicAndSome(OWLClassExpression ato,  OWLClassExpression superClass,OWLClassExpression someClass,
+												 Vector<OWLClassExpression> newF, ReasoningData data)
     {
-    	OWLDataFactory factory = new OWLDataFactoryImpl();   
+		//System.out.println("yes");
+    	OWLDataFactory factory = new OWLDataFactoryImpl();
      
     	ConceptAxiom axSome = absorbSome(someClass, newF, data);
-    	Set<OWLClassExpression> clsSet1 = new HashSet<OWLClassExpression>();
+    	Set<OWLClassExpression> clsSet1 = new HashSet<>();
   	    clsSet1.add( newF.get(0) );
   	    clsSet1.add( ato );
-  	    OWLClassExpression newLeft = factory.getOWLObjectIntersectionOf( clsSet1 ); 
-  	    Set<ConceptAxiom> result = new HashSet<ConceptAxiom>();
-  	    result.add(axSome);
-  	    result.add(new ConceptAxiom(newLeft, superClass) );
-  	  
+  	    OWLClassExpression newLeft = factory.getOWLObjectIntersectionOf( clsSet1 );
+  	    Set<ConceptAxiom> result = new HashSet<>();
+  	    //result.add(someClass);
+  	    result.add(new ConceptAxiom(ato, superClass) );
+
     	return  result;
     }
     
   //It is supposed that  "someClass" has 1 level
     public Set<ConceptAxiom> absorbTwoSomes(OWLClassExpression some1, OWLClassExpression some2, OWLClassExpression superClass,
-    	                     ReasoningData data) 
+    	                     ReasoningData data)
     {
-    	Vector<OWLClassExpression> newF = new Vector<OWLClassExpression>();
+    	Vector<OWLClassExpression> newF = new Vector<>();
     	ConceptAxiom axS = absorbSome(some2, newF, data);
     	OWLClassExpression new1 = newF.get(0);
     	newF.clear();
-    	Set<ConceptAxiom> ss = absorbAtomicAndSome(new1, some1, superClass, newF, data); 
-    	Set<ConceptAxiom> result = new HashSet<ConceptAxiom>();
+    	Set<ConceptAxiom> ss = absorbAtomicAndSome(new1, some1, superClass, newF, data);
+    	Set<ConceptAxiom> result = new HashSet<>();
     	result.add ( axS );
     	result.addAll( ss );
     	return  result;
@@ -498,47 +490,43 @@ public class BinaryAbsorption
      * Considers the cases :  A_1 and A_2 < C with A_i atomic; A_1 and \exists R.X ; \exists R_1. X_1 and \exists R_2.X_2 ;  
      *     ; \neg A_1 and A_2; \neg A_1 and \exists R. A_2; \neg A_1 and \neg A_2; (30/12/2017)   
      */    
-    public Set<ConceptAxiom> absorbBinaryAxiom(ConceptAxiom axiom, ReasoningData data) 
+    public Set<ConceptAxiom> absorbBinaryAxiom(ConceptAxiom axiom, ReasoningData data)
     {
+//    	HashSet<ConceptAxiom> h = new HashSet<>();
+//    	h.add(axiom);
+//    	return h;
     	OWLClassExpression subClass   = axiom.getLeftMember();
-    	OWLClassExpression superClass = axiom.getRightMember();            
+    	OWLClassExpression superClass = axiom.getRightMember();
 
-    	Object[] arr = subClass.asConjunctSet().toArray();  
+    	Object[] arr = subClass.asConjunctSet().toArray();
 
     	OWLClassExpression conj1 = (OWLClassExpression)arr[0];
     	OWLClassExpression conj2 = (OWLClassExpression)arr[1];
-
-    	//if( !conj1.isAnonymous() &&  !conj2.isAnonymous() )
-        if( conj1.isClassExpressionLiteral() &&  conj2.isClassExpressionLiteral() )	
+        if( conj1.isClassExpressionLiteral() &&  conj2.isClassExpressionLiteral() )
     	{
-    		Set<ConceptAxiom> res = new HashSet<ConceptAxiom>( Collections.singleton(axiom) );
-    		return res;
+    		return new HashSet<>( Collections.singleton(axiom) );
     	}
 
-    	if( conj1.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM &&  
-    		conj2.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM ) 
+    	if( conj1.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM &&
+    		conj2.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM )
     	{
-    		Set<ConceptAxiom> res = absorbTwoSomes(conj1, conj2, superClass,  data); 
-    		return res;
+			return absorbTwoSomes(conj1, conj2, superClass,  data);
     	}
 
     	OWLClassExpression someClass=null;
     	OWLClassExpression atoClass=null; // ClassExpressionLiteral
-    	if( conj1.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM ) 
+    	if(  conj1.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM)
     		someClass = conj1;
-    	else
-    		atoClass= conj1;
-
-    	if( conj2.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM ) 
-    		someClass = conj2;
     	else
     		atoClass= conj2;
 
-    	//System.out.println( "ABSOR : binary axiom conj1=" +   (new ManchesterOWLSyntaxOWLObjectRendererImpl()).render(conj1) +"\n\n");
-    	//System.out.println( "ABSOR : binary axiom conj2=" +   (new ManchesterOWLSyntaxOWLObjectRendererImpl()).render(conj2) +"\n\n");
-    	//System.out.println("STOP");
-    	Vector<OWLClassExpression> newF = new Vector<OWLClassExpression>();
-    	return absorbAtomicAndSome(atoClass, someClass, superClass, newF, data);
+    	if( conj2.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM)
+    		someClass = conj2;
+    	else
+    		atoClass= conj1;
+
+    	Vector<OWLClassExpression> newF = new Vector<>();
+    	return absorbAtomicAndSome(atoClass, someClass, superClass,newF,  data);
 
     }
           
@@ -546,65 +534,58 @@ public class BinaryAbsorption
       // C_1 /\ ... /\ C_n /\ \exists R_1. B_1 /\ ... \exists R_1. B_1 <= C 
       // Return a set of binary axioms of the form X_1 and X_2 < C
     public Set<ConceptAxiom> binarizingAbsorbableAxiom(ConceptAxiom axiom, ReasoningData data) {
-    	OWLDataFactory factory = new OWLDataFactoryImpl();        
+    	OWLDataFactory factory = new OWLDataFactoryImpl();
     	OWLClassExpression subClass   = axiom.getLeftMember();
-    	//System.out.println( "LOAD : binarizing, subClass=" +   (new ManchesterOWLSyntaxOWLObjectRendererImpl()).render(subClass) +"\n\n");
     	OWLClassExpression superClass = axiom.getRightMember();
     	if( subClass.asConjunctSet().size() <= 2 ) {
-    		Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();
+    		Set<ConceptAxiom> res = new HashSet<>();
     		res.add ( axiom );
     		return res;
     	}
-
-    	Set<OWLClassExpression> copyConjuncts =  new HashSet<OWLClassExpression>(subClass.asConjunctSet());
+    	Set<OWLClassExpression> copyConjuncts =  new HashSet<>(subClass.asConjunctSet());
     	OWLClassExpression conj1 = (OWLClassExpression)copyConjuncts.toArray()[0];
     	copyConjuncts.remove(conj1);
-    	OWLClassExpression conj2 = (OWLClassExpression)copyConjuncts.toArray()[0]; 
+    	OWLClassExpression conj2 = (OWLClassExpression)copyConjuncts.toArray()[0];
     	copyConjuncts.remove(conj2);
 
     	OWLClass F1 = factory.getOWLClass(IRI.create("http://linc/owl#conceptNameByAbsorption_Binary_"+ data.getNewConceptID()) );
     	data.getDerivedAtomicConcepts().add(F1);
-    	//OWLClassExpression remaining = factory.getOWLObjectIntersectionOf( copyConjuncts );
-    	Set<ConceptAxiom> res = new HashSet<ConceptAxiom>();
 
-    	Set<OWLClassExpression> clsSet1 = new HashSet<OWLClassExpression>();
+    	Set<ConceptAxiom> res = new HashSet<>();
+
+    	Set<OWLClassExpression> clsSet1 = new HashSet<>();
     	clsSet1.add( conj1 );
     	clsSet1.add( conj2 );
-    	
+
     	OWLClassExpression newLeft1 = factory.getOWLObjectIntersectionOf( clsSet1 );
     	//C_i and C_j <= A
     	res.add( new ConceptAxiom( newLeft1, F1) );
-        
-    	 
+
+
     	clsSet1.clear();
     	clsSet1.add( F1 );
     	clsSet1.addAll( copyConjuncts  );
-    	// A and (remainder of subClass) 
+    	// A and (remainder of subClass)
     	newLeft1 = factory.getOWLObjectIntersectionOf( clsSet1 );
 
-    	// Recursion     
+    	// Recursion
     	res.addAll( binarizingAbsorbableAxiom(new ConceptAxiom(newLeft1, superClass), data) );
 
-    	return res; 
+    	return res;
     }
 	
 	// Compute all atomics or negated concepts occuring in "c" (left hand side of an axiom) which are absorbable  
 	public Set<OWLClassExpression> extractAbsorbableInter(OWLClassExpression c  ) 
 	{
-	    Set<OWLClassExpression> abs = new HashSet<OWLClassExpression>();                             
-	    if(c.getClassExpressionType()!=ClassExpressionType.OBJECT_INTERSECTION_OF) 
-	    {
-	           return abs;
-	    }
+	    Set<OWLClassExpression> abs = new HashSet<>();
+//	    if(c.getClassExpressionType()!=ClassExpressionType.OBJECT_INTERSECTION_OF)
+//	    {
+//	           return abs;
+//	    }
         for(OWLClassExpression i : c.asConjunctSet()) 
         {
         	if( i.isClassExpressionLiteral() || containsOnlyInterSomeLiteral(i) )
         	    abs.add(i);
-            
-        	//if( !i.isAnonymous() ||  containsOnlyInterSome(i)  ) 
-            //{
-            //   abs.add(i);  
-            //}  
         } 
         return abs;   
     }
@@ -613,7 +594,7 @@ public class BinaryAbsorption
 		return genConceptAxioms;
 	}
 	
-	Vector<OWLClassExpression> newF = new Vector<OWLClassExpression>();
+	Vector<OWLClassExpression> newF = new Vector<>();
 	public void setGenConceptAxioms(Set<ConceptAxiom> s) 
 	{
 	       genConceptAxioms = s;
@@ -623,30 +604,15 @@ public class BinaryAbsorption
 	{
 		return atomicAxioms;
 	}
-	/*public Set<ConceptAxiom> getEquivAtomicAxioms() 
-	{
-		return equivAtomicAxioms;
-	}*/
+
 	
 	public void setAtomicAxioms(Set<ConceptAxiom> s) {
 	       atomicAxioms = s;
 	}
 
-	/*public Set<ConceptAxiom> getBinaryAxioms() {
-		return binaryAxioms;
-	} */
-	
-	
-	/*public void setInterAtomicAxioms(Set<ConceptAxiom> s) {
-	       interAtomicAxioms = s;
-	}
-	
-	public Set<ConceptAxiom> getInterAtomicAxioms( ) {
-	       return interAtomicAxioms;
-	}*/
 	
 	public Set<ConceptAxiom> getAllAxioms() { 
-	    Set<ConceptAxiom> allAxioms = new HashSet<ConceptAxiom>( this.genConceptAxioms );
+	    Set<ConceptAxiom> allAxioms = new HashSet<>( this.genConceptAxioms );
 	    
 	    allAxioms.addAll( this.atomicAxioms ); 
 	    

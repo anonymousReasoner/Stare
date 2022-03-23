@@ -71,25 +71,20 @@ public class ConceptLabel implements Serializable
      
   public ConceptLabel() 
   {
-	this.concepts = new LinkedHashSet<OWLClassExpression>();
-	 
+	this.concepts = new LinkedHashSet<>();
   }
 	
   public ConceptLabel(ConceptLabel cl) 
   {
-	this.concepts = new LinkedHashSet<OWLClassExpression>(cl.getConcepts());
-	this.dataRange = cl.getDataRange();//???
+	this.concepts = new LinkedHashSet<>(cl.getConcepts());
+	//this.individuals=new LinkedHashSet<>(cl.getIndividuals());
+	this.dataRange = cl.getDataRange();
 	hashcode = sumCode();
   }
 
   public ConceptLabel(Set<OWLClassExpression> s) 
   {
-	this.concepts = new LinkedHashSet<OWLClassExpression>(s);
-	//for(OWLClassExpression c : s)
-		//if(c instanceof OWLObjectOneOf)
-		//	this.concepts.add(((OWLObjectOneOf) c).asObjectUnionOf());
-		//else
-	//this.concepts.add(c);
+	this.concepts = new LinkedHashSet<>(s);
 	hashcode = sumCode();
   }
 	 
@@ -101,7 +96,7 @@ public class ConceptLabel implements Serializable
 	 
 	public ConceptLabel(OWLClassExpression id) 
 	{
-		this.concepts = new LinkedHashSet<OWLClassExpression>( Collections.singleton(id) );
+		this.concepts = new LinkedHashSet<>( Collections.singleton(id) );
 	    hashcode = sumCode(); 
 	}
 	
@@ -140,51 +135,39 @@ public class ConceptLabel implements Serializable
 	public void addAll(Set<OWLClassExpression> ids) 
 	{
 	  for(OWLClassExpression c : ids)
-			//if(c instanceof OWLObjectOneOf)
-			//	this.concepts.add(((OWLObjectOneOf) c).asObjectUnionOf());
-			//else
-		this.concepts.add(c);
+	  {this.concepts.add(c);}
 	  hashcode = sumCode();
 	}
  
   public  ConceptLabel getNewConceptLabel(OWLClassExpression c) 
   {
-	//if(c instanceof OWLObjectOneOf)
-		//return new ConceptLabel(Sets.union(Collections.singleton(((OWLObjectOneOf) c).asObjectUnionOf()), new HashSet<OWLClassExpression>(this.concepts)));
-	//	return new ConceptLabel(Sets.union(Collections.singleton(((OWLObjectOneOf) c).asObjectUnionOf()), new HashSet<OWLClassExpression>(this.concepts)));
-	//else
 	return new ConceptLabel(Sets.union(Collections.singleton(c), new HashSet<OWLClassExpression>(this.concepts)));
   }
 
 	 
   public  ConceptLabel getNewConceptLabel(Set<OWLClassExpression> lc) 
   {
-	Set<OWLClassExpression> ss = new HashSet<OWLClassExpression>(this.concepts);
+	Set<OWLClassExpression> ss = new HashSet<>(this.concepts);
 	ss.addAll(lc);
-	//for( OWLClassExpression c : lc)
-			//if(c instanceof OWLObjectOneOf)
-			//	ss.add(((OWLObjectOneOf) c).asObjectUnionOf());
-			//else
-	//  ss.add(c);
 	return new ConceptLabel(ss);
   }
 
 	public Set<OWLClassExpression> getAtomics()
 	{
- 		Set<OWLClassExpression> atos = new HashSet<OWLClassExpression> ();
+ 		Set<OWLClassExpression> atos = new HashSet<> ();
 		for(OWLClassExpression i : this.getConcepts()) {
 		    if( !i.isAnonymous())
-			atos.add(i);
+			{atos.add(i);}
 		}
 		return atos;
 	}
 
 	public Set<OWLClassExpression> getComplements()
 	{
- 		Set<OWLClassExpression> comp = new HashSet<OWLClassExpression> ();
+ 		Set<OWLClassExpression> comp = new HashSet<> ();
 		for(OWLClassExpression i : this.getConcepts()) {
 		    if(i.getClassExpressionType() == ClassExpressionType.OBJECT_COMPLEMENT_OF)
-			comp.add(i);
+			{comp.add(i);}
 		}
 		
 		return comp;
@@ -198,11 +181,11 @@ public class ConceptLabel implements Serializable
 		return this.concepts.contains(concept);
 	}
 	
-	public  boolean containsIndividual(OWLNamedIndividual ind) 
+	/*public  boolean containsIndividual(OWLNamedIndividual ind)
 	{
 	    Set<OWLIndividual> inds = this.getIndividuals();
 		return inds.contains(ind);
-	}
+	}*/
 	
 	public void setConcepts(LinkedHashSet<OWLClassExpression> s) {
 		this.concepts = s;
@@ -220,9 +203,9 @@ public class ConceptLabel implements Serializable
 
 	  return this.individuals;
 	}
-	public Set<OWLIndividual> getIndividuals()
+	/*public Set<OWLIndividual> getIndividuals()
 	{
-	  Set<OWLIndividual> inds = new HashSet<OWLIndividual>();
+	  Set<OWLIndividual> inds = new HashSet<>();
 	  for(OWLClassExpression c : this.concepts)
 	  {
 	      //a set of singleton disjunctions is a conjunction of nominals 
@@ -232,7 +215,7 @@ public class ConceptLabel implements Serializable
 	    }
 	  }
 	  return inds;
-	}
+	}*/
 	 
 	public ConceptLabel removeNominals()
 	{
@@ -302,18 +285,19 @@ public class ConceptLabel implements Serializable
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		ManchesterOWLSyntaxOWLObjectRendererImpl render = new ManchesterOWLSyntaxOWLObjectRendererImpl();
-		//sb.append("Core : " + System.getProperty("line.separator"));
-		if(concepts.size()==0) {
+
+		if(individuals!=null&&individuals.isEmpty()) {
 			  sb.append("Non-nominal star-type" + System.getProperty("line.separator") );
 		}
 		if(individuals!=null&&!individuals.isEmpty()) {
 			sb.append("Individuals: ");
 			for (OWLIndividual i :individuals ) {
+				if(i!=null)
 			sb.append(render.render(i) +", ");
 			}
 		}
-		if(concepts.size()==0) {
-		  sb.append("EMPTY CORE" + System.getProperty("line.separator") );
+		if(concepts.isEmpty()) {
+		  sb.append("EMPTY CORE CONCEPTS" + System.getProperty("line.separator") );
 		  return sb.toString();
 		}  
 		
@@ -333,7 +317,7 @@ public class ConceptLabel implements Serializable
 	public String toSimpleString( ) 
 	{
 		ManchesterOWLSyntaxOWLObjectRendererImpl render = new ManchesterOWLSyntaxOWLObjectRendererImpl();
-		String s = "";//"[Hash="+this.ID+", " ;
+		String s = "";
 		for (OWLClassExpression co : concepts) {
 			 
 			s = s + render.render(co) + "," ;

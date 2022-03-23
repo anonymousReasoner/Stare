@@ -1,29 +1,21 @@
 package fr.anonymous.reasoner;
 
+import org.openrdf.model.vocabulary.OWL;
+import org.semanticweb.owlapi.model.OWLClassExpression;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import org.semanticweb.owlapi.model.OWLIndividual;
-
-import com.google.common.collect.SetMultimap;
-
-public class Layer {
+public class Layer  {
 	private boolean isNominal;
 	private CopyOnWriteArraySet<Startype> Sstar;
+	private int id;
+
 	public Layer() {
 		this.isNominal=false;
-		//this.Sstar= Collections.synchronizedList(new ArrayList<Startype>());
-		this.Sstar= new CopyOnWriteArraySet<Startype>();
+		this.Sstar= new CopyOnWriteArraySet<>();
 
 	}
 
@@ -51,13 +43,9 @@ public class Layer {
 
 		while (Iterate_layer.hasNext() ) {
 			if(Iterate_layer.next().equals(layer) )
-
-
-				//System.out.println(Iterate_layer.hasNext());
 				hasNext= Iterate_layer.hasNext();
 
 		}
-		//System.out.print("Has next");
 		return hasNext;
 	}
 	public Layer next(	CompressedTableau ct, Layer layer) {
@@ -75,96 +63,70 @@ public class Layer {
 		return l_next;
 
 	}
-	public boolean isBlocked(Startype st2,CompressedTableau ct, Layer l) {
-		boolean blocked=false;
-	//	if(!st2.isNominal()) {
+	public boolean isBlocked(Startype st2,CompressedTableau ct) {
+
 			for(Layer layer:ct.getSlayer()) {
-				if(!layer.isNominal()) {
-
+				if(!layer.isNominal()&&!st2.getAddress().isNominal() ) {
 					for(Startype st1:layer.getSstar()) {
+						if(st1.getAddress().getId()<st2.getAddress().getId()&&st1.getIdS()<st2.getIdS()&&((st1.getCore().getConcepts().containsAll(st2.getCore().getConcepts())||st1.getCore().getConcepts().contains(st2.getCore().getConcepts())))) {
+							System.out.println("I have id " + st2.getIdS() +" and layer" +st2.getAddress().getId() +" I'm blocked by star-type of id: "+ st1.getIdS() +" and layer " +st1.getAddress().getId() );
+							System.out.println("My concepts are "+ st2.getCore().getConcepts()+" the concepts of my blocker are" + st1.getCore().getConcepts());
+						//st2.setBlocked(true);
+						return true;
 
-					//	int j=ct.getSlayer().indexOf(st2.getAddress());
-
-					//	int i=ct.getSlayer().indexOf(st1.getAddress());
-
-						if((st2.getAddress()!=st1.getAddress())&&!st2.getAddress().isNominal()&&!st1.getAddress().isNominal() ) {
-
-							if(st1.getCore().getConcepts().equals(st2.getCore().getConcepts())||st1.getCore().getConcepts().contains(st2.getCore().getConcepts())) {
-
-
-								blocked=true;
-
-							}
 						}
 					}
-
 				}
-			//}
 		}
 
-		return blocked;
+		return false;
 	}
-	public Layer previous(	CompressedTableau ct, Layer layer) {
+	public Layer previous(	CompressedTableau ct) {
 		Layer previous = null;
 		for (Iterator<Layer> i = ct.getSlayer().iterator(); i.hasNext();) {
 			Layer element = i.next();
 
-			// Do something with "element" and "previous" (if not null)
 
 			previous = element;
 		}
 		return previous;
 	}
-	public boolean satisfyLkandEqualities(ReasoningData rd, MatchingFn mf) {
-		boolean satisfy=true;
-		boolean lkSatisfy=true;
-		boolean eqSatisfy=true;
-		Set<Linkey> lks=rd.getLKBox().getLks();
+	public boolean satisfyLkandEqualities(ReasoningData rd) {
+		//boolean lkSatisfy=true;
+		Set<Linkey> lks=null;
+		if(rd.getLKBox()!=null) {
+			 lks = rd.getLKBox().getLks();
+		}
 		LinkkeyRules lkr=new 	LinkkeyRules();
 		Set<Startype> stars=this.getSstar();
-		SetMultimap<OWLIndividual, OWLIndividual> sameIndAssers=rd.getABox().getSameIndAssers();
-		 Set<Entry<OWLIndividual, OWLIndividual>> sameInd=sameIndAssers.entries();
-		for(Startype star1:stars)
-		{
-			for(Startype star2:stars) {
-				//if(!star1.getCore().equals(star2.getCore())) {
-				for(Linkey lk:lks) {
-					//lkSatisfy=false;
-					if(lkr.strongSatisfaction(star1, star2, lk, mf)) {
-						//System.out.println("Here");
-						//System.out.println(star1.getCore().getIndividual());
-						//System.out.print(star2.getCore().getIndividual());
-					//	for(Startype star3:stars) {
-							
-							//if(!star3.getCore().getIndividual().containsAll(star1.getCore().getIndividual())&&star3.getCore().getIndividual().containsAll(star2.getCore().getIndividual()))
-								
-								lkSatisfy=false;
+		if(lks!=null) {
+			for (Startype star1 : stars) {
+				for (Startype star2 : stars) {
+					for (Linkey lk : lks) {
+						// pb inside strong satisfaction
+						if ( lkr.strongSatisfaction(star1, star2, lk)&&!lkr.isMergeContained(star1, star2) ) {
+							//
+						//	&& !lkr.isMergeContained(star1, star2)
+System.out.println("Inside satisfy equalities and lks");
+							return false;
 						}
-				//	}
-					}
-				}
-				for( Entry<OWLIndividual, OWLIndividual> pair:sameInd) {
-					if(star1.getCore().getIndividual().contains(pair.getKey())&&star1.getCore().getIndividual().contains(pair.getValue())) {
-						//for(Startype merge:stars) {
-						//	if(merge.getCore().getIndividual().contains(pair.getKey())&&merge.getCore().getIndividual().contains(pair.getValue())) {
-						eqSatisfy=false;
-							
-				
-						//	}
-							
-						//}
-					}
-				
-				}
-			}
-		
 
-		if(lkSatisfy && eqSatisfy) {
+					}
+				}
+
+			}
+
+		}
 			return true;
-		}
-		else {
-return false;
-		}
+
+	}
+
+	public void setId(int i) {
+		id = i;
+	}
+
+	public int getId() {
+		return id;
 	}
 }
 

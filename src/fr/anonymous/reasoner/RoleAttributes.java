@@ -40,7 +40,9 @@ import java.io.Serializable;
  * @author Jeremy Lhez
  */
 public class RoleAttributes implements Serializable {
-    protected boolean isTransitive, isFunctional, isInverse;
+    protected boolean isTransitive;
+    protected boolean isFunctional;
+    protected boolean isInverse;
     protected boolean isTransitiveClosure;
     protected boolean isData;
 

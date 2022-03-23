@@ -13,7 +13,6 @@ public class PropertyPair {
 		
 	}
 	public PropertyPair(OWLPropertyExpression firstProperty, OWLPropertyExpression secondProperty) {
-		//super();
 		this.firstProperty = firstProperty;
 		this.secondProperty = secondProperty;
 	}

@@ -1,6 +1,4 @@
 package fr.anonymous.reasoner;
-
-
 import java.util.Set;
 
 public class Linkey {

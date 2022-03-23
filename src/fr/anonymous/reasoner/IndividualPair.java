@@ -6,7 +6,6 @@ public class IndividualPair {
 	OWLIndividual ind1;
 	OWLIndividual ind2;
 	public IndividualPair () {
-		
 	}
 	public IndividualPair (OWLIndividual ind1, OWLIndividual ind2) {
 		this.ind1=ind1;
