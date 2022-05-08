@@ -38,7 +38,7 @@ You can choose among 2 couples of ontologies and alignments:
 
 
 ****Next expected release****
-- Friday 30/04/2021
+- Friday 30/09/2021
 
 
 
