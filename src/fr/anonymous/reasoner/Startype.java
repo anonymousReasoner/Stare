@@ -57,12 +57,12 @@ public class Startype implements Serializable {
     private Set<OWLClassExpression> fresh;
     private Set<OWLClassExpression> processed;
     private Set<OWLClassExpression> allmax;
-    private Successors successors;
-    public Successors getSucc() {
+    private Match successors;
+    public Match getSucc() {
         return successors;
     }
 
-    public void setSucc(Successors mf) {
+    public void setSucc(Match mf) {
         this.successors = mf;
     }
 
@@ -117,7 +117,7 @@ public class Startype implements Serializable {
         this.fresh = new HashSet<>();
         this.processed = new HashSet<>();
         this.allmax = new HashSet<>();
-        this.successors=new Successors();
+        this.successors=new Match();
         this.hashcode= this.sumCode();
     }
 
@@ -810,7 +810,7 @@ public class Startype implements Serializable {
                             st.setAddress(star.getAddress());
                             st.getAddress().getSstar().add(st);
                             st.setNominal(st.getAddress().isNominal());
-                            star.getSucc().matchingPred(star, st, data, ct);
+                            star.getSucc().matchingCore(star, st, data, ct);
                             //     System.out.println(st.getCore().getIndividual());
                             // System.out.println("-------------------------------------------------");
                         }
@@ -1074,7 +1074,7 @@ public class Startype implements Serializable {
           //  st_copy.setCore(cl, data);
             //Traverse through the same triple objects but other set
             OWLObjectAllValuesFrom res = (OWLObjectAllValuesFrom) concept;
-
+if(!st_copy.getTriples().isEmpty())
             for (Triple triple : new CopyOnWriteArrayList<>(this.getTriples()))//as a list an element can be changed
             {
                 if (triple.getRay().getRidge().getRoles().contains(res.getProperty())&&triple.getRay().getTip().getConcepts().contains(res.getFiller()) || triple.getRay().getTip().getConcepts().equals(res.getFiller())) {
@@ -1087,6 +1087,7 @@ public class Startype implements Serializable {
                         r.setRidge(triple.getRay().getRidge());
                         r.setTip(triple.getRay().getTip());
                         HashSet<OWLIndividual> tipI = new HashSet<>();
+                        if(triple.getRay().getTip().getIndividual()!=null)
                         tipI.addAll(triple.getRay().getTip().getIndividual());
                         r.getTip().setIndividual(tipI);
                         Triple t_old = new Triple(cl1, r);
@@ -1304,8 +1305,77 @@ public class Startype implements Serializable {
         }
         return false;
     }
+    public Startype sub(Startype st,ReasoningData data, OWLOntology ontology, CompressedTableau ct) {
+        Startype copy_st = null;
+        if(isSub(st,ontology,data)) {
+            OWLClassExpression superClass = null;
+            OWLClassExpression subClass = null;
+
+            copy_st=new Startype();
+            duplicate(copy_st, st, data);
+            copy_st.setTriples(st.getTriples());
+            copy_st.getCore().setConcepts(st.getCore().getConcepts());
+            //  System.out.println(copy_st.getCore().getConcepts());
+            for (Triple t : copy_st.getTriples()) {
+                Succ o = new Succ();
+                o.setT(t);
+                copy_st.getSucc().getMatch().add(o);
+            }
+            for (OWLAxiom classAxiom : ontology.getAxioms()) {
+                if (classAxiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
+                    subClass = ((OWLSubClassOfAxiom) classAxiom).getSubClass();
+                    superClass = ((OWLSubClassOfAxiom) classAxiom).getSuperClass();
+                    Set<OWLClassExpression> s=new HashSet<>();
+                    s.add(subClass.getComplementNNF());
+                    s.add(superClass.getNNF());
+                   // copy_st.getCore().getConcepts().add(subClass.getComplementNNF());
+                 //   System.out.println("We have added " + subClass.getComplementNNF());
+                  //  copy_st.getCore().getConcepts().add(superClass.getNNF());
+                    copy_st.getCore().getConcepts().add(factory.getOWLObjectUnionOf(s));
+
+                }
+            }
+
+        }
+
+        return copy_st;
+
+    }
+    public boolean isSub(Startype st, OWLOntology ontology, ReasoningData rd) {
+        OWLClassExpression superClass = null;
+        OWLClassExpression subClass = null;
+        Boolean sat = true;
+       /* for (OWLClassExpression cl : this.getCore().getConcepts()) {
+            //
+            if (this.isAllRule(cl) ||this.isSomeRule(cl) ||  this.isUnionRule(cl, rd) || this.isIntersectionRule(cl, this)) {
+                sat = false;
+            }
+        }
+        if(st.g) {
+            System.out.println("Saturated without a TBox");*/
+            for (OWLAxiom classAxiom : ontology.getAxioms()) {
+                if (classAxiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
+                    subClass = ((OWLSubClassOfAxiom) classAxiom).getSubClass();
+                    //    .getNNF();
+                    superClass = ((OWLSubClassOfAxiom) classAxiom).getSuperClass().getNNF();
+
+                    if (!st.getCore().getConcepts().contains(subClass.getComplementNNF()) || !st.getCore().getConcepts().contains(superClass))
+                        // System.out.println("We have added " + subClass.getComplementNNF());
+
+                        return true;
+
+                }
+            }
+       /*  }
+
+       else{
+            System.out.println("One should apply other rules first");
+            }*/
 
 
+
+        return false;
+    }
     //This method return true iff ray1 and ray2 are present in pairs
     public boolean checkTriplePair(Triple triple1, Triple triple2, Set<Map<Triple, Triple>> pairs) {
         for (Map<Triple, Triple> pair : pairs) {
@@ -1622,6 +1692,7 @@ public class Startype implements Serializable {
     }
 
     public static boolean isCoreValidInd(Startype st, OWLOntology ontology) {
+
         if (st.getCore().getIndividual() != null) {
             for (OWLIndividual ind : st.getCore().getIndividual()) {
                 Set<OWLIndividual> diffinds;
@@ -1663,6 +1734,9 @@ public class Startype implements Serializable {
 	}*/
 
     public boolean isCoreValid(Set<OWLClassExpression> cl, ReasoningData data) {
+        if (this.getCore().contains(data.getBottom()) || (this.getCore().contains(data.getTop().getObjectComplementOf()))) {
+            return false;
+        }
         if (this.isValid() != null && !this.isValid()) {
             return false;
         }
@@ -1851,14 +1925,15 @@ public class Startype implements Serializable {
     }
 
 
-    public boolean isSaturated(Layer layer, ReasoningData rd, CompressedTableau ct) {
+    public boolean isSaturated( ReasoningData rd,  OWLOntology ontology) {
+
 
        // boolean saturated = true;
 
         for (OWLClassExpression cl : this.getCore().getConcepts()) {
 
-            if (this.isAllRule(cl) || this.isSomeRule(cl) || this.isUnionRule(cl, rd) || this.isIntersectionRule(cl, this)) {
-                //+
+            if (this.isAllRule(cl) || this.isSomeRule(cl) || this.isUnionRule(cl, rd) || this.isIntersectionRule(cl, this) ||this.isSub(this,ontology,rd)) {
+                //||this.isSub(this,ontology)
                 //System.out.println("Is the for-all rule is applicable?"+ this.isAllRule(cl) );
               //  System.out.println("Is the existential rule is applicable?"+ this.isSomeRule(cl,  layer, ct));
                // System.out.println("Is the union rule is applicable?"+  this.isUnionRule(cl, rd)  );
@@ -1868,6 +1943,7 @@ public class Startype implements Serializable {
             }
 
         }
+
         return true;
     }
 

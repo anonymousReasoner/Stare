@@ -5,7 +5,7 @@
          xmlns=""
          >
 <align:Cell rdf:about="#cell-with-linkkey">
-  <align:entity1><Class rdf:about="http://www.okkam.org/ontology_person1.owl#Address" /></align:entity1>
+  <align:entity1><Class rdf:about="http://www.okkam.org/ontology_person1.owl#Person" /></align:entity1>
   <align:entity2><Class rdf:about="http://www.okkam.org/ontology_person2.owl#Person" /></align:entity2>
   <align:relation>=</align:relation>
   <linkkey>
@@ -13,9 +13,13 @@
       <lk:type>plain</lk:type>
       <binding>
       <Intersects>
-    <property1><Relation rdf:about="http://www.okkam.org/ontology_person1.owl#house_number"/></property1>
-    <property2><Relation rdf:about="http://www.okkam.org/ontology_person2.owl#age"/></property2>
+    <property1><Relation rdf:about="http://www.okkam.org/ontology_person1.owl#soc_sec_id"/></property1>
+    <property2><Relation rdf:about="http://www.okkam.org/ontology_person2.owl#soc_sec_id"/></property2>
   </Intersects>
+    <Intersects>
+      <property1><Relation rdf:about="http://www.okkam.org/ontology_person1.owl#phone_numer"/></property1>
+      <property2><Relation rdf:about="http://www.okkam.org/ontology_person2.owl#phone_numer"/></property2>
+    </Intersects>
       </binding>
     </Linkkey>
   </linkkey>

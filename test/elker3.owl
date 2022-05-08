@@ -67,12 +67,15 @@
                                           <owl:NamedIndividual rdf:about="b11">
                                                      <rdf:type rdf:resource="Personne"/>
                                                   </owl:NamedIndividual>
+<owl:NamedIndividual rdf:about="Paris">
+ <rdf:type rdf:resource="City"/>
+</owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="a1">
- <c>Paris</c>
+ <c rdf:resource="Paris"/>
  </owl:NamedIndividual>
 <owl:NamedIndividual rdf:about="b10">
- <p>Paris</p>
+ <p rdf:resource="Paris"/>
  </owl:NamedIndividual>
 <!-- Schema definition RDFS -->
 <!-- Concepts -->
@@ -89,5 +92,5 @@
 <owl:ObjectProperty rdf:ID="pubCity"/>
 <owl:ObjectProperty rdf:ID="prenom"/>
 
-  
+
 </rdf:RDF>

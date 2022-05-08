@@ -1,12 +1,9 @@
 package fr.anonymous.reasoner;
 
-import org.openrdf.model.vocabulary.OWL;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+
 
 public class Layer  {
 	private boolean isNominal;
@@ -65,10 +62,12 @@ public class Layer  {
 	}
 	public boolean isBlocked(Startype st2,CompressedTableau ct) {
 
+
 			for(Layer layer:ct.getSlayer()) {
 				if(!layer.isNominal()&&!st2.getAddress().isNominal() ) {
 					for(Startype st1:layer.getSstar()) {
-						if(st1.getAddress().getId()<st2.getAddress().getId()&&st1.getIdS()<st2.getIdS()&&((st1.getCore().getConcepts().containsAll(st2.getCore().getConcepts())||st1.getCore().getConcepts().contains(st2.getCore().getConcepts())))) {
+						//st1.getAddress().getId()!=5&&st1.getAddress().getId()!=4&&st1.getAddress().getId()!=3&&st1.getAddress().getId()!=2&&
+						if(st1.getAddress().getId()!=st2.getAddress().getId()&&st1.getIdS()<st2.getIdS()&&((st1.getCore().getConcepts().containsAll(st2.getCore().getConcepts())||st1.getCore().getConcepts().contains(st2.getCore().getConcepts())))) {
 							System.out.println("I have id " + st2.getIdS() +" and layer" +st2.getAddress().getId() +" I'm blocked by star-type of id: "+ st1.getIdS() +" and layer " +st1.getAddress().getId() );
 							System.out.println("My concepts are "+ st2.getCore().getConcepts()+" the concepts of my blocker are" + st1.getCore().getConcepts());
 						//st2.setBlocked(true);
@@ -92,23 +91,23 @@ public class Layer  {
 		return previous;
 	}
 	public boolean satisfyLkandEqualities(ReasoningData rd) {
-		//boolean lkSatisfy=true;
+		boolean lkSatisfy=true;
 		Set<Linkey> lks=null;
 		if(rd.getLKBox()!=null) {
 			 lks = rd.getLKBox().getLks();
 		}
-		LinkkeyRules lkr=new 	LinkkeyRules();
+
 		Set<Startype> stars=this.getSstar();
 		if(lks!=null) {
 			for (Startype star1 : stars) {
 				for (Startype star2 : stars) {
 					for (Linkey lk : lks) {
 						// pb inside strong satisfaction
-						if ( lkr.strongSatisfaction(star1, star2, lk)&&!lkr.isMergeContained(star1, star2) ) {
-							//
-						//	&& !lkr.isMergeContained(star1, star2)
-System.out.println("Inside satisfy equalities and lks");
+					//	System.out.println("checking on lks" +lk.strongSatisfaction(star1, star2, lk) );
+						if ( lk.strongSatisfaction(star1, star2, lk)&&!lk.isMergeContained(star1, star2) ) {
+							System.out.println("Inside satisfy equalities and lks");
 							return false;
+							//
 						}
 
 					}
@@ -117,7 +116,7 @@ System.out.println("Inside satisfy equalities and lks");
 			}
 
 		}
-			return true;
+			return lkSatisfy;
 
 	}
 

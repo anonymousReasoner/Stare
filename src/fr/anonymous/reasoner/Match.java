@@ -1,17 +1,13 @@
 package fr.anonymous.reasoner;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.semanticweb.owlapi.model.*;
-import uk.ac.manchester.cs.owl.owlapi.OWLObjectUnionOfImpl;
 
-public class Successors {
+public class Match {
 	CopyOnWriteArrayList<Succ> match;
 	public int id;
 
-	public Successors() {
+	public Match() {
 		this.match = new CopyOnWriteArrayList<>();
 	}
 
@@ -24,7 +20,7 @@ public class Successors {
 	}
 
 	//	st_1 is the derived star-type, st_2 is the original
-	public void matchingPred(Startype s_1, Startype s_2, ReasoningData data, CompressedTableau ct) {
+	public void matchingCore(Startype s_1, Startype s_2, ReasoningData data, CompressedTableau ct) {
 
 		// I have to search for every predecessor of s_1
 		for (Startype pred : s_1.getAddress().previous(ct).getSstar()) {
@@ -94,7 +90,7 @@ public class Successors {
 			}
 		}
 		// the successors of s_2 through triples other than t_2 are not changed
-		System.out.println("Before matching to the successors");
+		//System.out.println("Before matching to the successors");
 		for (Succ s : s_1.getSucc().getMatch()) {
 
 			//if t_1 is not null
@@ -118,48 +114,43 @@ public class Successors {
 					}
 				}
 			}
+		OWLClassExpression superClass = null;
+		OWLClassExpression subClass = null;
+		boolean to=false;
 				// exists rule
 				// if t_1 is not null in this case we have to create a new star-type in the next layer, if the next layer exist,
 				// otherwise we have to create a new layer
+
 				if(t_1==null) {
 					Startype new_star = new Startype();
-					//new_star.setIdS(s_2.getIdS()+1);
-					new_star.getCore().setConcepts(t_2.getRay().getTip().getConcepts());
-					new_star.getCore().getConcepts().addAll(rd.getConceptsFromPrimitiveAxioms(t_2.getRay().getTip().getConcepts(), new HashSet<>()));
-					for(OWLClass c: ontology.getClassesInSignature()) {
-						// If $E\sqsubseteq F\in \mathcal{T}$ then  $\mathsf{nnf}(\neg E \sqcup F) \in \mathsf{core_C}(\sigma)$
-						if(!c.getSuperClasses(ontology).isEmpty()) {
-							Set<OWLClassExpression> setc=new HashSet<>();
-							setc.add(c.getComplementNNF());
-							setc.addAll(c.getSuperClasses(ontology));
-							OWLObjectUnionOf union= new OWLObjectUnionOfImpl(data,setc );
-
-							new_star.getCore().getConcepts().add(union);
-							// st.getCore().getConcepts().containsAll(c.getSuperClasses(ontology).getComplementNNF()))
-							System.out.println("I have added the following "+ union);
-							//System.out.println("I have added the following super classes "+c.getSuperClasses(ontology));
-						}
-					}
 					if (!s_1.getAddress().hasNext(ct, s_1.getAddress())) {
-
 						Layer layer = new Layer();
 						layer.setId(s_1.getAddress().getId()+1);
 						ct.getSlayer().add(layer);
 						layer.getSstar().add(new_star);
+						new_star.setAddress(layer);
 						System.out.println("I have added a new layer of number "+ layer.getId());
 					}
+					else{
+						new_star.setAddress(s_1.getAddress().next(ct, s_1.getAddress()));
+						s_2.getAddress().next(ct, s_1.getAddress()).getSstar().add(new_star);
+
+					}
+
+					new_star.getCore().setConcepts(t_2.getRay().getTip().getConcepts());
+				//	new_star.getCore().getConcepts().addAll(rd.getConceptsFromPrimitiveAxioms(t_2.getRay().getTip().getConcepts(), new HashSet<>()));
+				//	new_star.sub(new_star, rd, ontology, ct);
 					Succ sc = new Succ();
 					sc.setT(t_2);
 					sc.getSset().add(new_star);
 					s_2.getSucc().getMatch().add(sc);
-					new_star.setAddress(s_1.getAddress().next(ct, s_1.getAddress()));
-					s_2.getAddress().next(ct, s_1.getAddress()).getSstar().add(new_star);
+
 					//.getSstar().add(new_star);
 				}
 
 		}
 
-	public void matchingMerge(Startype s_1, Startype s_2, Startype s_12, ReasoningData rd, CompressedTableau ct) {
+	public void matchMerge(Startype s_1, Startype s_2, Startype s_12, ReasoningData rd, CompressedTableau ct) {
 		// The core and the triples are changed
 		// The triples are not changed but rather increased
 		// First we start by the predecessors of the modified core

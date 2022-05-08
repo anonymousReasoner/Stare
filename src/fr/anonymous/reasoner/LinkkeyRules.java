@@ -17,32 +17,34 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 public class LinkkeyRules implements StartypeOperators{
 public Set<Set<Startype>> lk=new HashSet<>();
 
-	public boolean weakSatisfaction(Startype s_1,  Startype s_2,   Linkey lk)
+	/*public boolean weakSatisfaction(Startype s_1,  Startype s_2,   Linkey lk)
 	{
-		//System.out.println("Inside weak satisfaction");
+		//
+
 		List<Triple> triples_1=s_1.getTriples();
 		List<Triple> triples_2=s_2.getTriples();
 		Set<PropertyPair> role=lk.getPropertySet();
 		Set<Set<Startype>> toReturn=new HashSet<>();
 		for(Triple tr_1 :triples_1 ) {
+
 			for( Triple tr_2 :triples_2) {
+
 				for(PropertyPair pp : role) {
+					//System.out.println("First property of the link key " +pp.getFirstProperty() + "Second property of the link key " +pp.getSecondProperty() );
 						for(Succ o1:s_1.getSucc().getMatch().stream().filter(o -> o.getT().equals(tr_1)).collect(Collectors.toSet())) {
 							for(Succ o2:s_2.getSucc().getMatch().stream().filter(o -> o.getT().equals(tr_2)).collect(Collectors.toSet())) {
 
-								//System.out.println("triple 2 roles:"+tr_2.getRay().getRidge().getRoles()+", lk roles "+pp.getSecondProperty());
+							//	System.out.println("triple 2 roles:"+tr_2.getRay().getRidge().getRoles()+", lk roles "+pp.getSecondProperty());
 								if ((tr_2.getRay().getRidge().getRoles().contains(pp.getSecondProperty()) || tr_2.getRay().getRidge().getRoles().containsAll(Collections.singleton(pp.getSecondProperty()))) &&
 										(tr_1.getRay().getRidge().getRoles().contains(pp.getFirstProperty()) || tr_1.getRay().getRidge().getRoles().containsAll(Collections.singleton(pp.getFirstProperty())))) {
 									//Here should be different
-								//	System.out.println(tr_1.getRay().getTip().getIndividual().toString());
+									//System.out.println(tr_1.getRay().getTip().getIndividual().toString());
 								//	System.out.println(tr_2.getRay().getTip().getIndividual().toString());
 
 
 									if (tr_1.getRay().getTip().getIndividual().toString().equals(tr_2.getRay().getTip().getIndividual().toString())||tr_1.getRay().getTip().getIndividual().toString().contains(tr_2.getRay().getTip().getIndividual().toString())) {
 
 										System.out.println("The tips of the triples are equal");
-										//	System.out.println("triple 2 roles:"+tr_2.getRay().getRidge().getRoles()+", lk roles "+pp.getSecondProperty());
-										//System.out.println("triple 1 roles:"+tr_1.getRay().getRidge().getRoles()+", lk roles "+pp.getFirstProperty());
 										return true;
 									}
 									if (o1.getSset().equals(o2.getSset()) || o1.getSset().containsAll(o2.getSset())) {
@@ -52,8 +54,6 @@ public Set<Set<Startype>> lk=new HashSet<>();
 										set.add(s_2);
 										set.addAll(o1.getSset());
 										toReturn.add(set);
-										//	System.out.println("triple 2 roles:"+tr_2.getRay().getRidge().getRoles()+", lk roles "+pp.getSecondProperty());
-										//System.out.println("triple 1 roles:"+tr_1.getRay().getRidge().getRoles()+", lk roles "+pp.getFirstProperty());
 										return true;
 									}
 								}
@@ -225,11 +225,11 @@ System.out.println(s.getCore().getIndividual());
 	}
 
 
-	/*
+	*//*
 	 *  Apply the union (\sqcup) rule to "concept" (that must be a \sqcup-concept) in the core of the startype.
 	 *  Create a new backtracking point as new unsat startype with history
 	 * "his" of "this" is not explicitly changed since "updateCore" updates automatically
-	 */
+	 *//*
 public boolean isLkRuleApp(Startype s1, Startype s2, LKBox LK, ReasoningData data){
 	for(Linkey lk:LK.getLks()) {
 	if((weakSatisfaction(s1, s2, lk)&&!strongSatisfaction(s1, s2, lk))||shouldMerge(s1, s2, data)) {
@@ -238,7 +238,7 @@ public boolean isLkRuleApp(Startype s1, Startype s2, LKBox LK, ReasoningData dat
 	}
 	return false;
 }
-
+*/
 	@Override
 	public boolean isUnionApp(Set<OWLClassExpression> asDisjuncts, Set<OWLClassExpression> concepts) {
 		// TODO Auto-generated method stub

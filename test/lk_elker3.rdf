@@ -4,18 +4,91 @@
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns=""
          >
-<align:Cell rdf:about="#cell-with-linkkey">
-  <align:entity1><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Newspaper" /></align:entity1>
-  <align:entity2><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Personne" /></align:entity2>
-  <align:relation>=</align:relation>
-  <linkkey>
-    <Linkkey>
-      <lk:type>plain</lk:type>
-      <binding>
-      <Intersects>
-    <property1><Relation rdf:about="c"/></property1>
-    <property2><Relation rdf:about="p"/></property2>
-  </Intersects>
-      </binding>
-    </Linkkey>
-  </linkkey>
+   <!-- <align:Cell rdf:about="#cell-with-linkkey">
+    <align:entity1><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Newspaper" /></align:entity1>
+    <align:entity2><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Journal" /></align:entity2>
+    <align:relation>=</align:relation>
+    <linkkey>
+      <Linkkey>
+        <lk:type>plain</lk:type>
+        <binding>
+        <Intersects>
+      <property1><Relation rdf:about="designation"/></property1>
+      <property2><Relation rdf:about="design"/></property2>
+    </Intersects>
+          <Intersects>
+          <property1><Relation rdf:about="pubCity"/></property1>
+          <property2><Relation rdf:about="villeEdit"/></property2>
+        </Intersects>
+         <Intersects>
+                                  <property1><Relation rdf:about="fYear"/></property1>
+                                  <property2><Relation rdf:about="dateF"/></property2>
+                                </Intersects>
+        </binding>
+      </Linkkey>
+    </linkkey>
+  <align:Cell rdf:about="#cell-with-linkkey">
+        <align:entity1><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Newspaper" /></align:entity1>
+        <align:entity2><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Journal" /></align:entity2>
+        <align:relation>=</align:relation>
+        <linkkey>
+          <Linkkey>
+            <lk:type>plain</lk:type>
+            <binding>
+            <Intersects>
+          <property1><Relation rdf:about="designation"/></property1>
+          <property2><Relation rdf:about="design"/></property2>
+        </Intersects>
+              <Intersects>
+              <property1><Relation rdf:about="pubCity"/></property1>
+              <property2><Relation rdf:about="villeEdit"/></property2>
+            </Intersects>
+                   <Intersects>
+                          <property1><Relation rdf:about="fYear"/></property1>
+                          <property2><Relation rdf:about="dateF"/></property2>
+                        </Intersects>
+            </binding>
+          </Linkkey>
+        </linkkey>
+         (\{\tuple{name,nom},\tuple{firstName, pr\acute{e}nom} \},\tuple{Person,Personne})-->
+              <align:Cell rdf:about="#cell-with-linkkey">
+                <align:entity1><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Person" /></align:entity1>
+                <align:entity2><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Personne" /></align:entity2>
+                <align:relation>=</align:relation>
+                <linkkey>
+                  <Linkkey>
+                    <lk:type>plain</lk:type>
+                    <binding>
+                    <Intersects>
+                  <property1><Relation rdf:about="name"/></property1>
+                  <property2><Relation rdf:about="nom"/></property2>
+                </Intersects>
+                      <Intersects>
+                      <property1><Relation rdf:about="firstName"/></property1>
+                      <property2><Relation rdf:about="prenom"/></property2>
+                    </Intersects>
+                    </binding>
+                  </Linkkey>
+                </linkkey>
+               <!--<align:Cell rdf:about="#cell-with-linkkey">
+                 <align:entity1><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Newspaper" /></align:entity1>
+                 <align:entity2><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Personne" /></align:entity2>
+                 <align:relation>=</align:relation>
+                 <linkkey>
+                   <Linkkey>
+                     <lk:type>plain</lk:type>
+                     <binding>
+                     <Intersects>
+                   <property1><Relation rdf:about="c"/></property1>
+                   <property2><Relation rdf:about="p"/></property2>
+                 </Intersects>
+                     </binding>
+                   </Linkkey>
+                 </linkkey>
+                $(\{\tuple{designation,d\acute{e}sign}, \tuple{pubCity,villeEdit}\},\tuple{Newspaper,Journal})$-->
+
+
+
+
+
+                 -->

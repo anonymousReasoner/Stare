@@ -69,7 +69,7 @@ public class Main {
 				for(Triple t:st.getTriples()) {
 					for(Succ o:st.getSucc().getMatch()) {
 						if(o.getT().equals(t)) {
-							System.out.println(" I'm matched through the triple of id " +o.getT().getIdT()+" and "+ o.getT().getRay().getTip().toString()+ " to: "+ "with the property"+o.getT().getRay().getRidge().getRoles());
+							System.out.println(" I'm matched through the triple of id " +o.getT().getIdT()+" and "+ o.getT().getRay().getTip().toString()+  "with the property"+o.getT().getRay().getRidge().getRoles()+"to:");
 							for(Startype w:o.getSset()) {
 								System.out.println(" star-type of: "+ w.getCore().toString()+",");
 							}
@@ -78,6 +78,8 @@ public class Main {
 					}
 					
 				}
+				System.out.println("----------------------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------------------");
 			}
 			i++;
 			}
@@ -91,6 +93,7 @@ public class Main {
 		File file;        // File object referring to the directory.
 		Scanner scanner;       // For reading a line of input from the user.
 		File f_exlk = null;
+		LinkkeyRules lkr=new LinkkeyRules();
 		scanner = new Scanner(System.in);  // scanner reads from standard input.
 		System.out.print("Enter a directory name of your ontology: ");
 		directoryName = scanner.nextLine().trim();
@@ -147,7 +150,7 @@ public class Main {
 			}
 			Instant end = Instant.now();
 			System.out.println("The execution time is " + Duration.between(start, end).toMillis() + "ms");
-			System.out.println("\nQuestion:Is the ontology consistent? \n" + "Answer: " + "" + ct.checkNew(ct, rd, lk, ct.getSlayer().stream().iterator().next()));
+			System.out.println("\nQuestion:Is the ontology consistent? \n" + "Answer: " + "" + ct.checkNew(ct, rd, lk, ct.getSlayer().stream().iterator().next(), ontology, lkr));
 			Iterator<Layer> layers_iterator = ct.getSlayer().iterator();
 			System.out.println("The number of layers in the compressed tableau are:" + ct.getSlayer().size());
 			int i = 0;
@@ -161,10 +164,7 @@ public class Main {
 					Startype st = layers_stars.next();
 					System.out.println("Star-type of id: " +st.getIdS() + " and Individuals: " + st.getCore().getIndividual());
 					//+ " of concepts" + st.getCore().getConcepts());
-					System.out.println(" Am I saturated? " + st.isSaturated(st.getAddress(), rd, ct) + " Am I blocked? " + st.getAddress().isBlocked(st, ct));
-					System.out.println("My nbr of triples: " + st.getTriples().size());
-
-				//	st.setIdS(idS);
+					System.out.println(" Am I saturated? " + st.isSaturated( rd,  ontology) + " Am I blocked? " + st.getAddress().isBlocked(st, ct));
 					idS = nextIdS;
 					nextIdS++;
 					Iterator<Triple> star_triples = st.getTriples().iterator();
@@ -190,5 +190,6 @@ public class Main {
 			// Calculate the used memory
 			long memory = runtime.totalMemory() - runtime.freeMemory();
 			System.out.println("Used memory is mb: " + memory / 1000000);
+		System.out.println("The execution time is " + Duration.between(start, end).toMillis() + "ms");
 		}// TODO Auto-generated method stub
 }

@@ -5,23 +5,40 @@
          xmlns:alext='http://exmo.inrialpes.fr/align/ext/1.0/'
          xmlns:align='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
          xmlns:edoal='http://ns.inria.org/edoal/1.0/#'>
-    <align:Cell rdf:about="#cell-with-linkkey">
-      <align:entity1><Class rdf:about="http://www.okkam.org/ontology_restaurant1.owl#Address"/></align:entity1>
-      <align:entity2><Class rdf:about="http://www.okkam.org/ontology_restaurant2.owl#Address"/></align:entity2>
-      <align:relation>=</align:relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
-      <linkkey>
-        <Linkkey>
-          <binding>
-            <Intersects>
-              <property1><Property rdf:about="http://www.okkam.org/ontology_restaurant1.owl#street"/></property1>
-              <property2><Property rdf:about="http://www.okkam.org/ontology_restaurant2.owl#street"/></property2>
-            </Intersects>
-          </binding>
-        </Linkkey>
-      </linkkey>
-    </align:Cell>
-    <align:Cell rdf:about="#cell-with-linkkey">
+        <align:Cell rdf:about="#cell-with-linkkey">
+          <align:entity1><Class rdf:about="http://www.okkam.org/ontology_restaurant1.owl#City"/></align:entity1>
+          <align:entity2><Class rdf:about="http://www.okkam.org/ontology_restaurant2.owl#Address"/></align:entity2>
+          <align:relation>=</align:relation>
+          <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+          <linkkey>
+            <Linkkey>
+              <binding>
+                <Intersects>
+                  <property1><Property rdf:about="http://www.okkam.org/ontology_restaurant1.owl#name"/></property1>
+                  <property2><Property rdf:about="http://www.okkam.org/ontology_restaurant2.owl#city"/></property2>
+                </Intersects>
+              </binding>
+            </Linkkey>
+          </linkkey>
+        </align:Cell>
+   <!--     <align:Cell rdf:about="#cell-with-linkkey">
+              <align:entity1><Class rdf:about="http://www.okkam.org/ontology_restaurant1.owl#Address"/></align:entity1>
+              <align:entity2><Class rdf:about="http://www.okkam.org/ontology_restaurant2.owl#Address"/></align:entity2>
+              <align:relation>=</align:relation>
+              <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+              <linkkey>
+                <Linkkey>
+                  <binding>
+                    <Intersects>
+                      <property1><Property rdf:about="http://www.okkam.org/ontology_restaurant1.owl#street"/></property1>
+                      <property2><Property rdf:about="http://www.okkam.org/ontology_restaurant2.owl#street"/></property2>
+                    </Intersects>
+                  </binding>
+                </Linkkey>
+              </linkkey>
+            </align:Cell>
+
+   <align:Cell rdf:about="#cell-with-linkkey">
       <align:entity1>
         <Class>
           <or rdf:parseType="Collection">
@@ -188,5 +205,5 @@
           </binding>
         </Linkkey>
       </linkkey>
-    </align:Cell>
+    </align:Cell>-->
 </rdf:RDF>

@@ -63,6 +63,121 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-1.owl">
 </ObjectUnionOf>
 </ObjectIntersectionOf>
 </SubClassOf>
+<SubClassOf>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+<Class IRI="#B_1"/>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+<ObjectIntersectionOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectIntersectionOf>
+<Class IRI="#D"/>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<Class IRI="#C"/>
+</ObjectIntersectionOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#L"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<Class IRI="#B_1"/>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
+
+
+<SubClassOf>
+<ObjectIntersectionOf>
+<Class IRI="#B_0"/>
+<Class IRI="#B_1"/>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_0"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+<ObjectSomeValuesFrom>
+<ObjectProperty IRI="#R"/>
+<ObjectComplementOf>
+<Class IRI="#B_1"/>
+</ObjectComplementOf>
+</ObjectSomeValuesFrom>
+</ObjectIntersectionOf>
+<Class abbreviatedIRI="owl:Nothing"/>
+</SubClassOf>
 
 <ClassAssertion>
 <ObjectIntersectionOf>

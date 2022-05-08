@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <!DOCTYPE Ontology [
 <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
@@ -19,45 +20,36 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
 <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
 <Declaration>
+
 <ObjectProperty IRI="#L"/>
 </Declaration>
-
 <InverseFunctionalObjectProperty>
 <ObjectProperty IRI="#L"/>
 </InverseFunctionalObjectProperty>
-
 <Declaration>
 <ObjectProperty IRI="#R"/>
 </Declaration>
-
 <InverseFunctionalObjectProperty>
 <ObjectProperty IRI="#R"/>
 </InverseFunctionalObjectProperty>
-
 <Declaration>
 <Class IRI="#C"/>
 </Declaration>
-
 <Declaration>
 <Class IRI="#D"/>
 </Declaration>
-
 <Declaration>
 <Class IRI="#B_0"/>
 </Declaration>
-
 <Declaration>
 <Class IRI="#B_1"/>
 </Declaration>
-
 <Declaration>
 <Class IRI="#B_2"/>
 </Declaration>
-
 <Declaration>
-<NamedIndividual IRI="#a"/>
+<NamedIndividual IRI="#ind1"/>
 </Declaration>
-
 <SubClassOf>
 <Class IRI="#C"/>
 <ObjectIntersectionOf>
@@ -81,7 +73,6 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 </ObjectUnionOf>
 </ObjectIntersectionOf>
 </SubClassOf>
-
 <ClassAssertion>
 <ObjectIntersectionOf>
 <Class IRI="#B_0"/>
@@ -89,7 +80,7 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <Class IRI="#B_2"/>
 <Class IRI="#C"/>
 </ObjectIntersectionOf>
-<NamedIndividual IRI="#a"/>
+<NamedIndividual IRI="#ind1"/>
 </ClassAssertion>
 
 <SubClassOf>
@@ -101,7 +92,7 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <ObjectSomeValuesFrom>
 <ObjectProperty IRI="#L"/>
 <ObjectIntersectionOf>
-<Class IRI="#B_1"/>
+<Class IRI="#D"/>
 <Class IRI="#C"/>
 <ObjectComplementOf>
 <Class IRI="#B_0"/>
@@ -112,7 +103,7 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <ObjectProperty IRI="#R"/>
 <ObjectIntersectionOf>
 <ObjectComplementOf>
-<Class IRI="#B_1"/>
+<Class IRI="#D"/>
 </ObjectComplementOf>
 <Class IRI="#C"/>
 <ObjectComplementOf>
@@ -135,6 +126,7 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <ObjectSomeValuesFrom>
 <ObjectProperty IRI="#L"/>
 <ObjectIntersectionOf>
+<Class IRI="#D"/>
 <Class IRI="#B_0"/>
 <ObjectComplementOf>
 <Class IRI="#B_1"/>
@@ -145,6 +137,9 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <ObjectSomeValuesFrom>
 <ObjectProperty IRI="#R"/>
 <ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
 <Class IRI="#B_0"/>
 <ObjectComplementOf>
 <Class IRI="#B_1"/>
@@ -170,6 +165,7 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <ObjectSomeValuesFrom>
 <ObjectProperty IRI="#L"/>
 <ObjectIntersectionOf>
+<Class IRI="#D"/>
 <Class IRI="#B_0"/>
 <Class IRI="#B_1"/>
 <ObjectComplementOf>
@@ -181,6 +177,9 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <ObjectSomeValuesFrom>
 <ObjectProperty IRI="#R"/>
 <ObjectIntersectionOf>
+<ObjectComplementOf>
+<Class IRI="#D"/>
+</ObjectComplementOf>
 <Class IRI="#B_0"/>
 <Class IRI="#B_1"/>
 <ObjectComplementOf>
@@ -460,22 +459,6 @@ ontologyIRI="http://www.semanticweb.org/ontologies/2014/6/FAT-3.owl">
 <Class abbreviatedIRI="owl:Nothing"/>
 </SubClassOf>
 
-<SubClassOf>
-<ObjectIntersectionOf>
-<ObjectSomeValuesFrom>
-<ObjectInverseOf>
-<ObjectProperty IRI="#L"/>
-</ObjectInverseOf>
-<Class abbreviatedIRI="owl:Thing"/>
-</ObjectSomeValuesFrom>
-<ObjectSomeValuesFrom>
-<ObjectInverseOf>
-<ObjectProperty IRI="#R"/>
-</ObjectInverseOf>
-<Class abbreviatedIRI="owl:Thing"/>
-</ObjectSomeValuesFrom>
-</ObjectIntersectionOf>
-<Class abbreviatedIRI="owl:Nothing"/>
-</SubClassOf>
+
 
 </Ontology>

@@ -360,7 +360,7 @@ public class LoadOntology {
                             }
                         } else {
                             //OWLClassExpression notSubClass = factory.getOWLObjectComplementOf(subClass).getNNF();
-                            //OWLClassExpression notSuperClass = factory.getOWLObjectComplementOf(superClass).getNNF();
+                           // OWLClassExpression notSuperClass = factory.getOWLObjectComplementOf(superClass).getNNF();
                             //absor.getEquivAtomicAxioms().add(new ConceptAxiom(notSubClass, notSuperClass));
                             absor.getGenConceptAxioms().add(new ConceptAxiom(superClass, subClass));
                         }

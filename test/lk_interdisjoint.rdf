@@ -17,18 +17,17 @@
     <property2><Relation rdf:about="prenom"/></property2>
   </Intersects>
    <Intersects>
-            <property1><Relation rdf:about="name"/></property1>
-            <property2><Relation rdf:about="nom"/></property2>
-          </Intersects>
-           <Intersects>
-                            <property1><Relation rdf:about="birthY"/></property1>
-                            <property2><Relation rdf:about="aneeN"/></property2>
-                          </Intersects>
+  <property1><Relation rdf:about="name"/></property1>
+  <property2><Relation rdf:about="nom"/></property2>
+   </Intersects>
+   <Intersects>
+  <property1><Relation rdf:about="birthY"/></property1>
+   <property2><Relation rdf:about="aneeN"/></property2>
+    </Intersects>
       </binding>
     </Linkkey>
   </linkkey>
-
-  <align:Cell rdf:about="#cell-with-linkkey">
+ <align:Cell rdf:about="#cell-with-linkkey">
     <align:entity1><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Female" /></align:entity1>
     <align:entity2><Class rdf:about="file:/Users/khadijajradeh/IdeaProjects/Stare/test/Person" /></align:entity2>
     <align:relation>=</align:relation>
