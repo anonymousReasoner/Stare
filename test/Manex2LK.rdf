@@ -5,6 +5,8 @@
          xmlns=""
          >
 
+
+
 <align:Cell rdf:about="#cell-with-linkkey">
   <align:entity1><Class rdf:about="A" /></align:entity1>
   <align:entity2><Class rdf:about="B" /></align:entity2>
@@ -14,8 +16,8 @@
       <lk:type>plain</lk:type>
       <binding>
         <Intersects>
-    <property1><Relation rdf:about="P" /></property1>
-    <property2><Relation rdf:about="R" /></property2>
+    <property1><Relation rdf:about="P"/></property1>
+    <property2><Relation rdf:about="R"/></property2>
   </Intersects>
       </binding>
 
@@ -23,16 +25,16 @@
   </linkkey>
 
   <align:Cell rdf:about="#cell-with-linkkey">
-    <align:entity1><Class rdf:about="C" /></align:entity1>
-    <align:entity2><Class rdf:about="D" /></align:entity2>
+    <align:entity1><Class rdf:about="C"/></align:entity1>
+    <align:entity2><Class rdf:about="D"/></align:entity2>
     <align:relation>=</align:relation>
     <linkkey>
       <Linkkey>
         <lk:type>plain</lk:type>
         <binding>
           <Intersects>
-      <property1><Relation rdf:about="Q" /></property1>
-      <property2><Relation rdf:about="S" /></property2>
+      <property1><Relation rdf:about="Q"/></property1>
+      <property2><Relation rdf:about="S"/></property2>
     </Intersects>
         </binding>
 

@@ -67,11 +67,11 @@ public class Linkey {
 
 								if (tr_1.getRay().getTip().getIndividual().toString().equals(tr_2.getRay().getTip().getIndividual().toString())||tr_1.getRay().getTip().getIndividual().toString().contains(tr_2.getRay().getTip().getIndividual().toString())) {
 
-									System.out.println("The tips of the triples are equal");
+								//	System.out.println("The tips of the triples are equal");
 									return true;
 								}
 								if (o1.getSset().equals(o2.getSset()) || o1.getSset().containsAll(o2.getSset())) {
-									System.out.println("The star-types are matched to the same set of star-types");
+								//	System.out.println("The star-types are matched to the same set of star-types");
 									Set<Startype> set=new HashSet<>();
 									set.add(s_1);
 									set.add(s_2);
@@ -105,7 +105,7 @@ public class Linkey {
 
 	public Startype chlk_1Rule(Startype s_1,  Startype s_2,  ReasoningData data, Linkey lk)
 	{ //Check if they weakly satisfy the condition of a lk
-		System.out.println("Inside chlk_1 ");
+
 		if(!s_1.equals(s_2)) {
 			Startype copyS_1 = new Startype();
 			copyS_1.setCore(s_1.getCore(), data);
@@ -137,7 +137,7 @@ public class Linkey {
 
 	public Startype chlk_2Rule(Startype s_1,  Startype s_2,  ReasoningData data, Linkey lk)
 	{ //Check if they weakly satisfy the condition of a lk
-		System.out.println("Inside chlk_2 ");
+
 		if(!s_1.equals(s_2)) {
 			Startype copyS_2 = new Startype();
 			copyS_2.setCore(s_2.getCore(), data);
@@ -256,7 +256,7 @@ public class Linkey {
 	 */
 	public boolean isLkRuleApp(Startype s1, Startype s2, LKBox LK, ReasoningData data){
 		for(Linkey lk:LK.getLks()) {
-			if((weakSatisfaction(s1, s2, lk)&&!strongSatisfaction(s1, s2, lk))||shouldMerge(s1, s2, data)) {
+			if(!strongSatisfaction(s1, s2, lk)||shouldMerge(s1, s2, data)) {
 				return true;
 			}
 		}

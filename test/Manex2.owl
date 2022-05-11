@@ -24,7 +24,7 @@
 
 <owl:NamedIndividual rdf:about="d">
     <rdf:type rdf:resource="D"/>
-    <R rdf:resource="e"/>
+    <S rdf:resource="e"/>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="e">

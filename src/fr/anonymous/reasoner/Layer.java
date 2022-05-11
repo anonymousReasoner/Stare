@@ -103,11 +103,9 @@ public class Layer  {
 				for (Startype star2 : stars) {
 					for (Linkey lk : lks) {
 						// pb inside strong satisfaction
-						//System.out.println("checking on lks" +lk.strongSatisfaction(star1, star2, lk) );
-						//System.out.println("is merge contained" +lk.isMergeContained(star1, star2) );
+
 						if ((lk.weakSatisfaction(star1,star2,lk)||lk.strongSatisfaction(star1, star2, lk))&&!lk.isMergeContained(star1, star2) ) {
 
-							System.out.println("Inside satisfy equalities and lks");
 							return false;
 							//
 						}
