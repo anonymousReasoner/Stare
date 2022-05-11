@@ -138,14 +138,15 @@ public class Match {
 					}
 
 					new_star.getCore().setConcepts(t_2.getRay().getTip().getConcepts());
-				//	new_star.getCore().getConcepts().addAll(rd.getConceptsFromPrimitiveAxioms(t_2.getRay().getTip().getConcepts(), new HashSet<>()));
-				//	new_star.sub(new_star, rd, ontology, ct);
+
+					//new_star.getCore().getConcepts().add(rd.getConceptsFromPrimitiveAxioms(t_2.getRay().getTip().getConcepts(), ));
+					//rd.getConceptsFromPrimitiveAxioms(t_2.getRay().getTip().getConcepts())
+					//new_star.getCore().getConcepts().addAll(rd.getConceptsFromPrimitiveAxioms(t_2.getRay().getTip().getConcepts(),));
+					new_star.sub(new_star, rd, ontology, ct);
 					Succ sc = new Succ();
 					sc.setT(t_2);
 					sc.getSset().add(new_star);
 					s_2.getSucc().getMatch().add(sc);
-
-					//.getSstar().add(new_star);
 				}
 
 		}

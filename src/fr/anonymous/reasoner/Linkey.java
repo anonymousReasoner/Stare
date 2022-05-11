@@ -203,6 +203,7 @@ public class Linkey {
 	}
 	public boolean isMergeContained(Startype s_1,  Startype s_2) {
 		for(Startype s:s_1.getAddress().getSstar()) {
+			//System.out.println("I am in should merge");
 			//R-neighbourhood relation
 			if(s.getCore().getIndividual().contains(s_1.getCore().getIndividual())&&s.getCore().getIndividual().contains(s_2.getCore().getIndividual())&&s.getCore().getConcepts().contains(s_1.getCore().getConcepts())&&s.getCore().getConcepts().contains(s_2.getCore().getConcepts())) {
 				System.out.println(s.getCore().getIndividual());

@@ -53,8 +53,6 @@ public class CompressedTableau {
             closure.add(ind);
             Startype st = rd.createInitStartype(ontology, closure);
             st.getCore().setIndividual(closure);
-
-
             st.setAddress(l);
             st.setNominal(true);
             idGlobal++;
@@ -326,28 +324,22 @@ public class CompressedTableau {
                         if (present)
                             break;
 
-                        //System.out.println(present);
-
                         // if we are already adding star-type with already contained individuals
                         if (!present) {
-                            // System.out.println("hereeee3");
+
                             modified = true;
                             Iterator<Startype> iter_corr = corr.iterator();
                             while (iter_corr.hasNext()) {
                                 Startype star_corr = iter_corr.next();
                                 Set<Startype> moreSubset = new HashSet<>();
-
-                                //  System.out.println("The subset: "+subset+ "of size: "+subset.size());
-                                //  System.out.println("The star-type: "+star_corr);
                                 moreSubset.addAll(subset);
                                 moreSubset.add(star_corr);
                                 proc.add(subset);
                                 allSubsets.add(moreSubset);
-                                //  present=false;
                             }
                         }
                     }
-                } // end checking if in processed
+                } //
             }
         }
         boolean exists = false;
@@ -384,24 +376,29 @@ public class CompressedTableau {
 
     public static boolean singleCheck(Startype st, ReasoningData rd, CompressedTableau ct, Layer l, OWLOntology ontology) {
         boolean validchoice = true;
+        boolean found=false;
 
         if (st.isSaturated( rd,  ontology)) {
 
             for (Triple t : st.getTriples()) {
                 //   System.out.println("Inside single check");
-                if (t.getRay().getTip().getConcepts().isEmpty()) {
+                if (t.getRay().getTip().getConcepts().isEmpty()||t.getRay().getTip().getConcepts()==null) {
                     //  System.out.println("The triple is dummy");
                     validchoice = true;
                     //  return validchoice;
-                } else {
+                }
+                else {
+
                     for (Succ o : st.getSucc().getMatch()) {
+
+
                         if (o.getT().equals(t)) {
                             for (Startype w : o.getSset()) {
                                 if (w.isSaturated(rd, ontology)) {
                                     //System.out.println(w.isSaturated(w.getAddress(), rd, ct));
-                                    if (!singleCheck(w, rd, ct, l, ontology))
-
-                                        validchoice = false;
+                                    if (singleCheck(w, rd, ct, l, ontology))
+                                            found= true;
+                                       // validchoice = false;
 
 
                                 }
@@ -411,8 +408,10 @@ public class CompressedTableau {
                 }
             }
         }
-        else
-            validchoice = false;
+        if(found=true)
+            return true;
+    
+    
 
 
         return validchoice;
@@ -427,23 +426,7 @@ public class CompressedTableau {
         boolean contained = false;
         int k = 0;
         List<Startype> firstL = new ArrayList<>(first.getSstar());
-/*        for (Startype s : firstL) {
-            if (!s.isSaturated(ct.getSlayer().iterator().next(), rd, ct, ontology))
-                firstL.remove(s);
-        }*/
         Iterator<Startype> f=firstL.listIterator();
-
-    /*  Startype s1 = f.hasNext() ? f.next() : null;
-        Startype s2 = f.hasNext() ? f.next() : null;
-        while (s1 != null && s2 != null) {
-            for (Linkey lk : rd.getLKBox().getLks()) {
-                if (lkr.strongSatisfaction(s1, s2, lk)) {
-                    f.remove();
-                }
-            }
-            s1 = f.hasNext() ? f.next() : null;
-            s2 = f.hasNext() ? f.next() : null;
-        }*/
         for (OWLIndividual ind : rd.getABox().getInitInds()) {
             nbr = 0;
             for (Startype st : firstL) {
@@ -458,7 +441,7 @@ public class CompressedTableau {
                     nbr++;
                 }
             }
-//System.out.println("nbrs "+nbrs);
+
            if(nbrs==1) {
 
             Set<Startype> s = new HashSet<>();
@@ -471,7 +454,7 @@ return sub;
 
                 for (int i = 0; i < n; i++) {
                     k++;
-                    // System.out.print("{ ");
+
                     Set<Startype> s = new HashSet<>();
                     // Print current subset
                     System.out.print(" Building the " + k + " subset");
@@ -481,12 +464,8 @@ return sub;
                     }
                     for (int j = 0; j < n; j++) {
                         contained = false;
-                        // (1<<j) is a number with jth bit 1
-                        // so when we 'and' them with the
-                        // subset number we get which numbers
-                        // are present in the subset and which
-                        // are not
-                        //if ((i & (1 << j)) > 0) {
+
+
                         for (Startype r : s) {
                             if (r.getCore().getIndividual().equals(firstL.get(j).getCore().getIndividual())) {
                                 //   System.out.println(r.getCore().getIndividual() +" and "+ firstL.get(j).getCore().getIndividual());
@@ -534,46 +513,50 @@ return sub;
     }
 
     public static boolean checkNew(CompressedTableau ct, ReasoningData rd, boolean lk, Layer layer, OWLOntology ontology, LinkkeyRules lkr) {
-        //System.out.println("Inside check new 1");
+
         boolean matched = false;
-        Layer l=new Layer();
-        CopyOnWriteArraySet cs=new CopyOnWriteArraySet();
-for (Set<Startype> s: sub(rd, ct,ontology,lkr)) {
-   // System.out.println("The size of the subset is: "+s.size() );
-
-       cs.addAll(s);
-        l.setSstar(cs);
-        //  l= ct.getSlayer().iterator().next();
-        if (lk) {
-            if (l.satisfyLkandEqualities(rd)) {
-                System.out.println("Inside check of lk satisfaction in checkNew");
-                for (Startype st : layer.getSstar()) {
-                    if (singleCheck(st, rd, ct, layer, ontology)) {
-                        matched = true;
-                    }
-                }
-            }
-            else {
-                System.out.println("I don't satisfy LKs");
-            }
+       // Layer l = new Layer();
+        CopyOnWriteArraySet cs = new CopyOnWriteArraySet();
+//for (Set<Startype> s: sub(rd, ct,ontology,lkr)) {
 
 
-        } else {
-
+   // cs.addAll(s);
+  //  l.setSstar(cs);
+    Layer  l= ct.getSlayer().iterator().next();
+    if (lk) {
+        if (l.satisfyLkandEqualities(rd)) {
             for (Startype st : layer.getSstar()) {
+                if (singleCheck(st, rd, ct, layer, ontology)) {
+                    //    System.out.println("Inside single check"+singleCheck(st, rd, ct, layer, ontology));
 
-                if ((singleCheck(st, rd, ct, layer, ontology))) {
                     matched = true;
                 }
-                }
+            }
+        } else {
+            System.out.println("I don't satisfy LKs");
+        }
+        if (matched==true)
+                     return matched;
+
+    } else {
+
+
+        for (Startype st : layer.getSstar()) {
+            if (singleCheck(st, rd, ct, layer, ontology)) {
+                matched = true;
             }
         }
+        if (matched == true) {
+        }
+        return matched;
+    }
+
 
 
         return matched;
     }
 
-    public static void main(CompressedTableau ct,  OWLOntology ontology, ReasoningData rd, boolean lk, String strategy, OWLDataFactory data) {
+    public static void main(CompressedTableau ct,  OWLOntology ontology, ReasoningData rd, boolean lk,  OWLDataFactory data) {
 
         boolean changed = true;
         //This is a simple solution for the underlying problem of your first code:
@@ -628,7 +611,7 @@ for (Set<Startype> s: sub(rd, ct,ontology,lkr)) {
                 }
 
                 if (lk) {
-                    if(strategy.equals("all")) {
+                //    if(strategy.equals("all")) {
                         System.out.println("\nLet us now check LK rules by first traversing each pair of star-type in the first layer \n");
                         if (l.isNominal()) {
                             for (Startype s_1 : l.getSstar()) {
@@ -648,51 +631,18 @@ for (Set<Startype> s: sub(rd, ct,ontology,lkr)) {
 
                                     }
 
-                                    // }
-                                    //  System.out.println("LK finished");
-                                    // System.out.println("The value of the variable changed is "+changed);
-
                                 }
                             }
                         }
-                    }
-                    else if (strategy.equals("iter")){
-                        for(Linkey k:rd.getLKBox().getLks()) {
-                            //create a new file with one link key, check its consistency
-                            List<Linkey> toReturn = new ArrayList<>();
-                            LKBox key = new LKBox();
-                            key.getLks().add(k);
-                            for (Startype s_1 : l.getSstar()) {
-                                for (Startype s_2 : l.getSstar()) {
-                                    Set<Startype> p = new HashSet<>();
-                                    Set<StartypePair> pairs = new HashSet<>();
-                                    LinkkeyRules lkr = new LinkkeyRules();
-                                    Set<Set<Startype>> setOfLkApp = setOfPairLkApp(s_1, s_2, rd, key);
-                                    for (Set<Startype> s : setOfLkApp) {
-                                        p.addAll(s);
-                                    }
-                                    // StartypePair pP = new StartypePair(s_1, s_2);
-                                    if (!processed_LK.contains(p)) {
-                                        changed = true;
-                                        saturateLK(s_1, s_2, rd, ct);
-                                        processed_LK.add(p);
-
-                                    }
-                                }
-                            }
-
-                            if (l.satisfyLkandEqualities(rd)) {
-                                toReturn.add(k);
-                            }
                         }
 
                     }
 
                 }
 
-            }
 
-        }
+
+
            // return checkNew(ct,rd,lk,ct.getSlayer().iterator().next(),ontology);
         }
 
@@ -703,7 +653,7 @@ for (Set<Startype> s: sub(rd, ct,ontology,lkr)) {
         LinkkeyRules lkr=new LinkkeyRules();
         if(Lkbox!=null) {
 
-            // System.out.println("size "+role.size());
+            
             if (data.getLKBox().getLks().iterator().next().shouldMerge(s_1, s_2, data)) {
                 Set<Startype> set = new HashSet<>();
                 set.add(s_1);
@@ -711,7 +661,7 @@ for (Set<Startype> s: sub(rd, ct,ontology,lkr)) {
                 toReturn.add(set);
             }
             for (Linkey lk : Lkbox.getLks()) {
-                //System.out.println("lks "+Lkbox.getLks().size());
+
                 Set<PropertyPair> role = lk.getPropertySet();
                 for (Triple tr_1 : triples_1) {
                     for (Triple tr_2 : triples_2) {

@@ -100,8 +100,8 @@ public class Main {
 		file = new File("test/" + directoryName);
 		System.out.print("Enter a directory name of your alignment: ");
 		String alignment = scanner.nextLine().trim();
-		System.out.print("Enter your strategy: all for the OneShot strategy,\n iter for the OneByOne strategy,\n com for the Combined strategy ");
-		String strategy = scanner.nextLine().trim();
+	//	System.out.print("Enter your strategy: all for the OneShot strategy,\n iter for the OneByOne strategy,\n com for the Combined strategy ");
+	//	String strategy = scanner.nextLine().trim();
 		OWLDataFactory data=new OWLDataFactoryImpl();
 
 			if (!alignment.isEmpty())
@@ -136,7 +136,7 @@ public class Main {
 					// here is the initialization function
 					ct.init(ontology,rd, pmanager, ct);
 					//calling the rules
-					ct.main(ct, ontology, rd, lk,strategy,data);
+					ct.main(ct, ontology, rd, lk,data);
 
 			}
 			else {
@@ -146,11 +146,12 @@ public class Main {
 				// here is the initialization function
 				ct.init(ontology,rd, pmanager, ct);
 				//calling the rules
-				ct.main(ct, ontology, rd, lk, strategy, data);
+				ct.main(ct, ontology, rd, lk,  data);
 			}
 			Instant end = Instant.now();
 			System.out.println("The execution time is " + Duration.between(start, end).toMillis() + "ms");
-			System.out.println("\nQuestion:Is the ontology consistent? \n" + "Answer: " + "" + ct.checkNew(ct, rd, lk, ct.getSlayer().stream().iterator().next(), ontology, lkr));
+			boolean cons=ct.checkNew(ct, rd, lk, ct.getSlayer().stream().iterator().next(), ontology, lkr);
+			System.out.println("\nQuestion:Is the ontology consistent? \n" + "Answer: " + "" + cons);
 			Iterator<Layer> layers_iterator = ct.getSlayer().iterator();
 			System.out.println("The number of layers in the compressed tableau are:" + ct.getSlayer().size());
 			int i = 0;
@@ -162,9 +163,9 @@ public class Main {
 
 				while (layers_stars.hasNext()) {
 					Startype st = layers_stars.next();
-					System.out.println("Star-type of id: " +st.getIdS() + " and Individuals: " + st.getCore().getIndividual());
+				//	System.out.println("Star-type of id: " +st.getIdS() + " and Individuals: " + st.getCore().getIndividual());
 					//+ " of concepts" + st.getCore().getConcepts());
-					System.out.println(" Am I saturated? " + st.isSaturated( rd,  ontology) + " Am I blocked? " + st.getAddress().isBlocked(st, ct));
+				//	System.out.println(" Am I saturated? " + st.isSaturated( rd,  ontology) + " Am I blocked? " + st.getAddress().isBlocked(st, ct));
 					idS = nextIdS;
 					nextIdS++;
 					Iterator<Triple> star_triples = st.getTriples().iterator();
@@ -179,7 +180,9 @@ public class Main {
 				}
 			}
 			System.out.println("The number of layers in the compressed tableau are:" + ct.getSlayer().size());
-			System.out.print("Do you want to display the matching function: (y/n) ");
+
+			System.out.println("Do you want to display the matching function: (y/n) ");
+		System.out.println("is the ontology consistent"+cons);
 			String decision = scanner.nextLine().trim();
 			if (decision.equalsIgnoreCase("y")) {
 				printMatchingPred(ct);
